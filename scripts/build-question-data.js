@@ -44,16 +44,36 @@ const sources = [
     path: path.join(root, 'COMP9517_example_exam_questions'),
     fileMatcher: file => file.endsWith('.md'),
     parser: parseExampleExamQuestions
+  },
+  {
+    id: 'comp9444',
+    title: 'COMP9444 神经网络与深度学习双语题库',
+    englishTitle: 'COMP9444 Neural Networks and Deep Learning',
+    description: '历年试题与复习题，英文在前，附中文翻译、原题图片及参考解析。',
+    path: path.join(root, 'COMP9444_question_bank'),
+    fileMatcher: file => file === 'questions.json',
+    parser: JSON.parse
+  },
+  {
+    id: 'comp9444-new',
+    title: 'COMP9444 原题题库 (new)',
+    englishTitle: 'COMP9444 Original Exam Questions (new)',
+    description: '附英文原题截图、可复制的题干、参考答案和可切换的中文翻译。',
+    ungraded: true,
+    supportsMarks: true,
+    path: path.join(root, 'COMP9444_original_question_bank'),
+    fileMatcher: file => file === 'questions.json',
+    parser: JSON.parse
   }
 ]
 
 function readSource(source) {
   const file = fs.readdirSync(source.path).find(source.fileMatcher)
   if (!file) {
-    throw new Error(`No markdown file found for ${source.id}`)
+    throw new Error(`No source file found for ${source.id}`)
   }
   const filePath = path.join(source.path, file)
-  return { filePath, markdown: fs.readFileSync(filePath, 'utf8') }
+  return { filePath, content: fs.readFileSync(filePath, 'utf8') }
 }
 
 function normalizeText(value = '') {
@@ -421,11 +441,14 @@ const banks = []
 const questions = []
 
 for (const source of sources) {
-  const { filePath, markdown } = readSource(source)
-  const parsed = withIds(source.id, source.parser(markdown, path.dirname(filePath)))
+  const { filePath, content } = readSource(source)
+  const parsed = withIds(source.id, source.parser(content, path.dirname(filePath)))
   banks.push({
     id: source.id,
     title: source.title,
+    ...(source.englishTitle && { englishTitle: source.englishTitle }),
+    ...(source.ungraded && { ungraded: true }),
+    ...(source.supportsMarks && { supportsMarks: true }),
     description: source.description,
     total: parsed.length
   })

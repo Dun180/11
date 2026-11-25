@@ -1,14 +1,13 @@
-import { BookOpen, Play, RotateCcw, Shuffle } from 'lucide-react'
+import { Bookmark, BookOpen, Play, RotateCcw, Shuffle } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { questionBanks } from '../data/questions.js'
-import { clearAnswerRecords, getStats, loadAnswerRecords } from '../data/storage.js'
+import { clearAnswerRecords, getStats, loadAnswerRecords, loadMarkedQuestionIds } from '../data/storage.js'
 
 export default function BankSelectPage() {
   return (
     <main className="page">
       <header className="app-header">
         <div>
-          <p className="eyebrow">COMP9517 Computer Vision</p>
           <h1>题库练习系统</h1>
         </div>
       </header>
@@ -16,6 +15,7 @@ export default function BankSelectPage() {
       <section className="bank-grid" aria-label="题库列表">
         {questionBanks.map(bank => {
           const stats = getStats(loadAnswerRecords(bank.id))
+          const markedCount = bank.supportsMarks ? loadMarkedQuestionIds(bank.id).size : 0
           return (
             <article className="bank-card" key={bank.id}>
               <div className="bank-icon">
@@ -26,8 +26,8 @@ export default function BankSelectPage() {
                 <p>{bank.description}</p>
                 <div className="bank-meta">
                   <span>{bank.total} 题</span>
-                  <span>已答 {stats.total}</span>
-                  <span>正确率 {(stats.accuracyRate * 100).toFixed(1)}%</span>
+                  <span>{bank.ungraded ? '已练习' : '已答'} {stats.total}</span>
+                  {!bank.ungraded && <span>正确率 {(stats.accuracyRate * 100).toFixed(1)}%</span>}
                 </div>
               </div>
               <div className="bank-card-actions">
@@ -39,6 +39,12 @@ export default function BankSelectPage() {
                   <Shuffle size={18} />
                   随机练习
                 </Link>
+                {bank.supportsMarks && (
+                  <Link className="secondary-button" to={`/bank/${bank.id}/marked`}>
+                    <Bookmark size={18} />
+                    练习标记题（{markedCount}）
+                  </Link>
+                )}
                 <button type="button" className="ghost-button" onClick={() => {
                   clearAnswerRecords(bank.id)
                   window.location.reload()

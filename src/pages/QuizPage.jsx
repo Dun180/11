@@ -1,10 +1,11 @@
 import { ArrowLeft, ArrowRight, BarChart3, Home } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useParams } from 'react-router-dom'
 import QuestionCard from '../components/QuestionCard.jsx'
+import QuestionLanguageToggle from '../components/QuestionLanguageToggle.jsx'
 import StatsBox from '../components/StatsBox.jsx'
-import { getBank, getQuestionsForBank } from '../data/selectors.js'
-import { getStats, loadAnswerRecords, saveAnswerRecords } from '../data/storage.js'
+import { getBank, getQuestionForDisplay, getQuestionsForBank } from '../data/selectors.js'
+import { getStats, loadAnswerRecords, loadMarkedQuestionIds, saveAnswerRecords, setQuestionMarked } from '../data/storage.js'
 
 function shuffleQuestions(questions) {
   const shuffled = [...questions]
@@ -21,44 +22,76 @@ function getResumeIndex(questions, records) {
   return Math.max(questions.length - 1, 0)
 }
 
-export default function QuizPage({ randomize = false }) {
+export default function QuizPage({ randomize = false, markedOnly = false }) {
   const { bankId } = useParams()
-  const navigate = useNavigate()
-  const bank = getBank(bankId)
-  const orderedQuestions = useMemo(() => getQuestionsForBank(bankId), [bankId])
-  const bankQuestions = useMemo(
-    () => randomize ? shuffleQuestions(orderedQuestions) : orderedQuestions,
-    [orderedQuestions, randomize]
-  )
-  const [answerRecords, setAnswerRecords] = useState(() => loadAnswerRecords(bankId))
-  const [currentIndex, setCurrentIndex] = useState(() => getResumeIndex(bankQuestions, loadAnswerRecords(bankId)))
-  const [selectedOption, setSelectedOption] = useState(null)
-  const [loadedBankId, setLoadedBankId] = useState(bankId)
+  const mode = markedOnly ? 'marked' : randomize ? 'random' : 'ordered'
+  return <QuizSession key={`${bankId}:${mode}`} bankId={bankId} randomize={randomize} markedOnly={markedOnly} />
+}
 
-  const currentQuestion = bankQuestions[currentIndex]
+function QuizSession({ bankId, randomize, markedOnly }) {
+  const bank = getBank(bankId)
+  const english = Boolean(bank?.englishTitle)
+  const orderedQuestions = useMemo(() => getQuestionsForBank(bankId), [bankId])
+  const hasTranslation = orderedQuestions.some(question => question.translation)
+  const [markedIds, setMarkedIds] = useState(() => loadMarkedQuestionIds(bankId))
+  const markFilter = markedOnly ? markedIds : null
+  const bankQuestions = useMemo(() => {
+    if (markFilter) return orderedQuestions.filter(question => markFilter.has(question.id))
+    return randomize ? shuffleQuestions(orderedQuestions) : orderedQuestions
+  }, [orderedQuestions, randomize, markFilter])
+  const [answerRecords, setAnswerRecords] = useState(() => markedOnly ? {} : loadAnswerRecords(bankId))
+  const [currentIndex, setCurrentIndex] = useState(() => getResumeIndex(bankQuestions, answerRecords))
+  const [selectedOption, setSelectedOption] = useState(null)
+  const [showChinese, setShowChinese] = useState(false)
+
+  const position = Math.min(currentIndex, bankQuestions.length - 1)
+  const currentQuestion = bankQuestions[position]
   const record = currentQuestion ? answerRecords[currentQuestion.id] : null
+  const displayedRecord = bank?.ungraded && !record?.referenceViewed ? null : record
   const stats = getStats(answerRecords)
 
   useEffect(() => {
-    const savedRecords = loadAnswerRecords(bankId)
-    setAnswerRecords(savedRecords)
-    setCurrentIndex(getResumeIndex(bankQuestions, savedRecords))
-    setLoadedBankId(bankId)
-  }, [bankId, bankQuestions])
-
-  useEffect(() => {
-    if (loadedBankId !== bankId) return
-    saveAnswerRecords(bankId, answerRecords)
-  }, [answerRecords, bankId, loadedBankId])
+    if (!markedOnly) saveAnswerRecords(bankId, answerRecords)
+  }, [answerRecords, bankId, markedOnly])
 
   useEffect(() => {
     if (!currentQuestion) return
     const savedRecord = answerRecords[currentQuestion.id]
     setSelectedOption(savedRecord ? savedRecord.selected : null)
-  }, [answerRecords, currentIndex, currentQuestion])
+  }, [answerRecords, currentQuestion])
 
-  if (!bank || bankQuestions.length === 0) {
+  if (!bank || orderedQuestions.length === 0) {
     return <Navigate to="/" replace />
+  }
+  if (markedOnly && !bank.supportsMarks) {
+    return <Navigate to={`/bank/${bankId}`} replace />
+  }
+  if (!currentQuestion) {
+    return (
+      <main className="page narrow-page" lang="en">
+        <section className="empty-state">
+          <h1>No marked questions</h1>
+          <p>Mark questions during practice to add them here.</p>
+          <div className="result-actions">
+            <Link className="primary-button" to={`/bank/${bankId}`}>Practice all questions</Link>
+            <Link className="icon-link" to="/">Question banks</Link>
+          </div>
+        </section>
+      </main>
+    )
+  }
+
+  const isMarked = markedIds.has(currentQuestion.id)
+
+  function handleToggleMark() {
+    setMarkedIds(setQuestionMarked(bankId, currentQuestion.id, !isMarked))
+    if (markedOnly && record) {
+      setAnswerRecords(prev => {
+        const next = { ...prev }
+        delete next[currentQuestion.id]
+        return next
+      })
+    }
   }
 
   function handleSelectOption(optionIndex) {
@@ -78,11 +111,24 @@ export default function QuizPage({ randomize = false }) {
   }
 
   function handleSubmitAnswer() {
+    if (currentQuestion.referenceAnswer) {
+      setAnswerRecords(prev => ({
+        ...prev,
+        [currentQuestion.id]: {
+          selected: null,
+          answers: [],
+          correct: null,
+          ...(bank.ungraded && { referenceViewed: true })
+        }
+      }))
+      return
+    }
+
     const selections = Array.isArray(selectedOption)
       ? selectedOption
       : selectedOption === null ? [] : [selectedOption]
     if (selections.length === 0) {
-      alert('请先选择一个答案')
+      alert(english ? 'Select an answer first.' : '请先选择一个答案')
       return
     }
     const correctAnswers = currentQuestion.answers || []
@@ -104,51 +150,60 @@ export default function QuizPage({ randomize = false }) {
   }
 
   return (
-    <main className="page quiz-layout">
+    <main className="page quiz-layout" lang={english && !showChinese ? 'en' : undefined}>
       <aside className="quiz-sidebar">
         <Link className="icon-link" to="/">
           <Home size={18} />
-          题库
+          {english ? 'Question banks' : '题库'}
         </Link>
         <div>
-          <p className="eyebrow">{randomize ? '随机练习' : '正在练习'}</p>
-          <h1>{bank.title}</h1>
+          <p className="eyebrow">
+            {markedOnly ? 'Marked questions' : english ? (randomize ? 'Random practice' : 'Practice') : (randomize ? '随机练习' : '正在练习')}
+          </p>
+          <h1>{bank.englishTitle || bank.title}</h1>
         </div>
-        <StatsBox stats={stats} totalQuestions={bankQuestions.length} />
-        <Link className="secondary-button" to={`/result/${bankId}`}>
-          <BarChart3 size={18} />
-          查看统计
-        </Link>
+        <StatsBox stats={stats} totalQuestions={bankQuestions.length} english={english} ungraded={bank.ungraded} />
+        {!markedOnly && (
+          <Link className="secondary-button" to={`/result/${bankId}`}>
+            <BarChart3 size={18} />
+            {english ? 'View results' : '查看统计'}
+          </Link>
+        )}
       </aside>
 
       <section className="quiz-main">
         <div className="progress-panel">
-          <span>{currentIndex + 1} / {bankQuestions.length}</span>
+          <span>{position + 1} / {bankQuestions.length}</span>
           <div className="progress-track">
-            <div style={{ width: `${((currentIndex + 1) / bankQuestions.length) * 100}%` }} />
+            <div style={{ width: `${((position + 1) / bankQuestions.length) * 100}%` }} />
           </div>
+          {hasTranslation && <QuestionLanguageToggle showChinese={showChinese} onToggle={() => setShowChinese(value => !value)} />}
         </div>
 
         <QuestionCard
-          question={currentQuestion}
+          question={getQuestionForDisplay(currentQuestion, hasTranslation && showChinese)}
+          english={english}
+          ungraded={bank.ungraded}
+          marked={isMarked}
+          onToggleMark={bank.supportsMarks ? handleToggleMark : undefined}
           selectedOption={selectedOption}
-          record={record}
+          record={displayedRecord}
           onSelect={handleSelectOption}
           onSubmit={handleSubmitAnswer}
         />
 
         <nav className="pager">
-          <button type="button" className="secondary-button" onClick={() => goToQuestion(currentIndex - 1)} disabled={currentIndex === 0}>
+          <button type="button" className="secondary-button" onClick={() => goToQuestion(position - 1)} disabled={position === 0}>
             <ArrowLeft size={18} />
-            上一题
+            {english ? 'Previous question' : '上一题'}
           </button>
-          {currentIndex === bankQuestions.length - 1 ? (
-            <button type="button" className="primary-button" onClick={() => navigate(`/result/${bankId}`)}>
-              完成并查看统计
-            </button>
+          {position === bankQuestions.length - 1 ? (
+            <Link className="primary-button" to={markedOnly ? '/' : `/result/${bankId}`}>
+              {markedOnly ? 'Finish marked practice' : english ? 'Finish and view results' : '完成并查看统计'}
+            </Link>
           ) : (
-            <button type="button" className="secondary-button" onClick={() => goToQuestion(currentIndex + 1)}>
-              下一题
+            <button type="button" className="secondary-button" onClick={() => goToQuestion(position + 1)}>
+              {english ? 'Next question' : '下一题'}
               <ArrowRight size={18} />
             </button>
           )}

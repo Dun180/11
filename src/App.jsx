@@ -10,6 +10,7 @@ export default function App() {
       <Route path="/" element={<BankSelectPage />} />
       <Route path="/bank/:bankId" element={<QuizPage />} />
       <Route path="/bank/:bankId/random" element={<QuizPage randomize />} />
+      <Route path="/bank/:bankId/marked" element={<QuizPage markedOnly />} />
       <Route path="/result/:bankId" element={<ResultPage />} />
       <Route path="/review/:bankId" element={<ReviewWrongPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />

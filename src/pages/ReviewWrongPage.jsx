@@ -4,20 +4,25 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import AnalysisBox from '../components/AnalysisBox.jsx'
 import MarkdownContent from '../components/MarkdownContent.jsx'
 import OptionList from '../components/OptionList.jsx'
-import { getBank, getQuestionsForBank } from '../data/selectors.js'
+import QuestionLanguageToggle from '../components/QuestionLanguageToggle.jsx'
+import { getBank, getQuestionForDisplay, getQuestionsForBank } from '../data/selectors.js'
 import { loadAnswerRecords, saveAnswerRecords } from '../data/storage.js'
 
 export default function ReviewWrongPage() {
   const { bankId } = useParams()
   const bank = getBank(bankId)
+  const english = Boolean(bank?.englishTitle)
   const bankQuestions = getQuestionsForBank(bankId)
   const [records, setRecords] = useState(() => loadAnswerRecords(bankId))
   const [practiceSelections, setPracticeSelections] = useState({})
   const [retryRecords, setRetryRecords] = useState({})
+  const [showChinese, setShowChinese] = useState(false)
 
   if (!bank) return <Navigate to="/" replace />
 
-  const wrongQuestions = bankQuestions.filter(question => records[question.id]?.correct === false)
+  const wrongQuestions = bankQuestions
+    .filter(question => records[question.id]?.correct === false)
+    .map(question => getQuestionForDisplay(question, showChinese))
 
   function retryQuestion(question) {
     const rawSelected = practiceSelections[question.id]
@@ -25,7 +30,7 @@ export default function ReviewWrongPage() {
       ? rawSelected
       : rawSelected === undefined ? [] : [rawSelected]
     if (selections.length === 0) {
-      alert('请先选择一个答案')
+      alert(english ? 'Select an answer first.' : '请先选择一个答案')
       return
     }
     const correctAnswers = question.answers || []
@@ -48,32 +53,35 @@ export default function ReviewWrongPage() {
   }
 
   return (
-    <main className="page narrow-page">
+    <main className="page narrow-page" lang={english && !showChinese ? 'en' : undefined}>
       <Link className="icon-link" to={`/result/${bankId}`}>
         <ArrowLeft size={18} />
-        返回统计
+        {english ? 'Back to results' : '返回统计'}
       </Link>
       <header className="result-header">
-        <p className="eyebrow">{bank.title}</p>
-        <h1>错题复习</h1>
-        <p className="muted">共 {wrongQuestions.length} 道错题</p>
+        <p className="eyebrow">{bank.englishTitle || bank.title}</p>
+        <h1>{english ? 'Review incorrect answers' : '错题复习'}</h1>
+        <p className="muted">{english ? `Incorrect answers: ${wrongQuestions.length}` : `共 ${wrongQuestions.length} 道错题`}</p>
+        {english && wrongQuestions.length > 0 && (
+          <QuestionLanguageToggle showChinese={showChinese} onToggle={() => setShowChinese(value => !value)} />
+        )}
       </header>
 
       {wrongQuestions.length === 0 ? (
         <section className="empty-state">
-          <strong>当前没有错题</strong>
-          <p>答题记录里没有错误题目，可以继续练习或重置后重新开始。</p>
+          <strong>{english ? 'No incorrect answers yet' : '当前没有错题'}</strong>
+          <p>{english ? 'Continue practicing or reset your progress to start over.' : '答题记录里没有错误题目，可以继续练习或重置后重新开始。'}</p>
         </section>
       ) : (
         <div className="review-list">
           {wrongQuestions.map(question => (
             <article className="review-card" key={question.id}>
               <div className="question-heading">
-                <span>错题 {question.number}</span>
+                <span>{english ? 'Question' : '错题'} {question.number}</span>
                 <strong>{question.title}</strong>
               </div>
               <MarkdownContent text={question.question} images={question.images} />
-              <AnalysisBox question={question} record={retryRecords[question.id]} />
+              <AnalysisBox question={question} record={retryRecords[question.id]} english={english} />
               <OptionList
                 options={question.options}
                 selectedOption={practiceSelections[question.id] ?? null}
@@ -93,7 +101,7 @@ export default function ReviewWrongPage() {
               />
               <button type="button" className="primary-button" onClick={() => retryQuestion(question)}>
                 <RotateCcw size={18} />
-                重新提交
+                {english ? 'Submit again' : '重新提交'}
               </button>
             </article>
           ))}
