@@ -5,6 +5,10 @@ export function getBank(bankId) {
 }
 
 export function getQuestionsForBank(bankId) {
+  const bank = getBank(bankId)
+  if (bank?.parentBankId) {
+    return questions.filter(question => question.bankId === bank.parentBankId && question.category === bank.category)
+  }
   return questions.filter(question => question.bankId === bankId)
 }
 

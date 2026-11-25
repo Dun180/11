@@ -1,3 +1,5 @@
+import MarkdownContent from './MarkdownContent.jsx'
+
 const labels = ['A', 'B', 'C', 'D']
 
 export default function AnalysisBox({ question, record, english = false }) {
@@ -34,6 +36,7 @@ export default function AnalysisBox({ question, record, english = false }) {
         </div>
       </dl>
       {question.explanation && <p>{question.explanation}</p>}
+      {question.answerImages?.length > 0 && <MarkdownContent images={question.answerImages} />}
     </section>
   )
 }

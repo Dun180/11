@@ -45,6 +45,7 @@ export default function QuestionCard({
         <section className="question-transcript" lang="en">
           <h2>Original English text</h2>
           <p>{question.transcript}</p>
+          {question.transcriptNote && <small className="transcript-note">{question.transcriptNote}</small>}
         </section>
       )}
       {question.imageNotes && (

@@ -271,6 +271,12 @@ button:disabled {
   overflow-wrap: anywhere;
 }
 
+.transcript-note {
+  display: block;
+  margin-top: 8px;
+  color: #566984;
+}
+
 .question-meta-row {
   display: flex;
   flex-wrap: wrap;

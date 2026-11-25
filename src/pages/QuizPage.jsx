@@ -30,10 +30,11 @@ export default function QuizPage({ randomize = false, markedOnly = false }) {
 
 function QuizSession({ bankId, randomize, markedOnly }) {
   const bank = getBank(bankId)
+  const markBankId = bank?.parentBankId || bankId
   const english = Boolean(bank?.englishTitle)
   const orderedQuestions = useMemo(() => getQuestionsForBank(bankId), [bankId])
   const hasTranslation = orderedQuestions.some(question => question.translation)
-  const [markedIds, setMarkedIds] = useState(() => loadMarkedQuestionIds(bankId))
+  const [markedIds, setMarkedIds] = useState(() => loadMarkedQuestionIds(markBankId))
   const markFilter = markedOnly ? markedIds : null
   const bankQuestions = useMemo(() => {
     if (markFilter) return orderedQuestions.filter(question => markFilter.has(question.id))
@@ -84,7 +85,7 @@ function QuizSession({ bankId, randomize, markedOnly }) {
   const isMarked = markedIds.has(currentQuestion.id)
 
   function handleToggleMark() {
-    setMarkedIds(setQuestionMarked(bankId, currentQuestion.id, !isMarked))
+    setMarkedIds(setQuestionMarked(markBankId, currentQuestion.id, !isMarked))
     if (markedOnly && record) {
       setAnswerRecords(prev => {
         const next = { ...prev }

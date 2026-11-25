@@ -44,6 +44,39 @@ export const questionBanks = [
     "supportsMarks": true,
     "description": "附英文原题截图、可复制的题干、参考答案和可切换的中文翻译。",
     "total": 145
+  },
+  {
+    "id": "comp9444-new-multiple-choice",
+    "title": "COMP9444 选择题",
+    "englishTitle": "COMP9444 Multiple-Choice Questions",
+    "ungraded": true,
+    "supportsMarks": true,
+    "description": "按原题选项作答，包含带选项的计算题。",
+    "total": 58,
+    "category": "multiple-choice",
+    "parentBankId": "comp9444-new"
+  },
+  {
+    "id": "comp9444-new-calculation",
+    "title": "COMP9444 计算题",
+    "englishTitle": "COMP9444 Calculation Questions",
+    "ungraded": true,
+    "supportsMarks": true,
+    "description": "练习数值计算、公式推导和逐步求解。",
+    "total": 75,
+    "category": "calculation",
+    "parentBankId": "comp9444-new"
+  },
+  {
+    "id": "comp9444-new-short-answer",
+    "title": "COMP9444 简答题",
+    "englishTitle": "COMP9444 Short-Answer Questions",
+    "ungraded": true,
+    "supportsMarks": true,
+    "description": "练习概念解释、方法比较和图示题。",
+    "total": 12,
+    "category": "short-answer",
+    "parentBankId": "comp9444-new"
   }
 ]
 
@@ -11363,6 +11396,7 @@ export const questions = [
       "explanation": "解析：训练时，Dropout 以一定概率暂时屏蔽神经元，因此每个 mini-batch 实际训练的是一个被“变薄”的子网络；测试时再使用完整网络及相应缩放。它可近似理解为共享参数的大量子网络集成。\nDropout 会削弱神经元之间的共适应，从而降低过拟合，并促使信息由多个单元共同承载。它并不直接对权重大小施加惩罚；促使权重变小通常是 L1/L2 正则化或 weight decay 的作用。"
     },
     "transcript": "Which of these statements about Dropout is FALSE:\nSelect one:\na. Dropout simulates an ensemble of network architectures\nb. Dropout helps to prevent overfitting\nc. Dropout encourages redundancy\nd. Dropout encourages the weight values to be small",
+    "category": "multiple-choice",
     "id": "comp9444-new-1",
     "bankId": "comp9444-new",
     "number": 1
@@ -11384,7 +11418,8 @@ export const questions = [
       "referenceAnswer": "答案：c. 是上一时间步隐藏层状态的副本。",
       "explanation": "解析：Elman 型简单 RNN 的上下文单元保存上一时间步的隐藏状态 h_(t-1)，并把它反馈给当前隐藏层。\n当前隐藏状态通常写为 h_t = f(W_x x_t + W_h h_(t-1) + b)。因此“当前输入和上一隐藏状态共同计算”的是当前隐藏层，而上下文层本身保存的是上一隐藏层状态。"
     },
-    "transcript": "The Context Layer in a Simple Recurrent Network:\nSelect one:\na.is computed from the current input and the previous hidden layer\nb. is comprised of the inputs in a sliding window around the current timestep\nc. is a copy of the hidden layer from the previous timestep\nd. is computed from the current input and the previous output",
+    "transcript": "The Context Layer in a Simple Recurrent Network:\nSelect one:\na. is computed from the current input and the previous hidden layer\nb. is comprised of the inputs in a sliding window around the current timestep\nc. is a copy of the hidden layer from the previous timestep\nd. is computed from the current input and the previous output",
+    "category": "multiple-choice",
     "id": "comp9444-new-2",
     "bankId": "comp9444-new",
     "number": 2
@@ -11407,6 +11442,7 @@ export const questions = [
       "explanation": "解析：经典 CBOW/Skip-gram word2vec 的隐藏层本质上是线性投影（查表、求和或平均），通常没有 tanh 这类非线性激活。\nword2vec 维护输入词向量矩阵和输出词向量矩阵，因此同一个词在两处的向量可以不同。高频词降采样可减少无信息词的影响并提升效率。"
     },
     "transcript": "Which statement about word2vec is FALSE?\nSelect one:\na. Representations for the same word at the input and output layers are different\nb. It aims to maximise the log probability of a word, based on the surrounding words\nc. The tanh activation function is used at the hidden nodes\nd. Performance improves if frequent words are sampled less often",
+    "category": "multiple-choice",
     "id": "comp9444-new-3",
     "bankId": "comp9444-new",
     "number": 3
@@ -11428,7 +11464,8 @@ export const questions = [
       "referenceAnswer": "答案：d. Conjugate Gradients（共轭梯度法）。",
       "explanation": "解析：ReLU 在正半轴的导数为 1，可缓解深层网络中的梯度衰减；Xavier/He 等初始化帮助控制前向激活和反向梯度的尺度；归一化也可改善训练稳定性。\n共轭梯度法是一类优化算法，并不是针对深度网络梯度消失/爆炸问题的标准结构性解决方案。"
     },
-    "transcript": "Which of these is NOT a method for dealing with the problem of vanishing or exploding gradients?\nSelect one:\na. Batch Normalization\nb. Rectified Linear Unit\nc, Weight Initialization\nd. Conjugate Gradients",
+    "transcript": "Which of these is NOT a method for dealing with the problem of vanishing or exploding gradients?\nSelect one:\na. Batch Normalization\nb. Rectified Linear Unit\nc. Weight Initialization\nd. Conjugate Gradients",
+    "category": "multiple-choice",
     "id": "comp9444-new-4",
     "bankId": "comp9444-new",
     "number": 4
@@ -11450,7 +11487,8 @@ export const questions = [
       "referenceAnswer": "答案：w0' = -0.5，w1' = -1，w2' = -3。",
       "explanation": "解析：先算净输入：z = 0.5 + 1*2 + (-2)*1 = 0.5，因此 H(z)=1，模型错误地预测为正类。\n把 Neg 编码为 t=0，则误差项 t-y = 0-1 = -1。令偏置输入 x0=1，更新式为 w_i' = w_i + eta*(t-y)*x_i。"
     },
-    "transcript": "erceptron whose output is gwen by Aln()> wiz] w2x2), where 11, x2 are inputs and hf) « the Heaviside (step) funchon.\nPerceptron is being trained on the dete in the following table, and that the current velues of the weights are wOe 05, wie 1 and w20 -2.\nraining txamplelt fa Klee\n|) tht] Neg\n|) th eg\na ee 2:\ntron Learning Rule is apphed to the current weights, using training item (b) and a learning rate of nO, the new values for WO, w1 and w2 at the end of this training step will be:",
+    "transcript": "Consider a Perceptron whose output is given by h(w0+w1x1+w2x2), where x1, x2 are inputs and h() is the Heaviside (step) function.\nAssume this Perceptron is being trained on the data in the following table, and that the current values of the weights are w0 = 0.5, w1 = 1 and w2 = -2.\n\nTraining Example | x1 | x2 | Class\n(a) | -1 | -1 | Neg\n(b) | 2 | 1 | Neg\n(c) | -2 | 2 | Pos\n\nIf the Perceptron Learning Rule is applied to the current weights, using training item (b) and a learning rate of η=1.0, the new values for w0, w1 and w2 at the end of this training step will be:",
+    "category": "calculation",
     "id": "comp9444-new-5",
     "bankId": "comp9444-new",
     "number": 5
@@ -11472,7 +11510,8 @@ export const questions = [
       "referenceAnswer": "答案：b0 = -3，b1 = 0，b2 = 0，b3 = 1。",
       "explanation": "解析：设 H(z)=1 当且仅当 z>=0。第一个隐藏节点为 H(b1-A+B)，要实现 (not A or B)：仅 A=1、B=0 时为 0，因此取 b1=0。\n第二个隐藏节点为 H(b2+B-C+D)，要实现 (B or not C or D)：仅 B=0、C=1、D=0 时为 0，因此取 b2=0。"
     },
-    "transcript": "the following multi-layer perceptron, using the threshold activation function, and assume thet TRUE is represented by 1: FALSE by 0.\na. wee on\nTN Of\nTe ed\nB Cc D E\nh values of the baases 60, 51, 02 and b} would thus network compute the logecal function\nA(BY Cv DaAl(-D0v -8\nLt}",
+    "transcript": "Consider the following multi-layer perceptron, using the threshold activation function, and assume that TRUE is represented by 1; FALSE by 0.\n\n[See the perceptron diagram in the screenshot.]\n\nFor which values of the biases b0, b1, b2 and b3 would this network compute the logical function\n(¬A ∨ B) ∧ (B ∨ ¬C ∨ D) ∧ (¬D ∨ ¬E)",
+    "category": "calculation",
     "id": "comp9444-new-6",
     "bankId": "comp9444-new",
     "number": 6
@@ -11494,7 +11533,8 @@ export const questions = [
       "referenceAnswer": "答案：P(B | Pink) = 0.30（30%）。",
       "explanation": "解析：P(A and Pink)=P(A)P(Pink|A)=0.4*0.7=0.28。\nP(Pink)=0.4*0.7+0.6*0.2=0.28+0.12=0.40。"
     },
-    "transcript": "EE eeeEEEEEEE~————E—E—E~E~EEE EE EE EEE EE EEE hh EEE EEE\n0% of its plants from Nursery A and 60% from Nursery 8. Among the plants grown at Nursery A 30% of them produce white flowers aind 70% produce pink flowers. Among the plants grown at Nursery B, 80% of them produce white flowers and 20%. produce pink\nFlower Shop produces pink flowers, what is: the probability that it was grown in Nursery 8?",
+    "transcript": "Fred's Flower Shop buys 40% of its plants from Nursery A and 60% from Nursery B. Among the plants grown at Nursery A, 30% of them produce white flowers and 70% produce pink flowers. Among the plants grown at Nursery B, 80% of them produce white flowers and 20% produce pink flowers. If a plant in Fred's Flower Shop produces pink flowers, what is the probability that it was grown in Nursery B?",
+    "category": "calculation",
     "id": "comp9444-new-7",
     "bankId": "comp9444-new",
     "number": 7
@@ -11516,7 +11556,8 @@ export const questions = [
       "referenceAnswer": "答案：H(p)=1.875≈1.88 bits；D_KL(p||q)=1.1875≈1.19 bits。",
       "explanation": "解析：H(p)=-sum p_i log2(p_i)=0.5*1+0.25*2+0.125*3+0.0625*4+0.0625*4=1.875。\nD_KL(p||q)=sum p_i log2(p_i/q_i)。各项依次为 1、0.5、-0.125、-0.1875、0，总和为 1.1875。"
     },
-    "transcript": "———————OEOEOEOEOE—EAEAEEOO————OOOOOOEOOEOEOEaEaEaEaEe\nConsider these two probability distributions on the same space = {A B, C, DB, E}\np=(12, 4% 1%, 46 Me)\n9=(%6 Ye, \"4, ve Ye)\nCompute (correct to at least two decimal places):\n*The Entropy Hip):\n* The KL-Divergence DKLfp || ¢):",
+    "transcript": "Consider these two probability distributions on the same space Ω = {A, B, C, D, E}\np = ⟨1/2, 1/4, 1/8, 1/16, 1/16⟩\nq = ⟨1/8, 1/16, 1/4, 1/2, 1/16⟩\n\nCompute (correct to at least two decimal places):\nThe Entropy H(p):\nThe KL-Divergence D_KL(p || q):",
+    "category": "calculation",
     "id": "comp9444-new-8",
     "bankId": "comp9444-new",
     "number": 8
@@ -11538,7 +11579,8 @@ export const questions = [
       "referenceAnswer": "答案：a。",
       "explanation": "解析：选项 a 的两个隐藏节点可写为 h1=H(-0.5-x1+x2)、h2=H(0.5-x1+x2)，输出为 y=H(0.5+h1-h2)。\n逐项代入：(0,0)->0，(0,1)->1，(1,0)->1，(1,1)->0，正好与 XOR 真值表一致。"
     },
-    "transcript": "_ which of these networks (with threshold activations at both the hidden and output layer) correctly computes the XOR function of two inputs?\n+05\n+0.5\n0.5\n+0.5\n+15\n40.5\n0.5\n41.5",
+    "transcript": "If 0=FALSE and 1=TRUE, which of these networks (with threshold activations at both the hidden and output layer) correctly computes the XOR function of two inputs?\nSelect one:\na. [Network diagram in the screenshot]\nb. [Network diagram in the screenshot]\nc. [Network diagram in the screenshot]\nd. [Network diagram in the screenshot]",
+    "category": "multiple-choice",
     "id": "comp9444-new-9",
     "bankId": "comp9444-new",
     "number": 9
@@ -11560,7 +11602,8 @@ export const questions = [
       "referenceAnswer": "答案：分别为 -0.07、0.80、-0.73。",
       "explanation": "解析：Softmax 概率约为 p=(0.06655, 0.19991, 0.73354)。\n对 log p_2，有 d(log p_2)/dz_j = 1[j=2]-p_j。"
     },
-    "transcript": "} neural network trained using scttmax tor a classification task with three classes 1, 2, 3. suppose a particular input Is 2resented, procucing cutputs\n= 24 z3= 3.7\nthe correct class for this nput is Class 2, and that Prob(2) is the sof:max probability of the network choosing Class 2, compute the following, to two decima' places:\nth? )Vid7t=\nsb{2))idza=\nb(2))/dz3-",
+    "transcript": "Consider a neural network trained using softmax for a classification task with three classes 1, 2, 3. Suppose a particular input is presented, producing outputs\nz1=1.3, z2=2.4, z3=3.7\nAssuming the correct class for this input is Class 2, and that Prob(2) is the softmax probability of the network choosing Class 2, compute the following, to two decimal places:\nd(log Prob(2))/dz1 =\nd(log Prob(2))/dz2 =\nd(log Prob(2))/dz3 =",
+    "category": "calculation",
     "id": "comp9444-new-10",
     "bankId": "comp9444-new",
     "number": 10
@@ -11572,10 +11615,6 @@ export const questions = [
       {
         "alt": "Original question 11 (1 / 2)",
         "src": "/COMP9444_original_question_bank/images/image11.png"
-      },
-      {
-        "alt": "Original question 11 (2 / 2)",
-        "src": "/COMP9444_original_question_bank/images/image12.png"
       }
     ],
     "options": [],
@@ -11586,7 +11625,14 @@ export const questions = [
       "referenceAnswer": "答案：每神经元 109；神经元 3536；连接 385424；独立参数 1744。",
       "explanation": "解析：每个卷积核覆盖 6*6*3=108 个输入，加一个 bias，因此每个神经元对应 109 个权重。\n输出高为 floor((42-6)/3)+1=13，输出宽为 floor((54-6)/3)+1=17；共有 13*17*16=3536 个输出神经元。"
     },
-    "transcript": "[Original screenshot 1]\nslutional neural network whick takes es inputs 42-by-54 color image (i.e. with three chennels R G, B). The first convolutional layer has 16 filters that are 6-by-6, with stride 3 and nc zero-paddng.\nniber of;\nuron in this layer (including bias):\nlayer:\n‘0 the neurons in this layer\nsrameters in this layer:\n[Original screenshot 2]\nhe input and output stacks with labels >\nAVNER, DOSS, GOSSRENW, PEN KEARR MRS\naX:\nABR @RBMH (Paz)\nD1 PREETE: 109 HE\n6x6x3 SHA + 1 FE\n42% 54% S @ 13x 17x16\nRG. BER 16, RM 221%\nS MPAA: 109 2 BIT: 3536\nEHO 6x6x3 = 108, 111 RH HiDS—H, 13x 17 x 16\n3E##: 385424 @ BR: 1744\nSHR 109 KH x 3536 FI—RORFHA 1 MERE, 16 x 109\nSSOAGEWANME (©). BORWR, G. B=E, BtE108-SX, Ball Mas,\nIAI—/MBF LE, MEF RE MPT,\nI-HBSOMET (@). BOEACZRLSS—-MUS, AON -BSaab—\n—ES13x17%, 16 MERE, MALE,\nEMR DAMES 109 RE, ARLEN = FETS X 109 (@) .\n§221 MEF, MeHA—-NERBRN, BRI 109-MVS, USES\nA, 146x109 (@) .\nRT: Qe METH, OST SER, @=Ox@, @=@Ox BA.",
+    "transcript": "Consider a convolutional neural network which takes as input a 42-by-54 color image (i.e. with three channels R, G, B). The first convolutional layer has 16 filters that are 6-by-6, with stride 3 and no zero-padding.\nCompute the number of:\nweights per neuron in this layer (including bias):\nneurons in this layer:\nconnections into the neurons in this layer:\nindependent parameters in this layer:",
+    "category": "calculation",
+    "answerImages": [
+      {
+        "alt": "Worked solution for question 11",
+        "src": "/COMP9444_original_question_bank/images/image12.png"
+      }
+    ],
     "id": "comp9444-new-11",
     "bankId": "comp9444-new",
     "number": 11
@@ -11608,7 +11654,8 @@ export const questions = [
       "referenceAnswer": "答案：d. Contractive Autoencoder（收缩自编码器）。",
       "explanation": "解析：收缩自编码器在重构损失之外加入编码器隐藏表示对输入的 Jacobian 范数惩罚，直接限制隐藏表示对输入微扰的敏感度。\n去噪自编码器通过破坏输入再重构干净样本来学习鲁棒表征，但题目中的“显式强制隐藏特征变化小”更准确地对应收缩自编码器。"
     },
-    "transcript": "it type of Autoencoder explicitly forces the hidden features not to change much when the inputs are slightly altered?\nct one:\na. Variational Autoencoder\nb. Sparse Autoencoder\nc. Denoising Autoencoder\nd. Contractive Autoencoder",
+    "transcript": "What type of Autoencoder explicitly forces the hidden features not to change much when the inputs are slightly altered?\nSelect one:\na. Variational Autoencoder\nb. Sparse Autoencoder\nc. Denoising Autoencoder\nd. Contractive Autoencoder",
+    "category": "multiple-choice",
     "id": "comp9444-new-12",
     "bankId": "comp9444-new",
     "number": 12
@@ -11630,7 +11677,8 @@ export const questions = [
       "referenceAnswer": "答案：v1：Not Stable；v2：Stable；v3：Not Stable。",
       "explanation": "解析：计算局部场 h=Wv。对 v1，h=(-1,-1,2,2,0)，第二个分量与 v1 的符号不一致，所以不稳定。\n对 v2，h=(1,1,-2,-2,-2)，所有非零分量符号都与 v2 一致，因此稳定。"
     },
-    "transcript": "a Hopfield Network with the following weight matrix W:\n100-10 oO]\n10000 -1|\n]-10 0+10]\n{0 0+10 +1]\n}0-10+10]\nof the following vectors, state whether it is Stable or Not Stable for this network:\n+1 +1+71): +\n=i) <i) <7: *\n1=+1+1): >",
+    "transcript": "Consider a Hopfield Network with the following weight matrix W:\n\n|  0  0 -1  0  0 |\n|  0  0  0  0 -1 |\n| -1  0  0 +1  0 |\n|  0  0 +1  0 +1 |\n|  0 -1  0 +1  0 |\n\nFor each of the following vectors, state whether it is Stable or Not Stable for this network:\n[-1 +1 +1 +1 +1]:\n[+1 +1 -1 -1 -1]:\n[+1 +1 -1 +1 +1]:",
+    "category": "calculation",
     "id": "comp9444-new-13",
     "bankId": "comp9444-new",
     "number": 13
@@ -11652,7 +11700,8 @@ export const questions = [
       "referenceAnswer": "答案：pi*(S1)=a1，pi*(S2)=a2；Q*=(8.00, 6.00, 0.00, 2.00)；gamma 范围为 [0.25, 0.625]，两位小数写作 [0.25, 0.63]。",
       "explanation": "解析：在策略 (a1,a2) 下，V1=4+gamma*V1，V2=1+gamma*V2。gamma=0.5 时得到 V1=8、V2=2。\n于是 Q*(S1,a1)=4+0.5*8=8；Q*(S1,a2)=5+0.5*2=6；Q*(S2,a1)=-4+0.5*8=0；Q*(S2,a2)=1+0.5*2=2。"
     },
-    "transcript": "n environment with two states S = {Sj, $2} and two actions A = {a4, a2}, where the (deterministic) transitions § and reward R for each state and action are as follows:\nAo fo™ a,\nCG) G))\na, Ti a,\n3 discount factor of y = 0.5, determine:\nming y = 0.5, compute these values (correct to two decimal places):\nyed to vary between O and 1, for which range of walues of y is this policy optimal (correct to two decimal places)?\n) value of y:\nn value of y:",
+    "transcript": "Consider an environment with two states S = {S1, S2} and two actions A = {a1, a2}, where the (deterministic) transitions δ and reward R for each state and action are as follows:\n\n[See the state-transition diagram in the screenshot.]\n\nAssuming a discount factor of γ = 0.5, determine:\nπ*(S1)=\nπ*(S2)=\n\nAgain assuming γ = 0.5, compute these values (correct to two decimal places):\nQ*(S1,a1)\nQ*(S1,a2)\nQ*(S2,a1)\nQ*(S2,a2)\n\nIf γ is allowed to vary between 0 and 1, for which range of values of γ is this policy optimal (correct to two decimal places)?\nMinimum value of γ:\nMaximum value of γ:",
+    "category": "calculation",
     "id": "comp9444-new-14",
     "bankId": "comp9444-new",
     "number": 14
@@ -11674,7 +11723,8 @@ export const questions = [
       "referenceAnswer": "答案：c. Experience Replay（经验回放）。",
       "explanation": "解析：智能体连续采集的转移 (s,a,r,s') 在时间上高度相关，直接按顺序训练会破坏随机梯度方法近似独立同分布的假设。\n经验回放把转移存入 replay buffer，再随机抽取 mini-batch，既降低时间相关性，又提高样本复用率。"
     },
-    "transcript": "The best way to deal with the problem of temporal correlations in Deep Q-Learning is:\nSelect one:\na. Cross Entropy Minimization\nb. Increased Momentum\n«. Experience Replay\ngd. Back Propagation Through Time",
+    "transcript": "The best way to deal with the problem of temporal correlations in Deep Q-Learning is:\nSelect one:\na. Cross Entropy Minimization\nb. Increased Momentum\nc. Experience Replay\nd. Back Propagation Through Time",
+    "category": "multiple-choice",
     "id": "comp9444-new-15",
     "bankId": "comp9444-new",
     "number": 15
@@ -11696,7 +11746,8 @@ export const questions = [
       "referenceAnswer": "答案：d。",
       "explanation": "解析：SVD 中 U 和 V 的列向量分别构成正交归一基；在实数矩阵情形满足 U^T U=I、V^T V=I。\nS 是非负奇异值构成的对角矩阵（矩形 SVD 时可为矩形对角形式）。复数情形对应酉矩阵。"
     },
-    "transcript": "Vonsidering a Singular Value Decomposition X = US VT, what are the special properties of matrices U, S and V ?\nselect one:\na. VU is orthogonal, V is upper triangular and S is symmetric.\nb.U, Vare upper triangular, and $ is diagonal.\nc.U, Vare symmetric and S is orthogonal.\nd. U, V are unitary and S is diagonal.",
+    "transcript": "Considering a Singular Value Decomposition X = U S V^T, what are the special properties of matrices U, S and V ?\nSelect one:\na. U is orthogonal, V is upper triangular and S is symmetric.\nb. U, V are upper triangular, and S is diagonal.\nc. U, V are symmetric and S is orthogonal.\nd. U, V are unitary and S is diagonal.",
+    "category": "multiple-choice",
     "id": "comp9444-new-16",
     "bankId": "comp9444-new",
     "number": 16
@@ -11718,7 +11769,8 @@ export const questions = [
       "referenceAnswer": "答案：d. Autoencoder 与 Deep Boltzmann Machine。",
       "explanation": "解析：自编码器可逐层学习输入数据的表示；Boltzmann 系列模型也可从无标签数据学习生成式特征，因此二者都可用于无监督预训练。\n普通权重初始化不是一种数据驱动的预训练方法，Bayesian inference 也不是此处所指的标准神经网络无监督预训练模块。"
     },
-    "transcript": "Two common methods for unsupery sed ore-training of neural networks are:\nSelect onc:\na. Deep Eoltzmanr Machine and Bayesian Inference\nb. Weigh: Initialization and Autoencoder\n¢. Bayesian Inference and Weight Initialization\nd. Autoencoder and Deep Boltzmann Machine",
+    "transcript": "Two common methods for unsupervised pre-training of neural networks are:\nSelect one:\na. Deep Boltzmann Machine and Bayesian Inference\nb. Weight Initialization and Autoencoder\nc. Bayesian Inference and Weight Initialization\nd. Autoencoder and Deep Boltzmann Machine",
+    "category": "multiple-choice",
     "id": "comp9444-new-17",
     "bankId": "comp9444-new",
     "number": 17
@@ -11740,7 +11792,8 @@ export const questions = [
       "referenceAnswer": "答案：c. 仍能学习，所需 epoch 数大致相同。",
       "explanation": "解析：设原始过程为 w_(t+1)=w_t+eta*Delta_t。若初始权重和学习率都乘以 c>0，则 w'_0=cw_0、eta'=c eta。\n在相同样本顺序下可归纳得到 w'_t=cw_t。正比例缩放不改变每个样本的分类符号，因此误分类发生在相同的步骤，更新次数和 epoch 数基本相同。"
     },
-    "transcript": "ning on linearly separable data using the Perceptron Learning Rule, wnat will happen if both the learning rate and the initial weights are scaled up by a large factor?\ndata will be learred successfully, but in a larg2r numbe: of epochs\ndata wil be learned successfully, in 3 smaller number of epochs\ndata will be learred successfully, in about the sam= number of epochs\nming may become unstable and fail to converge",
+    "transcript": "When training on linearly separable data using the Perceptron Learning Rule, what will happen if both the learning rate and the initial weights are scaled up by a large factor?\nSelect one:\na. The data will be learned successfully, but in a larger number of epochs\nb. The data will be learned successfully, in a smaller number of epochs\nc. The data will be learned successfully, in about the same number of epochs\nd. Learning may become unstable and fail to converge",
+    "category": "multiple-choice",
     "id": "comp9444-new-18",
     "bankId": "comp9444-new",
     "number": 18
@@ -11762,7 +11815,8 @@ export const questions = [
       "referenceAnswer": "答案：c。",
       "explanation": "解析：强化学习没有逐样本给出的标准答案标签。智能体通过与环境交互获得奖励，并学习使长期累计回报最大的策略。\na 和 d 描述监督学习；b 描述无监督学习。"
     },
-    "transcript": "Rei iforcement Learnirg is wher an egent is:\nSelect one:\na. presented multiple times (over time) with the same examples of inputs and their target outputs\nb. only preserted with the inputs and not target outputs, so it aims to find structure in these inouts\n¢. not presented with target outputs, but instead given a reward signal that it aims to maximize\n&. presemed once with examples of irputs and their target outputs",
+    "transcript": "Reinforcement Learning is when an agent is:\nSelect one:\na. presented multiple times (over time) with the same examples of inputs and their target outputs\nb. only presented with the inputs and not target outputs, so it aims to find structure in these inputs\nc. not presented with target outputs, but instead given a reward signal that it aims to maximize\nd. presented once with examples of inputs and their target outputs",
+    "category": "multiple-choice",
     "id": "comp9444-new-19",
     "bankId": "comp9444-new",
     "number": 19
@@ -11784,7 +11838,8 @@ export const questions = [
       "referenceAnswer": "答案：b. 使用训练过程中维护的 running averages。",
       "explanation": "解析：训练阶段使用当前 mini-batch 的均值和方差，同时以指数移动平均等方式维护总体统计量。\n测试阶段需要对单个样本给出确定结果，不能依赖当前测试 batch，因此使用训练期间累计的 running mean 和 running variance。"
     },
-    "transcript": "en using Batch Normalization, in the Testing phase, the Mean and Variance of the activations at each noce are typically\nect one:\n3. pre computed from the training sct\nb. estimated using runring averages\nc. either af the ahewe\nd. none of the above",
+    "transcript": "When using Batch Normalization, in the Testing phase, the Mean and Variance of the activations at each node are typically:\nSelect one:\na. pre computed from the training set\nb. estimated using running averages\nc. either of the above\nd. none of the above",
+    "category": "multiple-choice",
     "id": "comp9444-new-20",
     "bankId": "comp9444-new",
     "number": 20
@@ -11806,7 +11861,8 @@ export const questions = [
       "referenceAnswer": "答案：c（在第 21/45 题中）或对应的“能量函数公式不同”选项。",
       "explanation": "解析：两类模型都可用同一类二次能量函数描述；主要差异在于状态编码、确定性/随机更新，以及典型用途。\n因此“二者能量函数公式不同”是错误陈述；其余三项描述了课程中强调的差别。"
     },
-    "transcript": "When comparing a Hopfield Network with a Boltzmann Machine, which statement is FALSE?\nSelect one:\na. The range of activations is {-1, 1} for one model and {0,1} for the other\nb. One model is used for retrieval, the other for generation\nc. The formula for the energy function is different for the two models\nd, The updates are deterministic for one model, and stochastic for the other",
+    "transcript": "When comparing a Hopfield Network with a Boltzmann Machine, which statement is FALSE?\nSelect one:\na. The range of activations is {-1,1} for one model and {0,1} for the other\nb. One model is used for retrieval, the other for generation\nc. The formula for the energy function is different for the two models\nd. The updates are deterministic for one model, and stochastic for the other",
+    "category": "multiple-choice",
     "id": "comp9444-new-21",
     "bankId": "comp9444-new",
     "number": 21
@@ -11828,7 +11884,9 @@ export const questions = [
       "referenceAnswer": "答案：Long Short-Term Memory（LSTM）。",
       "explanation": "解析：LSTM 通过记忆单元和门控路径为信息与梯度提供较长的传播通道，显著缓解普通 RNN 的梯度消失。"
     },
-    "transcript": "s Sample Exam contains only One Multiple Choice Question,\neal Final Exam will contain 12 Multiple Choice Questions.\nhitectures would have the best chance of learning long range dependencies?\nt Term Memory Vv\nsurrent Network\nrd network with sliding window\nwork",
+    "transcript": "Which of these architectures would have the best chance of learning long range dependencies?\nSelect one:\na. Long Short Term Memory\nb. Simple Recurrent Network\nc. Feedforward network with sliding window\nd. Elman Network",
+    "category": "multiple-choice",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-22",
     "bankId": "comp9444-new",
     "number": 22
@@ -11850,7 +11908,9 @@ export const questions = [
       "referenceAnswer": "答案：π*(S1)=a2，π*(S2)=a1；Q*=(4.98, 5.69, 10.98, 10.69)；γ∈[0.50, 0.80]。",
       "explanation": "解析：在策略 (a2,a1) 下，V1=-2+γV2，V2=7+γV1。γ=0.7 时解得 V1=5.6863、V2=10.9804。\n于是 Q(S1,a1)=1+0.7V1=4.98，Q(S1,a2)=V1=5.69，Q(S2,a1)=V2=10.98，Q(S2,a2)=3+0.7V2=10.69。"
     },
-    "transcript": "nment with two states S = {S1, Sz} and two actions A = {a;, a2}, where the (deterministic) transitions 6 and reward R for each\ne as follows:\non:\nSO ae\nint factor of don determine:\n= 0.7, compute these values (correct to two decimal places):\n\\} I.\nNE) =>t0- | VE \\Is)= db 4\nry between 0 and 1, for which range of values of y is this policy optimal?\nfy:\n(Qy pr i) Fi\nif ys \\\nVig \\= (4 wW/Cc, ) > >",
+    "transcript": "Consider an environment with two states S = {S1, S2} and two actions A = {a1, a2}, where the (deterministic) transitions δ and reward R for each state and action are as follows:\n\n[See the state-transition diagram in the screenshot.]\n\nAssuming a discount factor of γ = 0.7, determine:\nπ*(S1)=\nπ*(S2)=\n\nAgain assuming γ = 0.7, compute these values (correct to two decimal places):\nQ*(S1,a1)\nQ*(S1,a2)\nQ*(S2,a1)\nQ*(S2,a2)\n\nIf γ is allowed to vary between 0 and 1, for which range of values of γ is this policy optimal?\nMinimum value of γ:\nMaximum value of γ:",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-23",
     "bankId": "comp9444-new",
     "number": 23
@@ -11872,7 +11932,9 @@ export const questions = [
       "referenceAnswer": "答案：w0=-2.5，w1=0，w2=1。",
       "explanation": "解析：当前净输入 s=-1.5+0×0+2×1=0.5，预测为正类，与目标 -1 不符。\n对负类误判执行“减去”增广输入 (1,0,1)，得到 (-1.5,0,2)-(1,0,1)=(-2.5,0,1)。"
     },
-    "transcript": "ron whose output is given by h(wo+w4x1+W2x2), where x4, X2 are inputs and h() is the Heaviside (step) function.\n>tron is being trained on the data in the following table, and that the current values of the weights are Wo= -1.5, w= 0\nTraining Example x7)xo|Class|\n| (a) 1 |\n| tb) [2 0} 1 |\nCae ee\n2arning Rule is applied to the current weights, using training item (a) and a learning rate of n=1.0, the new values for wo, w4\nof this training step will be: ee 2\n7 A",
+    "transcript": "Consider a Perceptron whose output is given by h(w0+w1x1+w2x2), where x1, x2 are inputs and h() is the Heaviside (step) function.\nAssume this Perceptron is being trained on the data in the following table, and that the current values of the weights are w0 = -1.5, w1 = 0 and w2 = 2.\n\nTraining Example | x1 | x2 | Class\n(a) | 0 | 1 | -1\n(b) | 2 | 0 | -1\n(c) | 1 | 1 | +1\n\nIf the Perceptron Learning Rule is applied to the current weights, using training item (a) and a learning rate of η=1.0, the new values for w0, w1 and w2 at the end of this training step will be:",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-24",
     "bankId": "comp9444-new",
     "number": 24
@@ -11894,7 +11956,9 @@ export const questions = [
       "referenceAnswer": "答案：b0=-2.5，b1=-0.5，b2=+1.5，b3=+0.5。",
       "explanation": "解析：A∨B 的权重为 (+1,+1)，取 b1=-0.5；¬B∨C∨¬D 的权重为 (-1,+1,-1)，取 b2=+1.5。\nD∨¬E 的权重为 (+1,-1)，取 b3=+0.5。输出层对三个子句做 AND，三个输入权重均为 +1，故取 b0=-2.5。"
     },
-    "transcript": "wing multi-layer perceptron, using the threshold activation function, and assume that TRUE is represented by 1; FALSE by 0.\n+1 +] +]\nb b\n2 3\n\"141] -1 +1 \\\nCc D E\nof the biases bo, b1, b2 and 63 would this network compute the logical function\nV AD) A (D V -E)}",
+    "transcript": "Consider the following multi-layer perceptron, using the threshold activation function, and assume that TRUE is represented by 1; FALSE by 0.\n\n[See the perceptron diagram in the screenshot.]\n\nFor which values of the biases b0, b1, b2 and b3 would this network compute the logical function\n(A ∨ B) ∧ (¬B ∨ C ∨ ¬D) ∧ (D ∨ ¬E)",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-25",
     "bankId": "comp9444-new",
     "number": 25
@@ -11916,7 +11980,9 @@ export const questions = [
       "referenceAnswer": "答案：0.25。",
       "explanation": "解析：P(RR|袋1)=C(2,2)/C(5,2)=0.1，P(RR|袋2)=C(3,2)/C(5,2)=0.3。\n先验相同，所以 P(袋1|RR)=0.1/(0.1+0.3)=0.25。"
     },
-    "transcript": "2 red balls and 3 white balls. Another bag contains 3 red balls and 2 green balls. One of these bags is chosen at random, and\nn randomly from that bag, without replacement. Both of the balls turn out to be red. What is the probability that the first bag\nchosen? (Give your answer correct to two decimal places) ee \\\nRE pie OF. wr popne Pe PLELR)",
+    "transcript": "One bag contains 2 red balls and 3 white balls. Another bag contains 3 red balls and 2 green balls. One of these bags is chosen at random, and two balls are drawn randomly from that bag, without replacement. Both of the balls turn out to be red. What is the probability that the first bag is the one that was chosen? (Give your answer correct to two decimal places)",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-26",
     "bankId": "comp9444-new",
     "number": 26
@@ -11938,7 +12004,9 @@ export const questions = [
       "referenceAnswer": "答案：H(p)=1.75 bits；D_KL(p||q)=0.50 bits。",
       "explanation": "解析：H(p)=0.5×1+0.25×2+0.125×3+0.125×3=1.75。\nKL 各项为 0.5、0.25、0、-0.25，总和为 0.50。"
     },
-    "transcript": "PEPPY S Fr Ih Fg EMO SZ Ye UM\nPIE IR HE\nPUFIR)= se /5\n9 probability distributions on the same space © = {A, B, C, D}\nrermemaes per) =~ Sly b) - b Wat) Hogg )- ligt).\nwoavie Das blige Wat ) tt long \"tt ) +4 (ly,",
+    "transcript": "Consider these two probability distributions on the same space Ω = {A, B, C, D}\np = ⟨1/2, 1/4, 1/8, 1/8⟩\nq = ⟨1/4, 1/8, 1/8, 1/2⟩\n\nCompute, correct to two decimal places:\nThe Entropy H(p):\nThe KL-Divergence D_KL(p || q):",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-27",
     "bankId": "comp9444-new",
     "number": 27
@@ -11968,7 +12036,9 @@ export const questions = [
       "referenceAnswer": "答案：c。",
       "explanation": "解析：每个输出位在二维隐藏空间中都必须由一条直线线性分割。逐位检查六个目标编码，只有图 c 的三条边界方向与标号同时满足全部样本。"
     },
-    "transcript": "[Original screenshot 1]\nnnected feedforward neural network with 6 inputs, 2 hidden units and 3 outputs, using tanh activation at the hidden units\noutputs. Suppose this network is trained on the following data, and that the training is successful.\nItem| inputs [Outputs|\n| fr234s6| 123 _|\n| 1. [100000] 000_|\n| 2. [010000] 001 _|\n| 3. [ootooo| 10 _|\n| 4. [ooor00| 100_|\nFs. fooooto| 101\n6. [ooooo|110_|\nigrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a (correctly labeled)\ndden unit space into regions for which the value of that output is greater/fless than one half ?\n[Original screenshot 3]\n(2)\nIt.unsw.edu.au/mod/quiz/review.php?attempt= 10032087 &cer\n(2)",
+    "transcript": "Consider a fully connected feedforward neural network with 6 inputs, 2 hidden units and 3 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is trained on the following data, and that the training is successful.\n\nItem | Inputs | Outputs\n     | 123456 | 123\n1.   | 100000 | 000\n2.   | 010000 | 001\n3.   | 001000 | 010\n4.   | 000100 | 100\n5.   | 000010 | 101\n6.   | 000001 | 110\n\nWhich of these diagrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a (correctly labeled) line dividing the hidden unit space into regions for which the value of that output is greater/less than one half ?\nSelect one:\na. [Diagram in the screenshot]\nb. [Diagram in the screenshot]\nc. [Diagram in the screenshot]\nd. [Diagram in the screenshot]",
+    "category": "multiple-choice",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-28",
     "bankId": "comp9444-new",
     "number": 28
@@ -11990,7 +12060,9 @@ export const questions = [
       "referenceAnswer": "答案：(-0.09, 0.76, -0.67)。",
       "explanation": "解析：softmax 概率约为 (0.0900,0.2447,0.6652)。\nlog-softmax 梯度为 one_hot(2)-p，因此得到 (-0.0900,0.7553,-0.6652)。"
     },
-    "transcript": "network trained using softmax for a classification task with three classes 1, 2, 3. Suppose a particular input is presented,\n3= 3.0\nrect class for this input is Class 2, and that Prob(2) is the softmax probability of the network choosing Class 2, compute the\nto two decimal places):\nz= =\nProbl) =z gb\nim >\nza elte te\nZ3=",
+    "transcript": "Consider a neural network trained using softmax for a classification task with three classes 1, 2, 3. Suppose a particular input is presented, producing outputs\nz1=1.0, z2=2.0, z3=3.0\nAssuming the correct class for this input is Class 2, and that Prob(2) is the softmax probability of the network choosing Class 2, compute the following (correct to two decimal places):\nd(log Prob(2))/dz1=\nd(log Prob(2))/dz2=\nd(log Prob(2))/dz3=",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-29",
     "bankId": "comp9444-new",
     "number": 29
@@ -12012,7 +12084,9 @@ export const questions = [
       "referenceAnswer": "答案：257；6400；1,644,800；4112。",
       "explanation": "解析：每个卷积核参数为 8×8×4+1=257。输出边长 floor((84-8)/4)+1=20，因此神经元数 20×20×16=6400。\n连接数按含 bias 口径为 6400×257=1,644,800；独立参数为 16×257=4112。"
     },
-    "transcript": "stional neural network which takes as input an 84x84x4 image (i.e. with four channels). The first convolutional layer has 16\ny-8, with stride 4 and no zero-padding.\nDer of:\non in this layer (including bias):\nyer:\nthe neurons in this layer:\nameters in this layer:",
+    "transcript": "Consider a convolutional neural network which takes as input an 84×84×4 image (i.e. with four channels). The first convolutional layer has 16 filters that are 8-by-8, with stride 4 and no zero-padding.\nCompute the number of:\nweights per neuron in this layer (including bias):\nneurons in this layer:\nconnections into the neurons in this layer:\nindependent parameters in this layer:",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-30",
     "bankId": "comp9444-new",
     "number": 30
@@ -12034,7 +12108,9 @@ export const questions = [
       "referenceAnswer": "答案：依次为：Not Stable；Stable；Not Stable。",
       "explanation": "解析：计算局部场 h=Wx，并检查 sign(h) 是否保持原向量。第二个向量的所有非零局部场符号都一致；第一、第三个向量至少有一位会翻转。"
     },
-    "transcript": "3.00\nHopfield Network with the following weight matrix W:\n[ 0 -14+1-1-1|\n|-1 0 -141+41]\n|+1-1 0 -1-1|\n|-14+1-1 0 +1]\n[-14+1-14+10 |\n‘the following vectors, state whether it is Stable or Not Stable for this network:\n1-1 Yet Gray L\n—1 -1]: ( te | \\ g x\nAE Not Cre Lc",
+    "transcript": "Consider a Hopfield Network with the following weight matrix W:\n\n|  0 -1 +1 -1 -1 |\n| -1  0 -1 +1 +1 |\n| +1 -1  0 -1 -1 |\n| -1 +1 -1  0 +1 |\n| -1 +1 -1 +1  0 |\n\nFor each of the following vectors, state whether it is Stable or Not Stable for this network:\n[+1 +1 +1 +1 -1]:\n[+1 -1 +1 -1 -1]:\n[-1 +1 -1 +1 -1]:",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-31",
     "bankId": "comp9444-new",
     "number": 31
@@ -12056,7 +12132,9 @@ export const questions = [
       "referenceAnswer": "答案：博弈可写成零和或非零和；课程中的非饱和、非零和生成器目标通常产生更好的图像。",
       "explanation": "解析：原始 minimax 形式是零和；实际常用的 non-saturating generator loss 改变了生成器目标，缓解早期梯度过弱。"
     },
-    "transcript": "enerative Adversarial Networks discussed in this course, the game between the\nrand Discriminator:\nyer zero-sum\nbe either zero-sum or not, but the non-zero-sum version produces better\nlays Zero-SsuM\ne either zero-sum or not, but the zero-sum version produces better images",
+    "transcript": "For the Generative Adversarial Networks discussed in this course, the game between the Generator and Discriminator:\na. Is never zero-sum\nb. Can be either zero-sum or not, but the non-zero-sum version produces better images\nc. Is always zero-sum\nd. Can be either zero-sum or not, but the zero-sum version produces better images",
+    "category": "multiple-choice",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-32",
     "bankId": "comp9444-new",
     "number": 32
@@ -12078,7 +12156,8 @@ export const questions = [
       "referenceAnswer": "答案：Ockham's Razor（奥卡姆剃刀）。",
       "explanation": "解析：该原则偏好在同样解释数据时更简单的模型，是模型选择与正则化背后的常见思想。"
     },
-    "transcript": "ciple ‘The most likely hypothesis is the simplest one consistent with the\ncalled:\notron Learning\n5; ~~ Rule\nmum Likelihood\nam' s Razor",
+    "transcript": "The principle ‘The most likely hypothesis is the simplest one consistent with the data.’ is called:\na. Perceptron Learning\nb. Bayes’ Rule\nc. Maximum Likelihood\nd. Ockham’s Razor",
+    "category": "multiple-choice",
     "id": "comp9444-new-33",
     "bankId": "comp9444-new",
     "number": 33
@@ -12100,7 +12179,8 @@ export const questions = [
       "referenceAnswer": "答案：c。",
       "explanation": "解析：图 c 的两个隐藏单元分别比较两输入的相对大小；相等输入时二者同时激活，不等输入时仅一个激活。\n输出单元以权重 (-1,-1)、偏置 +1.5 实现 NAND，因此真值表为 00→0、01→1、10→1、11→0。"
     },
-    "transcript": "which of these networks (with threshold ectivetions af both the hidden and output layer) correctly cormputes the XOR function of two inpuis?\nO53\n41 -l\nNF 05\nmel\nSON\n| ey\nol -l\nNOU 05\n\"1 any\n1.3\n_ A 05\n1 ay\n1 ¢!\nS /\nSY ats\not!\nva _\n\"tats",
+    "transcript": "If 0=FALSE and 1=TRUE, which of these networks (with threshold activations at both the hidden and output layer) correctly computes the XOR function of two inputs?\nSelect one:\na. [Network diagram in the screenshot]\nb. [Network diagram in the screenshot]\nc. [Network diagram in the screenshot]\nd. [Network diagram in the screenshot]",
+    "category": "multiple-choice",
     "id": "comp9444-new-34",
     "bankId": "comp9444-new",
     "number": 34
@@ -12122,7 +12202,8 @@ export const questions = [
       "referenceAnswer": "答案：(-0.10, 0.70, -0.60)。",
       "explanation": "解析：softmax 概率约为 (0.0995,0.2988,0.6017)，而 ∇log p2=one_hot(2)-p。"
     },
-    "transcript": "rk trained using softmax for a classification task with three classes 1, 2, 3. Suppose a particular input is presented, producing outputs\nass for this input is Class 2, and that Prob(2) is the softmax probability of the network choosing Class 2, compute the following, to two decimal places:\n> S",
+    "transcript": "Consider a neural network trained using softmax for a classification task with three classes 1, 2, 3. Suppose a particular input is presented, producing outputs\nz1=1.3, z2=2.4, z3=3.1\nAssuming the correct class for this input is Class 2, and that Prob(2) is the softmax probability of the network choosing Class 2, compute the following, to two decimal places:\nd(log Prob(2))/dz1=\nd(log Prob(2))/dz2=\nd(log Prob(2))/dz3=",
+    "category": "calculation",
     "id": "comp9444-new-35",
     "bankId": "comp9444-new",
     "number": 35
@@ -12144,7 +12225,8 @@ export const questions = [
       "referenceAnswer": "答案：每神经元 76；神经元 5472；连接 415,872；独立参数 1368。",
       "explanation": "解析：输出空间尺寸为 16×19，故神经元数 16×19×18=5472；每核参数 5×5×3+1=76。\n连接数 5472×76=415,872；共享后的独立参数为 18×76=1368。"
     },
-    "transcript": "ural network which takes as input a 65-by-77 color image (i.e. with three channels R, G, B). The first convolutional layer has 18 filters that are 5-by-5, with stride 4 and\nlayer (including bias):\nns in this layer:\n1 this layer:",
+    "transcript": "Consider a convolutional neural network which takes as input a 65-by-77 color image (i.e. with three channels R, G, B). The first convolutional layer has 18 filters that are 5-by-5, with stride 4 and no zero-padding.\nCompute the number of:\nweights per neuron in this layer (including bias):\nneurons in this layer:\nconnections into the neurons in this layer:\nindependent parameters in this layer:",
+    "category": "calculation",
     "id": "comp9444-new-36",
     "bankId": "comp9444-new",
     "number": 36
@@ -12166,7 +12248,9 @@ export const questions = [
       "referenceAnswer": "答案：每神经元 28；神经元 21,888；连接 612,864；独立参数 504。",
       "explanation": "解析：输出空间尺寸为 32×38；每核参数 3×3×3+1=28。\n因此神经元 32×38×18=21,888，连接 21,888×28=612,864，独立参数 18×28=504。"
     },
-    "transcript": "olutional neural network which takes as input a 65-by-77 color image (i.e. with three channels R,\nconvolutional layer has 18 filters that are 3-by-3, with stride 2 and no zero-padding.\nmber of:\nuron in this layer (including bias):\n_layer:| 21888\nto the neurons in this layer: | 612864\narameters in this layer:",
+    "transcript": "Consider a convolutional neural network which takes as input a 65-by-77 color image (i.e. with three channels R, G, B). The first convolutional layer has 18 filters that are 3-by-3, with stride 2 and no zero-padding.\nCompute the number of:\nweights per neuron in this layer (including bias):\nneurons in this layer:\nconnections into the neurons in this layer:\nindependent parameters in this layer:",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-37",
     "bankId": "comp9444-new",
     "number": 37
@@ -12188,7 +12272,8 @@ export const questions = [
       "referenceAnswer": "答案：依次为：Stable；Not Stable；Stable。",
       "explanation": "解析：逐向量计算 h=Wx。第一个和第三个向量的非零局部场符号保持原状态；第二个向量至少有一位会翻转。\n若局部场为 0，按课程常用规则保持该神经元原状态。"
     },
-    "transcript": "opfield Network with the following weight matrix W:\n190-10 0|\n190000-1|\n1-10 0 +10]\n10 04170 41|\n10-10 +10]\nhe following vectors, state whether it is Stable or Not Stable for this network:\n1 +1): $\naay: e .\nr————\n1 +1): $",
+    "transcript": "Consider a Hopfield Network with the following weight matrix W:\n\n|  0  0 -1  0  0 |\n|  0  0  0  0 -1 |\n| -1  0  0 +1  0 |\n|  0  0 +1  0 +1 |\n|  0 -1  0 +1  0 |\n\nFor each of the following vectors, state whether it is Stable or Not Stable for this network:\n[-1 +1 +1 +1 +1]:\n[+1 +1 -1 -1 -1]:\n[+1 +1 -1 +1 +1]:",
+    "category": "calculation",
     "id": "comp9444-new-38",
     "bankId": "comp9444-new",
     "number": 38
@@ -12210,7 +12295,9 @@ export const questions = [
       "referenceAnswer": "答案：依次为：Stable；Not Stable；Stable。",
       "explanation": "解析：逐向量计算 h=Wx。第一个和第三个向量的非零局部场符号保持原状态；第二个向量至少有一位会翻转。\n若局部场为 0，按课程常用规则保持该神经元原状态。"
     },
-    "transcript": "| Hopfield Network with the following weight matrix W:\n}0 0-10 O|\n}0 0 0 O +1|\n1-10 0-10|\n|0 0-10 +1|\n|0+104+10]|\nf the following vectors, state whether it is Stable or Not Stable for this network:\n+1+1]:| Stable =\n1-1]:| Not Stable +\n+1+1]:| Stable +",
+    "transcript": "Consider a Hopfield Network with the following weight matrix W:\n\n|  0  0 -1  0  0 |\n|  0  0  0  0 +1 |\n| -1  0  0 -1  0 |\n|  0  0 -1  0 +1 |\n|  0 +1  0 +1  0 |\n\nFor each of the following vectors, state whether it is Stable or Not Stable for this network:\n[-1 +1 +1 +1 +1]:\n[+1 +1 -1 -1 -1]:\n[+1 +1 -1 +1 +1]:",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-39",
     "bankId": "comp9444-new",
     "number": 39
@@ -12236,7 +12323,9 @@ export const questions = [
       "referenceAnswer": "答案：a。",
       "explanation": "解析：把每个四位输出码看成该点相对于四条分割线的符号向量。图 a 的区域编码集合可与六个目标码一一对应；其余图至少有一对样本无法同时满足四个输出位。"
     },
-    "transcript": "[Original screenshot 1]\n| feedforward neural network with 6 inputs, 2 hidden units and 4 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is\nta, and that the training is successful.\nItem] inputs jOurputs|\n[a fto0000) 0007 |\n[2, foroo0o) oon |\n|_3. [ooto00\n[4. fooos0q| 1000 |\n[s. fooooro) 1011\n[8 jooooa)| 1100 _|\n‘orrectly shows a point in hiddan unit space corresponding to each input, and, for each output, a line dividing the hidden unit space into regions for which the value of\nthan one half ?\n———\n| °\n[Original screenshot 2]\ncity\nAare",
+    "transcript": "Consider a fully connected feedforward neural network with 6 inputs, 2 hidden units and 4 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is trained on the following data, and that the training is successful.\n\nItem | Inputs | Outputs\n     | 123456 | 1234\n1.   | 100000 | 0001\n2.   | 010000 | 0011\n3.   | 001000 | 0101\n4.   | 000100 | 1000\n5.   | 000010 | 1011\n6.   | 000001 | 1100\n\nWhich of these diagrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a line dividing the hidden unit space into regions for which the value of that output is greater/less than one half ?\nSelect one:\na. [Diagram in the first screenshot]\nb. [Diagram in the first screenshot]\nc. [Diagram in the second screenshot]\nd. [Diagram in the second screenshot]",
+    "category": "multiple-choice",
+    "transcriptNote": "The source image cuts off the bottom edge of diagram b.",
     "id": "comp9444-new-40",
     "bankId": "comp9444-new",
     "number": 40
@@ -12258,7 +12347,8 @@ export const questions = [
       "referenceAnswer": "答案：0.25（25%）。",
       "explanation": "解析：P(V∩D)=0.4×0.01=0.004，P(D)=0.004+0.6×0.02=0.016。\n所以 P(V|D)=0.004/0.016=0.25。"
     },
-    "transcript": "n have been vaccinated against a certain disease. Among those who are vaccinated, only 1% of them have the disease. But, among those who are not vaccinated, 2% of\nd to have the disease, what is the probability that they have been vaccinated?\neither as a percentage, or as a number between 0 and 1)",
+    "transcript": "Only 40% of the population have been vaccinated against a certain disease. Among those who are vaccinated, only 1% of them have the disease. But, among those who are not vaccinated, 2% of them have the disease.\nIf a random person is found to have the disease, what is the probability that they have been vaccinated?\n(You can give your answer either as a percentage, or as a number between 0 and 1)",
+    "category": "calculation",
     "id": "comp9444-new-41",
     "bankId": "comp9444-new",
     "number": 41
@@ -12280,7 +12370,8 @@ export const questions = [
       "referenceAnswer": "答案：H(p)=1.875≈1.88 bits；D_KL(p||q)=0.75 bits。",
       "explanation": "解析：熵为 2×(1/16×4)+(1/8×3)+(1/4×2)+(1/2×1)=1.875。\nKL 各项依次为 -0.125、0、0.125、-0.25、1，总和 0.75。"
     },
-    "transcript": "ese two probability distributions on the same space © = {A, B, C, D, E}\n1 Ve, Vie Vp )\n1 Ve, Vp, Ve )\norrect to at least two decimal places):\noy H(p): |\nvergence Dx_ (p || q): |",
+    "transcript": "Consider these two probability distributions on the same space Ω = {A, B, C, D, E}\np = ⟨1/16, 1/16, 1/8, 1/4, 1/2⟩\nq = ⟨1/4, 1/16, 1/16, 1/2, 1/8⟩\n\nCompute (correct to at least two decimal places):\nThe Entropy H(p):\nThe KL-Divergence D_KL(p || q):",
+    "category": "calculation",
     "id": "comp9444-new-42",
     "bankId": "comp9444-new",
     "number": 42
@@ -12302,7 +12393,8 @@ export const questions = [
       "referenceAnswer": "答案：Q/价值估计（Critic）与 Policy Gradients（Actor）。",
       "explanation": "解析：Actor 直接参数化并更新策略；Critic 用 TD 误差或价值/Q 估计为策略梯度提供低方差学习信号。"
     },
-    "transcript": "~ritic algorithm combines:\np different Q-Learners (one for action selection, the other for value estimation)\nLearning and Policy Gradients\nversarially trained Generator and Discriminator networks\nLearning and TD-Learning",
+    "transcript": "The Actor-Critic algorithm combines:\nSelect one:\na. two different Q-Learners (one for action selection, the other for value estimation)\nb. Q-Learning and Policy Gradients\nc. adversarially trained Generator and Discriminator networks\nd. Q-Learning and TD-Learning",
+    "category": "multiple-choice",
     "id": "comp9444-new-43",
     "bankId": "comp9444-new",
     "number": 43
@@ -12324,7 +12416,8 @@ export const questions = [
       "referenceAnswer": "答案：Gated Recurrent Unit（GRU）。",
       "explanation": "解析：该任务需要跨较长序列保留状态；GRU 的更新门和重置门比普通 Jordan/Elman 网络更能维持长期依赖。"
     },
-    "transcript": "itecture would have the best chance of learning an Embedded Reber Grammar?\nted Recurrent Unit\ntTalk system\nrdan Network\nnan Network",
+    "transcript": "Which architecture would have the best chance of learning an Embedded Reber Grammar?\nSelect one:\na. Gated Recurrent Unit\nb. NetTalk system\nc. Jordan Network\nd. Elman Network",
+    "category": "multiple-choice",
     "id": "comp9444-new-44",
     "bankId": "comp9444-new",
     "number": 44
@@ -12346,7 +12439,8 @@ export const questions = [
       "referenceAnswer": "答案：b0=-2.5，b1=+1.5，b2=+0.5，b3=+0.5。",
       "explanation": "解析：第一个隐藏节点权重 (-1,-1)，取 +1.5 使其仅在 A=B=1 时为 0。\n第二、第三子句分别用 (+1,-1,+1), b=+0.5 与 (+1,-1), b=+0.5；输出层对三项做 AND，取 b0=-2.5。"
     },
-    "transcript": "jing multi-layer perceptron, using the threshold activation function, and assume that TRUE is represented by 1; FALSE by 0.\n+1 +1 +1\nb, b,\n+1 —-1) +1 +1 -1\nis D E\n[ the biases Do, by, b2 and b3 would this network compute the logical function\nCVD) A(DV +E)",
+    "transcript": "Consider the following multi-layer perceptron, using the threshold activation function, and assume that TRUE is represented by 1; FALSE by 0.\n\n[See the perceptron diagram in the screenshot.]\n\nFor which values of the biases b0, b1, b2 and b3 would this network compute the logical function\n(¬A ∨ ¬B) ∧ (B ∨ ¬C ∨ D) ∧ (D ∨ ¬E)",
+    "category": "calculation",
     "id": "comp9444-new-45",
     "bankId": "comp9444-new",
     "number": 45
@@ -12368,7 +12462,8 @@ export const questions = [
       "referenceAnswer": "答案：w0=0.5，w1=-3，w2=0。",
       "explanation": "解析：净输入 s=-0.5+(-1)(-2)+(-2)(2)=-2.5，误判为负类。\n对正类误判加上增广输入 (1,-2,2)，得到 (0.5,-3,0)。"
     },
-    "transcript": "10Se Output is given by h(wo+w4x7+W2x2), where x4, x2 are inputs and h/() is the Heaviside (step) function.\n3 being trained on the data in the following table, and that the current values of the weights are wo= -0.5, w4= -1 and w= -2.\naining Examplexy x2 |Class|\n) Rule is applied to the current weights, using training item (a) and a learning rate of n=1,0, the new values for wo, #1 and w2 at the end of this training step will be:",
+    "transcript": "Consider a Perceptron whose output is given by h(w0+w1x1+w2x2), where x1, x2 are inputs and h() is the Heaviside (step) function.\nAssume this Perceptron is being trained on the data in the following table, and that the current values of the weights are w0 = -0.5, w1 = -1 and w2 = -2.\n\nTraining Example | x1 | x2 | Class\n(a) | -2 | 2 | Pos\n(b) | 2 | 1 | Neg\n(c) | -1 | -1 | Neg\n\nIf the Perceptron Learning Rule is applied to the current weights, using training item (a) and a learning rate of η=1.0, the new values for w0, w1 and w2 at the end of this training step will be:",
+    "category": "calculation",
     "id": "comp9444-new-46",
     "bankId": "comp9444-new",
     "number": 46
@@ -12390,7 +12485,8 @@ export const questions = [
       "referenceAnswer": "答案：策略 π*(S1)=a1、π*(S2)=a2。γ=0.7 时 Q*=(10.00,9.67,3.00,6.67)；最优范围 γ∈[0.67,0.86]。",
       "explanation": "解析：在该策略下 V1=3/(1-γ)、V2=2/(1-γ)。γ=0.7 时 V1=10、V2=6.6667。\n四个 Q 依次为 10、5+0.7V2=9.67、-4+0.7V1=3、6.67。"
     },
-    "transcript": "nvironment with two states S = {S;, Sp} and two actions A = {a), a2}, where the\n) transitions 6 and reward R for each state and action are as follows:\na, éf *% a,\nl \\_ |\nscount factor of y = 0.7, determine:\n1g y = 0.7, compute these values (correct to two decimal places):\nto vary between 0 and 1, for which range of values of y is this policy optimal (correct to\nlaces)?\njue of y:\nlue of y:",
+    "transcript": "Consider an environment with two states S = {S1, S2} and two actions A = {a1, a2}, where the (deterministic) transitions δ and reward R for each state and action are as follows:\n\n[See the state-transition diagram in the screenshot.]\n\nAssuming a discount factor of γ = 0.7, determine:\nπ*(S1)=\nπ*(S2)=\n\nAgain assuming γ = 0.7, compute these values (correct to two decimal places):\nQ*(S1,a1)\nQ*(S1,a2)\nQ*(S2,a1)\nQ*(S2,a2)\n\nIf γ is allowed to vary between 0 and 1, for which range of values of γ is this policy optimal (correct to two decimal places)?\nMinimum value of γ:\nMaximum value of γ:",
+    "category": "calculation",
     "id": "comp9444-new-47",
     "bankId": "comp9444-new",
     "number": 47
@@ -12412,7 +12508,9 @@ export const questions = [
       "referenceAnswer": "答案：策略 π*(S1)=a1、π*(S2)=a2。γ=0.8 时 Q*=(15.00,13.00,8.00,10.00)；最优范围 γ∈[0.67,0.86]。",
       "explanation": "解析：在该策略下 V1=3/(1-γ)、V2=2/(1-γ)。γ=0.8 时 V1=15、V2=10。\n四个 Q 依次为 15、5+0.8V2=13、-4+0.8V1=8、10。"
     },
-    "transcript": "wt with two states S = (S;, S2)} and two actions A = {a;, a2), where the (deterministic) transitions 5 and reward R for each state and action are as follows:\na ™~ a,\nile\nctor of y = 0.8, determine:\ncompute these values (correct to two decimal places):\ntween O and 1, for which range of values of y is this policy optimal (correct to two decimal places)?\n0.14\n0.75",
+    "transcript": "Consider an environment with two states S = {S1, S2} and two actions A = {a1, a2}, where the (deterministic) transitions δ and reward R for each state and action are as follows:\n\n[See the state-transition diagram in the screenshot.]\n\nAssuming a discount factor of γ = 0.8, determine:\nπ*(S1)=\nπ*(S2)=\n\nAgain assuming γ = 0.8, compute these values (correct to two decimal places):\nQ*(S1,a1)\nQ*(S1,a2)\nQ*(S2,a1)\nQ*(S2,a2)\n\nIf γ is allowed to vary between 0 and 1, for which range of values of γ is this policy optimal (correct to two decimal places)?\nMinimum value of γ:\nMaximum value of γ:",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-48",
     "bankId": "comp9444-new",
     "number": 48
@@ -12434,7 +12532,8 @@ export const questions = [
       "referenceAnswer": "答案：可取 y=H(-3X+4Y)，即 b=0,wX=-3,wY=4；保证有限步找到解。",
       "explanation": "解析：三个净输入分别为 4、-2、2，分类恰为 1、0、1。\n数据线性可分，因此由感知机收敛定理，在固定正学习率和反复呈现样本的条件下会在有限次更新后找到分离超平面。"
     },
-    "transcript": "v1.\nOUTPUT\n2 1\n2 2\nks) Construct by hand a Perceptron network which correctly classi-\n> above three data items. Your network should have two inputs (X,Y)\ni output. Make sure the connections and weights of your network are\nspecified.\nk) If a perceptron were trained on the above data using the perceptron\nig algorithm, would it be guaranteed to find a solution in finite time?",
+    "transcript": "X | Y | OUTPUT\n0 | 1 | 1\n2 | 1 | 0\n2 | 2 | 1\n\n(a) (2 marks) Construct by hand a Perceptron network which correctly classifies the above three data items. Your network should have two inputs (X,Y) and one output. Make sure the connections and weights of your network are clearly specified.\n\n(b) (1 mark) If a perceptron were trained on the above data using the perceptron learning algorithm, would it be guaranteed to find a solution in finite time?",
+    "category": "calculation",
     "id": "comp9444-new-49",
     "bankId": "comp9444-new",
     "number": 49
@@ -12456,7 +12555,8 @@ export const questions = [
       "referenceAnswer": "答案：同步：(-1,+1,-1,+1) → (+1,-1,+1,-1) → (-1,+1,-1,+1)。异步示例最终到 (+1,-1,-1,+1)。",
       "explanation": "解析：同步更新每次同时计算 sign(Wx)，会在两个状态之间形成二周期振荡。\n异步可依次更新单元 1、3、1：(+1,-1,+1,+1)→(-1,-1,+1,+1)→(-1,-1,-1,+1)→(+1,-1,-1,+1)，最后状态稳定。"
     },
-    "transcript": "eeEeEEEEEeEEEEE—EEEeEeEe—e———————————————————— SE\n1 10.\n~onsider a Hopfield Network with the following weight matrix W:\n+1 -1 +l\n+1 0 +1 -1\n—-1 +1 0 -l\n+1 -l1 -1 0\nnetwork begins in state [+1,—1,+1,+1], and assuming synchronous\ns, compute the state at the next three timesteps.\ning asynchronous updates, give one possible sequence leading to a sta-\nte.",
+    "transcript": "(5 marks) Consider a Hopfield Network with the following weight matrix W:\n\n 0  +1  −1  +1\n+1   0  +1  −1\n−1  +1   0  −1\n+1  −1  −1   0\n\n(a) If the network begins in state [+1, −1, +1, +1], and assuming synchronous updates, compute the state at the next three timesteps.\n\n(b) Assuming asynchronous updates, give one possible sequence leading to a stable state.",
+    "category": "calculation",
     "id": "comp9444-new-50",
     "bankId": "comp9444-new",
     "number": 50
@@ -12478,7 +12578,8 @@ export const questions = [
       "referenceAnswer": "答案：见解析中的三部分。",
       "explanation": "解析：Boltzmann Machine：E(x)=-1/2∑_{i≠j}w_ij x_i x_j-∑_i b_i x_i（等价地对 i<j 求和而不写 1/2）。\nVAE 的 E_q[log pθ(x|z)] 是重构/数据拟合项；KL(qφ(z|x)||p(z)) 把近似后验拉向先验，使潜空间连续、可采样并起正则化作用。"
     },
-    "transcript": "111.\nks) Write the Energy function for a Boltzmann Machine, with units\ni<n\nks) The Variational Auto-Encoder is trained to maximize\nBE. nag(zket) [log po(2|z)] — Der (go(z|2)IIp(z))\nstate what each of these two terms aims to achieve.\nks) Briefly describe two ways in which a GAN may fail to converge.",
+    "transcript": "(a) (2 marks) Write the Energy function for a Boltzmann Machine, with units {x_i}_(1≤i≤n)\n\n(b) (3 marks) The Variational Auto-Encoder is trained to maximize\n\nE_(z~q_φ(z|x^(i))) [log p_θ(x^(i)|z)] − D_KL(q_φ(z|x^(i)) ‖ p(z))\n\nBriefly state what each of these two terms aims to achieve.\n\n(c) (2 marks) Briefly describe two ways in which a GAN may fail to converge.",
+    "category": "short-answer",
     "id": "comp9444-new-51",
     "bankId": "comp9444-new",
     "number": 51
@@ -12500,7 +12601,8 @@ export const questions = [
       "referenceAnswer": "答案：见三点解析。",
       "explanation": "解析：感知机学习用于单层阈值分类器，只在误分类时按样本更新；反向传播利用链式法则，为可微多层网络计算损失对全部参数的梯度。\nBatch learning 先汇总整批/全数据梯度再更新；online learning 每个样本到来即更新，响应快但梯度噪声大。mini-batch 介于两者之间。"
     },
-    "transcript": "ks) Briefly explain the difference between Perceptron learning and\nypagation.\n<s) Briefly explain the difference between batch learning and online\na.\n<s) What would happen if the transfer functions at the hidden layers in\nlayer perceptron would be omitted; i.e. if the activation would simply\nveighted sum of the activations at the previous layer? Explain why this\n1) activation scheme is not normally used in MLPs although it would\ny and accelerate the calculations for the backpropagation algorithm?",
+    "transcript": "(a) (2 marks) Briefly explain the difference between Perceptron learning and backpropagation.\n\n(b) (2 marks) Briefly explain the difference between batch learning and online learning.\n\n(c) (3 marks) What would happen if the transfer functions at the hidden layers in a multi-layer perceptron would be omitted; i.e. if the activation would simply be the weighted sum of the activations at the previous layer? Explain why this (simpler) activation scheme is not normally used in MLPs although it would simplify and accelerate the calculations for the backpropagation algorithm?",
+    "category": "short-answer",
     "id": "comp9444-new-52",
     "bankId": "comp9444-new",
     "number": 52
@@ -12522,7 +12624,8 @@ export const questions = [
       "referenceAnswer": "答案：轨迹应在读入 5 个 a 时沿一串可区分状态累积“计数”，随后每读一个 b 依次反向/沿另一支轨迹返回；输出边界把预测 a 与预测 b 的状态区域线性分开。",
       "explanation": "解析：隐藏状态不必落在唯一坐标；关键是 a 阶段的五个状态可区分并保存计数，转入 b 后每一步消耗一个计数状态。\n分割线的一侧对应下一符号 a，另一侧对应下一符号 b；在 a→b 的转折附近轨迹跨越该边界。"
     },
-    "transcript": "13.\nConsider a simple recurrent (Elman) network with 2 inputs, 2 hidden\n2 outputs, using tanh activation at the hidden units and sigmoid at the\nuppose this network is trained to predict the formal language a\"b\" and\nining is successful.\ngram showing:\njectory that might be traversed in hidden unit space as the network\nses the string a°b?\ne that divides the hidden unit space into the region for which a is pre-\nand the region for which b is predicted.",
+    "transcript": "(4 marks) Consider a simple recurrent (Elman) network with 2 inputs, 2 hidden units and 2 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is trained to predict the formal language a^n b^n and that the training is successful.\n\nDraw a diagram showing:\n\n(a) the trajectory that might be traversed in hidden unit space as the network processes the string a^5 b^5\n\n(b) the line that divides the hidden unit space into the region for which a is predicted, and the region for which b is predicted.",
+    "category": "short-answer",
     "id": "comp9444-new-53",
     "bankId": "comp9444-new",
     "number": 53
@@ -12544,7 +12647,8 @@ export const questions = [
       "referenceAnswer": "答案：公式与概念见解析。",
       "explanation": "解析：σ(x)=1/(1+e^{-x})；tanh(x)=(e^x-e^{-x})/(e^x+e^{-x})；ReLU(x)=max(0,x)。\nBayes：P(A|B)=P(B|A)P(A)/P(B)。"
     },
-    "transcript": "s) Sketch the following activation functions, and write their formulas:\nsigmoid\ntanh\nReLU\n<s) Write the formula for Bayes' Rule, in terms of a cause A and an\n‘s) In the context of supervised learning, explain the difference between\num likelihood estimation and Bayesian inference.\n‘<s) Briefly explain the concept of Data Augmentation, and how it has\ned in a neural network application of your choosing.",
+    "transcript": "(a) (3 marks) Sketch the following activation functions, and write their formulas:\n(i) sigmoid\n(ii) tanh\n(iii) ReLU\n\n(b) (2 marks) Write the formula for Bayes’ Rule, in terms of a cause A and an effect B.\n\n(c) (3 marks) In the context of supervised learning, explain the difference between maximum likelihood estimation and Bayesian inference.\n\n(d) (3 marks) Briefly explain the concept of Data Augmentation, and how it has been used in a neural network application of your choosing.",
+    "category": "short-answer",
     "id": "comp9444-new-54",
     "bankId": "comp9444-new",
     "number": 54
@@ -12566,7 +12670,8 @@ export const questions = [
       "referenceAnswer": "答案：49；4158；2058。",
       "explanation": "解析：每核参数 4×4×3+1=49。输出高 floor((26+2-4)/3)+1=9，宽 floor((32+2-4)/3)+1=11。\n神经元数 9×11×42=4158；独立参数 42×49=2058。"
     },
-    "transcript": "15.\nonsider a convolutional neural network which takes as input a 26-by-32\ne (i.e. with three channels R, G, B). The first convolutional layer has 42\nare 4-by-4, with stride 3 and zero-padding of width 1.\nhe number of:\nts for each neuron in this layer (including bias)\n1s in this layer\nndent parameters in this layer\nu do not have a calculator, it is sufficient to write an arithmetic expression\nse.",
+    "transcript": "(4 marks) Consider a convolutional neural network which takes as input a 26-by-32 color image (i.e. with three channels R, G, B). The first convolutional layer has 42 filters that are 4-by-4, with stride 3 and zero-padding of width 1.\n\nCompute the number of:\n\n(a) weights for each neuron in this layer (including bias)\n(b) neurons in this layer\n(c) independent parameters in this layer\n\nNote: if you do not have a calculator, it is sufficient to write an arithmetic expression in each case.",
+    "category": "calculation",
     "id": "comp9444-new-55",
     "bankId": "comp9444-new",
     "number": 55
@@ -12588,7 +12693,8 @@ export const questions = [
       "referenceAnswer": "答案：类比用 v*=v(B)-v(A)+v(C)，在候选中选择与 v* 余弦相似度最大的 X。",
       "explanation": "解析：L(w) 是从根到词 w 的路径长度；n(w,j) 是该路径上的第 j 个节点；v'_{n(w,j)} 是该内部节点的输出向量；h 是当前上下文/隐藏表示。\nσ 是 logistic sigmoid；指示/符号项 [n(w,j+1)=child(n(w,j))] 按路径选择的分支返回 +1 或 -1，使每个乘积因子表示在该节点选择正确分支的概率。"
     },
-    "transcript": "s) Assume you are given a set of pre-trained word embeddings from\nec or GloVe. Briefly explain how you would use these word embed-\n) answer questions of the form:\nis to B as C is to X?\nA, B, C are given words and you have to choose between four other\nXi, Xo, Xz, X4 to replace X).\n's) The equation for Hierarchical Softmax is this:\nL(w)-1\n»b(w = w,) = I] o([n(w, 7 +1) = child(n(w, j))Vnqw.)\" h)\nj=l\n‘the following symbols in the above equation:\nj + 1) = child(n(w, j))]",
+    "transcript": "(a) (3 marks) Assume you are given a set of pre-trained word embeddings from word2vec or GloVe. Briefly explain how you would use these word embeddings to answer questions of the form:\n\nA is to B as C is to X?\n\n(where A, B, C are given words and you have to choose between four other words X₁, X₂, X₃, X₄ to replace X).\n\n(b) (5 marks) The equation for Hierarchical Softmax is this:\n\nprob(w = w_t) = ∏_(j=1)^(L(w)−1) σ([n(w,j+1) = child(n(w,j))] v′_(n(w,j))^T h)\n\nIdentify the following symbols in the above equation:\nL(w)\nn(w,j)\nv_(n(w,j))\nh\nσ()\n[n(w,j+1) = child(n(w,j))]",
+    "category": "short-answer",
     "id": "comp9444-new-56",
     "bankId": "comp9444-new",
     "number": 56
@@ -12610,7 +12716,8 @@ export const questions = [
       "referenceAnswer": "答案：可用标准 GRU 四式完整表示图中连线。",
       "explanation": "解析：z_t=σ(W_zx_t+U_zh_(t-1)+b_z)，r_t=σ(W_rx_t+U_rh_(t-1)+b_r)。\n候选状态 h~_t=tanh(W_hx_t+U_h(r_t⊙h_(t-1))+b_h)。"
     },
-    "transcript": "a7.\nCopy this outline into your script book, and use it to complete a diagram\n1 workings of a GRU (Gated Recurrent Unit).\nam should include:\nths along which data travels through the system,\nices where matrix multiplication occurs,\nices where sigmoid and tanh are applied, and\nictions where values are combined by addition or multiplication.\ndo not have to write any equations.",
+    "transcript": "(5 marks) Copy this outline into your script book, and use it to complete a diagram of the inner workings of a GRU (Gated Recurrent Unit).\n\n[See the original image for the outline labeled h_(t−1), x_t, and h_t.]\n\nYour diagram should include:\n\n(a) the paths along which data travels through the system,\n(b) the places where matrix multiplication occurs,\n(c) the places where sigmoid and tanh are applied, and\n(d) the junctions where values are combined by addition or multiplication.\n\nNote: You do not have to write any equations.",
+    "category": "short-answer",
     "id": "comp9444-new-57",
     "bankId": "comp9444-new",
     "number": 57
@@ -12632,7 +12739,8 @@ export const questions = [
       "referenceAnswer": "答案：经验回放与进化更新步骤见解析。",
       "explanation": "解析：把转移 e_t=(s_t,a_t,r_t,s_(t+1)) 存入 D，随机采样 mini-batch。目标 y=r+γmax_a'Q_target(s',a')，最小化 (y-Q(s,a;θ))²；这样打散时间相关性并复用样本。\n进化策略可从当前 θ 采样 θ_i=θ+σε_i，运行完整 episode 得回报 R_i，再按标准化回报加权噪声更新 θ←θ+α/(Nσ)∑R_iε_i。Hill climbing 则保留当前最好权重，只接受回报更高的随机扰动。"
     },
-    "transcript": "‘s) In the context of Deep Q Learning, explain the concept of Experi-\nplay, including why and how it is applied, and the relevant equation(s).\n‘s) Briefly describe how an Evolutionary Strategy or HillClimbing al-\n1 could be applied to one of the following domains:\n>kgammon\nwulated Hockey\nri Pong\nJoCo humanoid walking\nyou do NOT have to describe the domain; you only need to describe\nyrithm for updating the weights)",
+    "transcript": "(a) (4 marks) In the context of Deep Q Learning, explain the concept of Experience Replay, including why and how it is applied, and the relevant equation(s).\n\n(b) (4 marks) Briefly describe how an Evolutionary Strategy or HillClimbing algorithm could be applied to one of the following domains:\n\n(a) Backgammon\n(b) Simulated Hockey\n(c) Atari Pong\n(d) MuJoCo humanoid walking\n\n(Note: you do NOT have to describe the domain; you only need to describe the algorithm for updating the weights)",
+    "category": "short-answer",
     "id": "comp9444-new-58",
     "bankId": "comp9444-new",
     "number": 58
@@ -12654,7 +12762,9 @@ export const questions = [
       "referenceAnswer": "答案：π*(S1)=a1，π*(S2)=a2；V*=(2,6)；Q*(S1,a1)=2，Q*(S1,a2)=1，Q*(S2,a1)=5，Q*(S2,a2)=6。",
       "explanation": "解析：选自环策略时 V1=1+0.5V1=2，V2=3+0.5V2=6。\n另两个动作的值为 -2+0.5×6=1 与 4+0.5×2=5，均小于当前动作值，因此策略最优。"
     },
-    "transcript": "onsider a world with two states S = {S), S2} and two actions A = {a1, a2},\n‘ansition 6 and reward r for each state and action are as follows:\na) =S1, r(Si,a) =41\na2) = So, r(Sj, a2) = -—2\na1) =S1, r(S2,a) = +4\na2) => So, r(So, az) => +3\nhe discount factor is y = ae compute:\nmal policy 7*: S++ A\nie function V*: Si+>R\ninction@*: Sx AWR\ny by helpful to know that, for 0 < x < 1,\n2 3 1\nlteter tart... = —m\nl-2z",
+    "transcript": "(5 marks) Consider a world with two states S = {S₁, S₂} and two actions A = {a₁, a₂}, where the transition δ and reward r for each state and action are as follows:\n\nδ(S₁, a₁) = S₁,    r(S₁, a₁) = +1\nδ(S₁, a₂) = S₂,    r(S₁, a₂) = −2\nδ(S₂, a₁) = S₁,    r(S₂, a₁) = +4\nδ(S₂, a₂) = S₂,    r(S₂, a₂) = +3\n\nAssuming the discount factor is γ = 1/2, compute:\n\n(a) the optimal policy π* : S ↦ A\n(b) the value function V* : S ↦ R\n(c) the Q function Q* : S × A ↦ R\n\nNote: it may by helpful to know that, for 0 ≤ x < 1,\n\n1 + x + x² + x³ + ... = 1/(1 − x)",
+    "category": "calculation",
+    "transcriptNote": "The screenshot prints “it may by helpful”.",
     "id": "comp9444-new-59",
     "bankId": "comp9444-new",
     "number": 59
@@ -12676,7 +12786,8 @@ export const questions = [
       "referenceAnswer": "答案：MLE 给出一个参数点估计；Bayesian inference 给出参数的后验分布并对预测积分。",
       "explanation": "解析：MLE 最大化 p(D|θ)，不显式保留参数不确定性。Bayesian 方法从 p(θ) 出发，得到 p(θ|D)∝p(D|θ)p(θ)。\n预测时 Bayesian 方法使用 p(y|x,D)=∫p(y|x,θ)p(θ|D)dθ，能表达不确定性，但计算更昂贵。"
     },
-    "transcript": "itext of Supervised Learning, explain the difference between Maximum Likelihood and\n1 Inference.\nur answer here\nis Sample Exam contains only One Short Answer Question,\neal Final Exam will contain 4 Short Answer Questions (11 to 14).",
+    "transcript": "In the context of Supervised Learning, explain the difference between Maximum Likelihood and Bayesian Inference.",
+    "category": "short-answer",
     "id": "comp9444-new-60",
     "bankId": "comp9444-new",
     "number": 60
@@ -12702,7 +12813,8 @@ export const questions = [
       "referenceAnswer": "答案：第1步 s=-4.5，Add→(0.5,1,-1)；第2步 s=-3.5，Add→(1.5,-1,1)；第3步 s=1.5，Subtract→(0.5,0,2)。",
       "explanation": "解析：正类被预测为负时加上 (1,x1,x2)；负类被预测为正时减去该增广向量。\n逐步代入可得到上述三个净输入和权重序列。"
     },
-    "transcript": "[Original screenshot 1]\na perceptron whose output is given by h(wo + W421 + Woo) where 21, £2 are inputs\ns the Heaviside (step) function.\nItem| £1 | 22 |Class|\n| 2] 1] + |\n|-2{ 2{ + |\n|=1| 1] — |\n‘ate the first three steps of the Perceptron Learning Algorithm on the above data, using\nyrate of 1.0 and initial weight values of\n= —0.5\n=-1\n= —2\nstep, you need to:\nter the value of S = wo + W121 + Wor.\noose the appropriate Action (right column)\nfer the new values of Wo, W1, We on the next line (left columns)\n[Original screenshot 2]\nwy | we item) z;/%2| Class | $s | Action\n—1 1 + Choose:\nSelect alternative\n(Add, Subtract, None)\nEnter: + Choose:\nSelect alternative\n(Add, Subtract, None)\nEnter: | c. |—1/-—1 Enter: Choose:\nSelect alternative\n(Add, Subtract, None)",
+    "transcript": "Consider a perceptron whose output is given by h(w₀ + w₁x₁ + w₂x₂) where x₁, x₂ are inputs and h() is the Heaviside (step) function.\n\nTraining Item | x₁ | x₂ | Class\na. | 2 | 1 | +\nb. | −2 | 2 | +\nc. | −1 | −1 | −\n\nDemonstrate the first three steps of the Perceptron Learning Algorithm on the above data, using a learning rate of 1.0 and initial weight values of\n\nw₀ = −0.5\nw₁ = −1\nw₂ = −2\n\nFor each step, you need to:\n• Enter the value of s = w₀ + w₁x₁ + w₂x₂\n• Choose the appropriate Action (right column)\n• Enter the new values of w₀, w₁, w₂ on the next line (left columns)\n\nStep | w₀ | w₁ | w₂ | Item | x₁ | x₂ | Class | s | Action\n1 | −0.5 | −1 | −2 | a. | 2 | 1 | + | | (Add, Subtract, None)\n2 | | | | b. | −2 | 2 | + | | (Add, Subtract, None)\n3 | | | | c. | −1 | −1 | − | | (Add, Subtract, None)\n4 | | | | | | | | |",
+    "category": "calculation",
     "id": "comp9444-new-61",
     "bankId": "comp9444-new",
     "number": 61
@@ -12724,7 +12836,8 @@ export const questions = [
       "referenceAnswer": "答案：b0=-2.5，b1=+1.5，b2=+0.5，b3=+0.5。",
       "explanation": "解析：第一个隐藏节点权重 (-1,-1)，取 +1.5 使其仅在 A=B=1 时为 0。\n第二、第三子句分别用 (+1,-1,+1), b=+0.5 与 (+1,-1), b=+0.5；输出层对三项做 AND，取 b0=-2.5。"
     },
-    "transcript": "r the following multi-layer perceptron, using the threshold activation function, and\nthat TRUE is represented by 1; FALSE by 0.\n+] +] +1\nb, b,\n1-l +1 -1| +1 +1 -1\nB C D E\nh values of the biases bp, bi, be, bs would this network compute the following logical\n(-A V -=B) A(BV ~C VD) A(D Vv -7E)\ny= Selectalternative (-2.5, -1.5, -0.5, +0.5, +1.5, +2.5)\n= Selectalternative (-2.5, -1.5, -0.5, +0.5, +1.5, +2.5)\n»= Selectalternative (-2.5, -1.5, -0.5, +0.5, +1.5, +2.5)\n= Select alternative (-2.5, -1.5, -0.5, +0.5, +1.5, +2.5)",
+    "transcript": "Consider the following multi-layer perceptron, using the threshold activation function, and assume that TRUE is represented by 1; FALSE by 0.\n\n[See the original image for the network diagram.]\n\nFor which values of the biases b₀, b₁, b₂, b₃ would this network compute the following logical function ?\n\n(¬A ∨ ¬B) ∧ (B ∨ ¬C ∨ D) ∧ (D ∨ ¬E)\n\n• b₀ = (−2.5, −1.5, −0.5, +0.5, +1.5, +2.5)\n• b₁ = (−2.5, −1.5, −0.5, +0.5, +1.5, +2.5)\n• b₂ = (−2.5, −1.5, −0.5, +0.5, +1.5, +2.5)\n• b₃ = (−2.5, −1.5, −0.5, +0.5, +1.5, +2.5)",
+    "category": "multiple-choice",
     "id": "comp9444-new-62",
     "bankId": "comp9444-new",
     "number": 62
@@ -12746,7 +12859,8 @@ export const questions = [
       "referenceAnswer": "答案：0.125（12.5%，两位小数可写 0.13）。",
       "explanation": "解析：P(V∩D)=0.3×0.01=0.003；P(D)=0.003+0.7×0.03=0.024。\n所以 P(V|D)=0.003/0.024=0.125。"
     },
-    "transcript": "Of the population have been vaccinated against a certain disease. Among those who\ninated, only 1% of them have the disease. But, among those who are not vaccinated,\n2m have the disease.\nym person is found to have the disease, what is the probability that they have been\n2d?\nir answer as a number between 0 and 1, correct to at least 2 decimal places).",
+    "transcript": "Only 30% of the population have been vaccinated against a certain disease. Among those who are vaccinated, only 1% of them have the disease. But, among those who are not vaccinated, 3% of them have the disease.\n\nIf a random person is found to have the disease, what is the probability that they have been vaccinated?\n(give your answer as a number between 0 and 1, correct to at least 2 decimal places).",
+    "category": "calculation",
     "id": "comp9444-new-63",
     "bankId": "comp9444-new",
     "number": 63
@@ -12768,7 +12882,8 @@ export const questions = [
       "referenceAnswer": "答案：H(p)=1.875≈1.88 bits。",
       "explanation": "解析：H=0.5×1+0.25×2+0.125×3+2×0.0625×4=1.875。"
     },
-    "transcript": "a probability distribution p on the same space 2 = {A, B, C', D, E} given by:\n»%a, La, 6,6 ?\nthe Entropy of p (give your answer in terms of log base 2 (bits) correct to at least two\nlaces):",
+    "transcript": "Consider a probability distribution p on the same space Ω = {A, B, C, D, E} given by:\n\np = ⟨1/2, 1/4, 1/8, 1/16, 1/16⟩\n\nCompute the Entropy of p (give your answer in terms of log base 2 (bits) correct to at least two decimal places):\n\nH(p) =",
+    "category": "calculation",
     "id": "comp9444-new-64",
     "bankId": "comp9444-new",
     "number": 64
@@ -12790,7 +12905,8 @@ export const questions = [
       "referenceAnswer": "答案：D_KL(p||q)=0.6875≈0.69 bits。",
       "explanation": "解析：各项为 0.5、0.25、0.125、-0.1875、0，总和为 0.6875。"
     },
-    "transcript": "‘wo probability distribution P,Q on the same space 2 = {A, B, C, D, E} given by:\n(%, Va, Yas \"ie. Ae >\n(%,, Ya, Ye, Ya, Ye >\nthe KL-Divergenece between p and q (give your answer in terms of log base 2\nact to at least two decimal places):\n(pIlq) =",
+    "transcript": "Consider two probability distribution p, q on the same space Ω = {A, B, C, D, E} given by:\n\np = ⟨1/2, 1/4, 1/8, 1/16, 1/16⟩\nq = ⟨1/4, 1/8, 1/16, 1/2, 1/16⟩\n\nCompute the KL-Divergence between p and q (give your answer in terms of log base 2 (bits) correct to at least two decimal places):\n\nD_KL(p ‖ q) =",
+    "category": "calculation",
     "id": "comp9444-new-65",
     "bankId": "comp9444-new",
     "number": 65
@@ -12812,7 +12928,8 @@ export const questions = [
       "referenceAnswer": "答案：(-0.69, 0.75, -0.06)。",
       "explanation": "解析：softmax 概率约为 (0.6897,0.2537,0.0566)，故 one_hot(2)-p=(-0.6897,0.7463,-0.0566)。"
     },
-    "transcript": "a neural network trained using softmax for a classification task with three classes\nIppose a particular input is presented, producing outputs :\n= 2.5, 22 = 1.5, Z =0\nthe correct class for this input is Class 2, that Prob(2) is the softmax probability of the\nhoosing Class 2, and that log, is the natural logarithm (In), compute the following\n) at least two decimal places):\nog,Prob(2))/dz1 =\nog, Prob(2))/dz2 =\nog, Prob(2))/dz3 =",
+    "transcript": "Consider a neural network trained using softmax for a classification task with three classes 1, 2, 3. Suppose a particular input is presented, producing outputs :\n\nz₁ = 2.5,  z₂ = 1.5,  z₃ = 0\n\nAssuming the correct class for this input is Class 2, that Prob(2) is the softmax probability of the network choosing Class 2, and that logₑ is the natural logarithm (ln), compute the following (correct to at least two decimal places):\n\n• d(logₑ Prob(2))/dz₁ =\n• d(logₑ Prob(2))/dz₂ =\n• d(logₑ Prob(2))/dz₃ =",
+    "category": "calculation",
     "id": "comp9444-new-66",
     "bankId": "comp9444-new",
     "number": 66
@@ -12834,7 +12951,8 @@ export const questions = [
       "referenceAnswer": "答案：每核 76；神经元 9450；连接 718,200；独立参数 1368。",
       "explanation": "解析：输出空间为 21×25，神经元数 21×25×18=9450；每核参数 5×5×3+1=76。\n连接数 9450×76=718,200；独立参数 18×76=1368。"
     },
-    "transcript": "a convolutional neural network which takes as input a 65 x 77 color image (i.e. with\ninels R, G, B). The first convolutional layer has 18 filters that are 5-by-5, with stride 3\nro- padding.\nthe number of:\nyhts per filter in this layer (including bias) :\nrons in this layer :\nnections into the neurons in this layer :\npendent parameters in this layer :",
+    "transcript": "Consider a convolutional neural network which takes as input a 65 × 77 color image (i.e. with three channels R, G, B). The first convolutional layer has 18 filters that are 5-by-5, with stride 3 and no zero- padding.\nCompute the number of:\n\n• weights per filter in this layer (including bias) :\n• neurons in this layer :\n• connections into the neurons in this layer :\n• independent parameters in this layer :",
+    "category": "calculation",
     "id": "comp9444-new-67",
     "bankId": "comp9444-new",
     "number": 67
@@ -12856,7 +12974,8 @@ export const questions = [
       "referenceAnswer": "答案：Q(S1,a1)=10.00，Q(S1,a2)=9.67，Q(S2,a1)=3.00，Q(S2,a2)=6.67。",
       "explanation": "解析：V1=3/(1-0.7)=10，V2=2/(1-0.7)=6.6667，再把下一状态价值代入各动作。"
     },
-    "transcript": "a reinforcement learning environment with two states S = {Si, So} and two actions\nar}, where the (deterministic) transitions 6 and reward R for each state and action\nlows :\na ——— NN\nyo 2 a\nNe a\niscount factor of \"Y = 0.7, the optimal policy 7f for this environment is given by :\n($1) =a, (S52) = a2\n/above policy, and assuming ‘Y = 0.7, compute these values (correct to at least two\nlaces):\n\"(S1, a1) =\n\"(S1, a2) =\n\"(S2, a1) =\n(Se, a2) =",
+    "transcript": "Consider a reinforcement learning environment with two states S = {S₁, S₂} and two actions a = {a₁, a₂}, where the (deterministic) transitions δ and reward ℛ for each state and action are as follows :\n\n[See the original image for the state transition diagram.]\n\nWith a discount factor of γ = 0.7, the optimal policy π for this environment is given by :\n\nπ(S₁) = a₁,  π(S₂) = a₂\n\nUsing the above policy, and assuming γ = 0.7, compute these values (correct to at least two decimal places):\n\n• Q^π(S₁,a₁) =\n• Q^π(S₁,a₂) =\n• Q^π(S₂,a₁) =\n• Q^π(S₂,a₂) =",
+    "category": "calculation",
     "id": "comp9444-new-68",
     "bankId": "comp9444-new",
     "number": 68
@@ -12878,7 +12997,9 @@ export const questions = [
       "referenceAnswer": "答案：γ_min=2/3≈0.67。",
       "explanation": "解析：S1 选择自环 a1 要求 3/(1-γ)≥5+2γ/(1-γ)，化简得 γ≥2/3。"
     },
-    "transcript": "the same reinforcement learning environment from Question 22 (above), but with the\nactor ‘Y varying between 0 and 1. Recall that, when +y = 0.7, the optimal policy 7 is\nm(S1) =a, m(S2) = ag\nrange of values of 'Y is this policy optimal? (give the minimum and maximum value,\nat least two decimal places, as your answer for Questions 23 and 24).\n| value of YY for which 7 is optimal :",
+    "transcript": "Consider the same reinforcement learning environment from Question 22 (above), but with the discount factor γ varying between 0 and 1. Recall that, when γ = 0.7, the optimal policy π is given by :\n\nπ(S₁) = a₁,  π(S₂) = a₂\n\nFor which range of values of γ is this policy optimal? (give the minimum and maximum value, correct to at least two decimal places, as your answer for Questions 23 and 24).\n\nMinimum value of γ for which π is optimal :",
+    "category": "calculation",
+    "transcriptNote": "Original Question 22 is Question 068 in this bank. The companion maximum-value question is Question 070.",
     "id": "comp9444-new-69",
     "bankId": "comp9444-new",
     "number": 69
@@ -12900,7 +13021,9 @@ export const questions = [
       "referenceAnswer": "答案：γ_max=6/7≈0.86。",
       "explanation": "解析：S2 选择自环 a2 要求 2/(1-γ)≥-4+3γ/(1-γ)，化简得 γ≤6/7。"
     },
-    "transcript": "he maximum value of \"y for which the policy 7 from Question 22 is optimal?\nm value of ‘Y for which 77 is optimal :",
+    "transcript": "What is the maximum value of γ for which the policy π from Question 22 is optimal?\n\nMaximum value of γ for which π is optimal :",
+    "category": "calculation",
+    "transcriptNote": "Original Question 22 is Question 068 in this bank. The companion minimum-value question is Question 069.",
     "id": "comp9444-new-70",
     "bankId": "comp9444-new",
     "number": 70
@@ -12922,7 +13045,8 @@ export const questions = [
       "referenceAnswer": "答案：a（左上图）。",
       "explanation": "解析：左上网络的两个隐藏节点形成互补比较器：相等输入时都激活，不等输入时仅一个激活；输出节点对两者做 NAND，得到 XOR 真值表。"
     },
-    "transcript": "SE and 1=TRUE, which of these networks (with threshold activations at both the hidden\nit layer) correctly computes the XOR function of two inputs ?\n1e alternative:\n+1.5 +1.5\n1 -l -1 -1l\n| ( C2 t\neae 40.5 f Lae\n1 +1 +1 +1\n+05 0.5\n+1 -1 +1 +1\n< +0.5 +0.5 [a ted 5\n1 +1 -1 -1",
+    "transcript": "If 0=FALSE and 1=TRUE, which of these networks (with threshold activations at both the hidden and output layer) correctly computes the XOR function of two inputs ?\nSelect one alternative:\n\n[See the original image for the four network diagrams.]",
+    "category": "multiple-choice",
     "id": "comp9444-new-71",
     "bankId": "comp9444-new",
     "number": 71
@@ -12944,7 +13068,8 @@ export const questions = [
       "referenceAnswer": "答案：a（左上图）。",
       "explanation": "解析：把每个点相对四条直线的两侧关系编码为四位符号向量。左上图的六个区域编码可经输出位标号与正负侧选择后与六个目标码一一对应。"
     },
-    "transcript": "a fully connected feedforward neural network with 6 inputs, 2 hidden units and 4\nusing tanh activation at the hidden units and sigmoid at the outputs. Suppose this\nS trained on the following data, and that the training is successful.\nnputs | Outputs |\n3456| 1234 |\n}0000| 0001 |\n0000| 0011 |\n}1000| 0100 |\n}0100| 1010 |\n10010) 1011 |\n}o001| 1110 |\nthese diagrams correctly shows a point in hidden unit space corresponding to each\nd, for each output, a line dividing the hidden unit space into regions for which the value\nitput is greater/less than one half ?\nne alternative:\nA ba",
+    "transcript": "Consider a fully connected feedforward neural network with 6 inputs, 2 hidden units and 4 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is trained on the following data, and that the training is successful.\n\nItem | Inputs (1 2 3 4 5 6) | Outputs (1 2 3 4)\n1. | 1 0 0 0 0 0 | 0 0 0 1\n2. | 0 1 0 0 0 0 | 0 0 1 1\n3. | 0 0 1 0 0 0 | 0 1 0 0\n4. | 0 0 0 1 0 0 | 1 0 1 0\n5. | 0 0 0 0 1 0 | 1 0 1 1\n6. | 0 0 0 0 0 1 | 1 1 1 0\n\nWhich of these diagrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a line dividing the hidden unit space into regions for which the value of that output is greater/less than one half ?\nSelect one alternative:\n\n[See the original image for the four diagrams.]",
+    "category": "multiple-choice",
     "id": "comp9444-new-72",
     "bankId": "comp9444-new",
     "number": 72
@@ -12966,7 +13091,8 @@ export const questions = [
       "referenceAnswer": "答案：a. 4D+1+(K-1)D(D+1)。",
       "explanation": "解析：输入到首隐藏层：2D 权重+D 偏置=3D；隐藏层之间：(K-1)(D²+D)。\n末隐藏层到输出：D 权重+1 偏置。总和为 4D+1+(K-1)D(D+1)。"
     },
-    "transcript": "etwork with a two inputs, one output, and K hidden layers, each containing D hidden units. What is the total number of parameters in this network\njases)?\n1)D(D +1)\n1)D(D +1)\n(D +1)\n(D +1)",
+    "transcript": "Consider a deep neural network with a two inputs, one output, and K hidden layers, each containing D hidden units. What is the total number of parameters in this network (including weights and biases)?\n\nSelect one:\na. 4D + 1 + (K − 1)D(D + 1)\nb. 3D + 1 + (K − 1)D(D + 1)\nc. 3D + 1 + KD(D + 1)\nd. 4D + 1 + KD(D + 1)",
+    "category": "multiple-choice",
     "id": "comp9444-new-73",
     "bankId": "comp9444-new",
     "number": 73
@@ -12988,7 +13114,8 @@ export const questions = [
       "referenceAnswer": "答案：0.375（37.5%）。",
       "explanation": "解析：三盒的两黑似然分别为 1/3、3/10、1/6。等先验抵消后，P(B|BB)=(3/10)/(1/3+3/10+1/6)=0.375。"
     },
-    "transcript": "ck balls and 1 green ball.\nck balls and 2 red balls.\nck balls and 2 white balls.\nis selected randomly (with equal probability), and then two balls are chosen randomly (without replacement) from the selected box.\nills are black, what is the probability that the selected box was Box B?\nver either as a percentage, or as a number between 0 and 1)",
+    "transcript": "Box A contains 2 black balls and 1 green ball.\n\nBox B contains 3 black balls and 2 red balls.\n\nBox C contains 2 black balls and 2 white balls.\n\nOne of these 3 boxes is selected randomly (with equal probability), and then two balls are chosen randomly (without replacement) from the selected box.\n\nIf both the chosen balls are black, what is the probability that the selected box was Box B?\n\n(You can give your answer either as a percentage, or as a number between 0 and 1)",
+    "category": "calculation",
     "id": "comp9444-new-74",
     "bankId": "comp9444-new",
     "number": 74
@@ -13010,7 +13137,9 @@ export const questions = [
       "referenceAnswer": "答案：(-0.58, -0.13, 0.71)。",
       "explanation": "解析：softmax 概率约为 (0.5815,0.1297,0.2888)，故 one_hot(3)-p=(-0.5815,-0.1297,0.7112)。"
     },
-    "transcript": "rk trained using softmax for a classification task with three classes 1, 2, 3. Suppose a particular input is presented, producing outputs\n= 0.5\nt class for this input is Class 3, that Prob(3) is the softmax probability of the network choosing Class 3, and that log. is the natural logarithm (In), compute\nat least two decimal places):\n0.58",
+    "transcript": "Consider a neural network trained using softmax for a classification task with three classes 1, 2, 3. Suppose a particular input is presented, producing outputs\n\nz₁ = 1.2, z₂ = −0.3, z₃ = 0.5\n\nIf we assume the correct class for this input is Class 3, that Prob(3) is the softmax probability of the network choosing Class 3, and that logₑ is the natural logarithm (ln), compute the following (correct to at least two decimal places):\n\n* d(logₑ Prob(3))/dz₁ =\n* d(logₑ Prob(3))/dz₂ =\n* d(logₑ Prob(3))/dz₃ =",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-75",
     "bankId": "comp9444-new",
     "number": 75
@@ -13032,7 +13161,8 @@ export const questions = [
       "referenceAnswer": "答案：依次：224，0，0，16，1168，0，0，0，10,250。",
       "explanation": "解析：CONV3-8：(3×3×3+1)×8=224；BatchNorm 对 8 个通道各有 γ、β，故 16 个可训练参数。\n第一次池化后为 16×16×8；CONV3-16 参数 (3×3×8+1)×16=1168。第二次池化后为 8×8×16，FC-10 参数 (8×8×16+1)×10=10,250。"
     },
-    "transcript": "‘ork (CNN) architecture defined by the layers in the left column below. The input is a 32-by-32 color image (i.e. three channels R,G,B). Find the number of parameters (including bias) for each layer of the network and enter them in the table below. (Note:\ning of 1 and stride of 1 where appropriate.\ner with N filters with height and width equal to x.\nyer with stride of n and zero padding.\nto torch.nn.flatten\nwith N neurons.",
+    "transcript": "Consider the Convolutional Neural Network (CNN) architecture defined by the layers in the left column below. The input is a 32-by-32 color image (i.e. three channels R,G,B). Find the number of parameters (including bias) for each layer of the network and enter them in the table below. (Note: some of them may be zero). Assume padding of 1 and stride of 1 where appropriate.\n\nNotations:\n• CONVx-N denotes a convolutional layer with N filters with height and width equal to x.\n• Pool-n denotes a n x n max-pooling layer with stride of n and zero padding.\n• FLATTEN flattens its inputs, identical to torch.nn.flatten\n• FC-N denotes a fully-connected layer with N neurons.\n\nCNN Architecture\n\nLayer | Number of Parameters\nCONV3-8 |\nLeaky ReLU |\nPOOL-2 |\nBatchNorm |\nCONV3-16 |\nLeaky ReLU |\nPOOL-2 |\nFLATTEN |\nFC-10 |",
+    "category": "calculation",
     "id": "comp9444-new-76",
     "bankId": "comp9444-new",
     "number": 76
@@ -13058,7 +13188,9 @@ export const questions = [
       "referenceAnswer": "答案：a。",
       "explanation": "解析：正确图必须同时包含 f_t⊙c_(t-1)、i_t⊙g_t、两项相加得到 c_t，以及 h_t=o_t⊙tanh(c_t)。\n图 a 完整呈现四个变换（三个 sigmoid 门和一个 tanh 候选）、两个逐元素乘法路径、cell 加法及输出门。"
     },
-    "transcript": "[Original screenshot 1]\nse diagrams is a correct depiction of a Long Short Term Memory (LSTM) unit?\no_o Hs\n1 6 @ t\n[raph}\n) 2)\nCo] Co) fen) Go]\n1 Ulbs] Ue Ok ER) h,\nEy,\na BL:\nI 6 t\n[tah\n(2) G)\nCo] fan] Cod) Cel]\nOs) ce) ole) 2 h\n5] }] t\n[Original screenshot 2]\n(2) ©)\nLo | Lo |\nh,_| Ue lk hy\nw= =\nt-l q C) t\n©) )\n| o_| fo] Lo]\niy UI h,",
+    "transcript": "Which of these diagrams is a correct depiction of a Long Short Term Memory (LSTM) unit?\n\nSelect one:\n\n[See the two original images for diagrams a–d.]",
+    "category": "multiple-choice",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-77",
     "bankId": "comp9444-new",
     "number": 77
@@ -13080,7 +13212,9 @@ export const questions = [
       "referenceAnswer": "答案：a. Unidirectional RNN。",
       "explanation": "解析：预测 y_t 时只应使用 x_1…x_t；未来天气 x_(t+1)… 不属于因果可用信息。双向 RNN 会把未来输入泄漏到当前预测。"
     },
-    "transcript": "pe mood is heavily dependent on the current and past few days' weather. You've collected data for the past 365 days on the weather, which you represent as\n\"365 You have also collected data on your dog's mood, which you represent as y*\"\", ......, y°2®5\". You'd like to build a model to map from x to y. Should you\nor Bidirectional RNN for this problem?\nIN, because the value of y<'\" depends only on x*!\",......, x\", but not on xt*?\", ......, x<365\",\nIN, because the value of y*'\" depends only on x*\". and no other days' weather.\n{, because this allows the prediction of mood on day t to take into account more information.\n1, because this allows backpropagation to compute more accurate gradients.",
+    "transcript": "You have a pet dog whose mood is heavily dependent on the current and past few days' weather. You've collected data for the past 365 days on the weather, which you represent as a sequence as x^<1>, ......, x^<365>. You have also collected data on your dog's mood, which you represent as y^<1>, ......, y^<365>. You'd like to build a model to map from x to y. Should you use a Unidirectional RNN or Bidirectional RNN for this problem?\n\na. Unidirectional RNN, because the value of y^<1> depends only on x^<1>, ......, x^<t>., but not on x^<t+1>, ......, x^<365>.\nb. Unidirectional RNN, because the value of y^<1> depends only on x^<t>. and no other days' weather.\nc. Bidirectional RNN, because this allows the prediction of mood on day t to take into account more information.\nd. Bidirectional RNN, because this allows backpropagation to compute more accurate gradients.",
+    "category": "multiple-choice",
+    "transcriptNote": "The first two choices both print y with superscript <1>.",
     "id": "comp9444-new-78",
     "bankId": "comp9444-new",
     "number": 78
@@ -13102,7 +13236,9 @@ export const questions = [
       "referenceAnswer": "答案：V=(0.67,3.33,4.67)，Q(S2,a2)=1.33；γ∈[1/3,(1+√17)/8]≈[0.33,0.64]。",
       "explanation": "解析：方程为 V1=-1+γV2，V2=3+γV1，V3=3+γV2；γ=0.5 时得到 0.6667、3.3333、4.6667。\nQ(S2,a2)=-1+0.5V3=1.3333。S1 的最优条件给 γ≥1/3；S3 不改选 +2 自环给 4γ²-γ-1≤0，即 γ≤(1+√17)/8≈0.6404。"
     },
-    "transcript": "it with three states S = {S;, S2, Sz} and two actions A = {a}, a2}, where the (deterministic) transitions 6 and reward R for each state and action are as\n™ aX oN a,\n@) G@)e\n_7 a NU\" ay\nctor of y = 0.5, the optimal policy n for this environment is\n1S) = a;\nsuming y = 0.5, compute these values (correct to at least two decimal places):\ntween 0 and 1, for which range of values of y is this policy optimal (correct to two decimal places)?\n0.25\n0.5",
+    "transcript": "Consider an environment with three states S = {S₁, S₂, S₃} and two actions A = {a₁, a₂}, where the (deterministic) transitions δ and reward R for each state and action are as follows:\n\n[See the original image for the state transition diagram.]\n\nAssuming a discount factor of γ = 0.5, the optimal policy π for this environment is\n\nπ(S₁) = a₂, π(S₂) = a₁, π(S₃) = a₁\n\nUsing this policy, and assuming γ = 0.5, compute these values (correct to at least two decimal places):\n\n* V^π(S₁)\n* V^π(S₂)\n* V^π(S₃)\n* Q^π(S₂,a₂)\n\nIf γ is allowed to vary between 0 and 1, for which range of values of γ is this policy optimal (correct to two decimal places)?\n\n* Minimum value of γ:\n* Maximum value of γ:",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-79",
     "bankId": "comp9444-new",
     "number": 79
@@ -13124,7 +13260,8 @@ export const questions = [
       "referenceAnswer": "答案：c. Attention(Q,K,V)=softmax(QK^T/√d_k)V。",
       "explanation": "解析：QK^T 形成查询与键的相似度；除以 √d_k 控制尺度，softmax 得到权重，再对 V 加权求和。"
     },
-    "transcript": "architecture, which of the following correctly calculates Attention, based on the Query (Q), Key (K) and Value (V) ?\n), K, V) = softmax(QV\"/Vd),)K\n), K, V) = min(KV'/vdj,)Q\n), K, V) = softmax(QK'/Vd,)V\n), K, V) = softmax(KV\"/vd,)Q",
+    "transcript": "In the Transformer architecture, which of the following correctly calculates Attention, based on the Query (Q), Key (K) and Value (V) ?\n\nSelect one:\na. Attention(Q, K, V) = softmax(QV^T/√dₖ)K\nb. Attention(Q, K, V) = min(KV^T/√dₖ)Q\nc. Attention(Q, K, V) = softmax(QK^T/√dₖ)V\nd. Attention(Q, K, V) = softmax(KV^T/√dₖ)Q",
+    "category": "multiple-choice",
     "id": "comp9444-new-80",
     "bankId": "comp9444-new",
     "number": 80
@@ -13146,7 +13283,9 @@ export const questions = [
       "referenceAnswer": "答案：b. Captures semantic relationships。",
       "explanation": "解析：稠密嵌入把语义或句法相近的词放在相近方向/位置，可支持相似度与类比；one-hot 之间彼此正交，无法表达这种关系。"
     },
-    "transcript": "y advantage of dense word vectors learned by Word2Vec or GloVe, compared to spares one-hot word vectors?\niplementation\nsemantic relationships\nnensionality than one-hot encodings\nle above",
+    "transcript": "What is the primary advantage of dense word vectors learned by Word2Vec or GloVe, compared to spares one-hot word vectors?\n\nSelect one:\na. Simpler implementation\nb. Captures semantic relationships\nc. Higher dimensionality than one-hot encodings\nd. None of the above",
+    "category": "multiple-choice",
+    "transcriptNote": "The screenshot prints “spares one-hot”.",
     "id": "comp9444-new-81",
     "bankId": "comp9444-new",
     "number": 81
@@ -13168,7 +13307,8 @@ export const questions = [
       "referenceAnswer": "答案：c. Introduce Dropout。",
       "explanation": "解析：巨大训练-测试差距表明过拟合。Dropout 是正则化手段，可降低共适应并改善泛化；继续训练或加层通常会加剧问题。"
     },
-    "transcript": "tion problem with 50,000 training examples. After you have trained a neural network, you observe that the model is giving 98% accuracy on the training set\ntest set. Which of the following methods will likely reduce this gap?\nnetwork for additional epochs\nh size\n‘o the network",
+    "transcript": "You are given a classification problem with 50,000 training examples. After you have trained a neural network, you observe that the model is giving 98% accuracy on the training set and 57% accuracy on the test set. Which of the following methods will likely reduce this gap?\n\nSelect one:\na. Keep training the network for additional epochs\nb. Increase the batch size\nc. Introduce Dropout\nd. Add more layers to the network",
+    "category": "multiple-choice",
     "id": "comp9444-new-82",
     "bankId": "comp9444-new",
     "number": 82
@@ -13190,7 +13330,8 @@ export const questions = [
       "referenceAnswer": "答案：d. Max Pooling。",
       "explanation": "解析：最大池化主要进行比较而非乘加，按 FLOP 口径几乎不含浮点乘加；卷积最重，BatchNorm 与平均池化仍需要算术运算。"
     },
-    "transcript": "k runtime for the following layers typically forming building blocks of a Convolutional Neural Network (CNN). Which of the following would you expect to be\n\\e floating point operations)?\ntion (",
+    "transcript": "Your task is to benchmark runtime for the following layers typically forming building blocks of a Convolutional Neural Network (CNN). Which of the following would you expect to be the fastest (in terms of the floating point operations)?\n\na. Average Pooling\nb. Batch Normalization\nc. Conv layer\nd. Max Pooling",
+    "category": "multiple-choice",
     "id": "comp9444-new-83",
     "bankId": "comp9444-new",
     "number": 83
@@ -13212,7 +13353,8 @@ export const questions = [
       "referenceAnswer": "答案：a. [CLS] sentence_1 [SEP] sentence_2 [SEP]。",
       "explanation": "解析：[CLS] 用于聚合序列级表示；[SEP] 既分隔两个句子，也结束第二句，配合 segment/token-type embeddings 区分句段。"
     },
-    "transcript": "the BERT model expect a pair of sentences to be presented?\n_S] Tokens_of_sentence_1 [SEP] Tokens_of_sentence_2 [SEP]\nkens_of_sentence_1 [SEP] Tokens_of_sentence_2\n_S] Tokens_of_sentence_1 [SEP] Tokens_of_sentence_2\n_S] Tokens_of_sentence_1 Tokens_of_sentence_2",
+    "transcript": "How does the BERT model expect a pair of sentences to be presented?\n\na. [CLS] Tokens_of_sentence_1 [SEP] Tokens_of_sentence_2 [SEP]\nb. Tokens_of_sentence_1 [SEP] Tokens_of_sentence_2\nc. [CLS] Tokens_of_sentence_1 [SEP] Tokens_of_sentence_2\nd. [CLS] Tokens_of_sentence_1 Tokens_of_sentence_2",
+    "category": "multiple-choice",
     "id": "comp9444-new-84",
     "bankId": "comp9444-new",
     "number": 84
@@ -13234,7 +13376,8 @@ export const questions = [
       "referenceAnswer": "答案：w=(0.5,1,-1)。",
       "explanation": "解析：净输入 s=-0.5-2-2=-4.5，正类被误判；加上增广输入 (1,2,1)，得到 (0.5,1,-1)。"
     },
-    "transcript": "ceptron whose output is given by h(wotw1x7+W2x2), where x1, Xz are inputs and A() is the Heaviside\nerceptron is being trained on the data in the following table, and that the current values of\nWo= -0.5, wy= -1 and w= -2.\nTraining Example|x; |xz |Class|\n|) fa] -1 |\nerceptron Learning Rule is applied to the current weights, using a learning rate of n=1.0,\nm (a) is learned. the new values for Wo, w, and w? at the end of this training step will be:",
+    "transcript": "Consider a Perceptron whose output is given by h(w₀+w₁x₁+w₂x₂), where x₁, x₂ are inputs and h() is the Heaviside (step) function.\nAssume this Perceptron is being trained on the data in the following table, and that the current values of the weights are w₀= −0.5, w₁= −1 and w₂= −2.\n\nTraining Example | x₁ | x₂ | Class\n(a) | 2 | 1 | +1\n(b) | −2 | 2 | +1\n(c) | −1 | −1 | −1\n\nSuppose the Perceptron Learning Rule is applied to the current weights, using a learning rate of η=1.0, where only item (a) is learned. the new values for w₀, w₁ and w₂ at the end of this training step will be:\n\n* w₀:\n* w₁:\n* w₂:",
+    "category": "calculation",
     "id": "comp9444-new-85",
     "bankId": "comp9444-new",
     "number": 85
@@ -13256,7 +13399,8 @@ export const questions = [
       "referenceAnswer": "答案：H(p)=1.875≈1.88 bits；D_KL(p||q)=0.6875≈0.69 bits。",
       "explanation": "解析：熵按 -∑p log2p 得 1.875；KL 各项为 0.5、0.25、0.125、-0.1875、0，总和 0.6875。"
     },
-    "transcript": "Consider these two probability distributions on the same space O = {A, B, C, D, E}\np=(12,144,\"%8,'16,'/16)\n=sl,, 14, 1 1,, 1\nG=( 44, °/8, 16, /25 16)\nCompute, correct to at least two decimal places:\n* The Entropy H(p):\n* The KL-Divergence Dx. (p II q):",
+    "transcript": "Consider these two probability distributions on the same space Ω = {A, B, C, D, E}\n\np = ⟨1/2, 1/4, 1/8, 1/16, 1/16⟩\nq = ⟨1/4, 1/8, 1/16, 1/2, 1/16⟩\n\nCompute, correct to at least two decimal places:\n\n* The Entropy H(p):\n* The KL-Divergence D_KL(p ‖ q):",
+    "category": "calculation",
     "id": "comp9444-new-86",
     "bankId": "comp9444-new",
     "number": 86
@@ -13278,7 +13422,8 @@ export const questions = [
       "referenceAnswer": "答案：forget gate、input gate、output gate。",
       "explanation": "解析：遗忘门控制旧 cell state，输入门控制写入候选信息，输出门控制由 cell state 读出 hidden state。reset/update 是 GRU 术语。"
     },
-    "transcript": "re the gates in the Long Short-Term Memory (LSTM) Network?\none alternative:\nyut, reset, and update\nget, input, and output\nget, input, and update\nyut, output, and reset",
+    "transcript": "What are the gates in the Long Short-Term Memory (LSTM) Network?\nSelect one alternative:\n\n• input, reset, and update\n• forget, input, and output\n• forget, input, and update\n• input, output, and reset",
+    "category": "multiple-choice",
     "id": "comp9444-new-87",
     "bankId": "comp9444-new",
     "number": 87
@@ -13300,7 +13445,8 @@ export const questions = [
       "referenceAnswer": "答案：Generative Pre-trained Transformer。",
       "explanation": "解析：Generative 表示生成建模，Pre-trained 表示先进行大规模预训练，Transformer 是所采用的核心序列架构。"
     },
-    "transcript": "'T, what does GPT stand for?\ne alternative:\nralised Programming Tool\nrative Pre-trained Transformer\noed Pattern Translator\nal Processing Technique\nSample Exam contains only Three Multiple Choice Question,\nal Final Exam will contain more Multiple Choice Questions and numbers may vary.",
+    "transcript": "In ChatGPT, what does GPT stand for?\nSelect one alternative:\n\n• Generalised Programming Tool\n• Generative Pre-trained Transformer\n• Grouped Pattern Translator\n• Global Processing Technique",
+    "category": "multiple-choice",
     "id": "comp9444-new-88",
     "bankId": "comp9444-new",
     "number": 88
@@ -13322,7 +13468,8 @@ export const questions = [
       "referenceAnswer": "答案：自编码器由编码器和解码器组成，通过重构输入学习潜在表示；应用包括降维/表示学习、去噪、异常检测、压缩、生成建模预训练等。",
       "explanation": "解析：编码器 z=fθ(x) 将输入压缩为潜变量，解码器 x̂=gφ(z) 重构输入，训练通常最小化重构损失。\n欠完备、稀疏、去噪、收缩和变分自编码器通过不同约束学习有用结构；其中 VAE 还能从先验采样生成数据。"
     },
-    "transcript": "an autoencoder and what are some of its applications?\nDur answer here\n1is Sample Exam contains only Two Short Answer Question,\nreal Final Exam may contain more Short Answer Questions.",
+    "transcript": "What is an autoencoder and what are some of its applications?",
+    "category": "short-answer",
     "id": "comp9444-new-89",
     "bankId": "comp9444-new",
     "number": 89
@@ -13343,7 +13490,8 @@ export const questions = [
       "imageNotes": "题意：先验 P(H)=0.30，证据在 H 为真时出现的概率为 0.80，H 为假时为 0.20，求 P(H|D)。",
       "referenceAnswer": "参考答案 / 解题要点：约 0.63；Bayes: 0.30×0.80 / (0.30×0.80+0.70×0.20)。"
     },
-    "transcript": "A hypothesis A has prior probability 0.30. Evidence D occurs with probability 0.80 when h is true and with probability 0.20 when h is false.\nCompute P{h| D) to two decimal places.\nAnswer:\n* Posterior probability =",
+    "transcript": "A hypothesis h has prior probability 0.30. Evidence D occurs with probability 0.80 when h is true and with probability 0.20 when h is false. Compute P(h | D) to two decimal places.\n\n* Posterior probability =",
+    "category": "calculation",
     "id": "comp9444-new-90",
     "bankId": "comp9444-new",
     "number": 90
@@ -13364,7 +13512,8 @@ export const questions = [
       "imageNotes": "题意：输入为 65×77 RGB 图像，卷积层包含 18 个 5×5 filters，每个 filter 含一个 bias，求单个 filter 的参数量。",
       "referenceAnswer": "参考答案 / 解题要点：5×5×3+1 = 76。"
     },
-    "transcript": "A convolutional layer receives a 65 x 77 RGB image and uses 18 filters of size 5 x 5. Including one bias per filter, how many trainable\nparameters belong to each filter?\nSelect one: fr\na 25\nb. 75\nc.. 76\nd. 1,368",
+    "transcript": "A convolutional layer receives a 65 × 77 RGB image and uses 18 filters of size 5 × 5. Including one bias per filter, how many trainable parameters belong to each filter?\n\nSelect one:\na. 25\nb. 75\nc. 76\nd. 1,368",
+    "category": "multiple-choice",
     "id": "comp9444-new-91",
     "bankId": "comp9444-new",
     "number": 91
@@ -13385,7 +13534,8 @@ export const questions = [
       "imageNotes": "题意：两层 sigmoid 网络中，哪种训练规则能够为两个层的权重分配各自的 loss-gradient 贡献？",
       "referenceAnswer": "参考答案 / 解题要点：Backpropagation：通过可微中间激活应用链式法则。"
     },
-    "transcript": "A two-layer sigmoid network misclassifies an example. Which learning procedure can assign a separate loss-gradient contribution to\nweights in both layers?\nSelect one:\na. Backpropagation, because it applies the chain rule through differentiable intermediate activations\nb. The perceptron rule, because its threshold update differentiates every hidden activation\nc. The perceptron rule, because a classification error supplies an exact gradient for any multilayer network\nd. Neither procedure, because an error signal cannot be propagated beyond the output layer",
+    "transcript": "A two-layer sigmoid network misclassifies an example. Which learning procedure can assign a separate loss-gradient contribution to weights in both layers?\n\nSelect one:\na. Backpropagation, because it applies the chain rule through differentiable intermediate activations\nb. The perceptron rule, because its threshold update differentiates every hidden activation\nc. The perceptron rule, because a classification error supplies an exact gradient for any multilayer network\nd. Neither procedure, because an error signal cannot be propagated beyond the output layer",
+    "category": "multiple-choice",
     "id": "comp9444-new-92",
     "bankId": "comp9444-new",
     "number": 92
@@ -13406,7 +13556,8 @@ export const questions = [
       "imageNotes": "题意：给定动量系数、上一步更新量、当前梯度和学习率，计算下一步权重。保留题图中的原始数值。",
       "referenceAnswer": "参考答案 / 解题要点：w_new = w_old + v_new；v_new = μv_old − η∇L（使用题图约定的动量符号）。"
     },
-    "transcript": "Momentum uses v, = 0.8v,_,; — ng, and w, = =\nplaces. : t-1 19; w, = Wp_1 + 1%. Ify,_; = — 04) = 0.05, g, = — 2 and w,_, = 1.5, compute w, to two decimal\nAnswer:\n* Updated weight = |",
+    "transcript": "Momentum uses v_t = 0.8v_(t−1) − ηg_t and w_t = w_(t−1) + v_t. If v_(t−1) = −0.4, η = 0.05, g_t = −2 and w_(t−1) = 1.5, compute w_t to two decimal places.\n\n* Updated weight =",
+    "category": "calculation",
     "id": "comp9444-new-93",
     "bankId": "comp9444-new",
     "number": 93
@@ -13427,7 +13578,8 @@ export const questions = [
       "imageNotes": "题意：Bernoulli 过程观察到 72 次成功和 28 次失败，求成功概率的 MLE。",
       "referenceAnswer": "参考答案 / 解题要点：72/(72+28)=0.72。"
     },
-    "transcript": "A Bemoulli model is fitted by maximum likelihood to 100 independent trials containing 72 successes and 28 failures, Compute the\nmaximum-likelihood estimate of the success probability. Give your answer to two decimal places.\nAnswer:\n* Maximum-likelihood estimate =",
+    "transcript": "A Bernoulli model is fitted by maximum likelihood to 100 independent trials containing 72 successes and 28 failures. Compute the maximum-likelihood estimate of the success probability. Give your answer to two decimal places.\n\n* Maximum-likelihood estimate =",
+    "category": "calculation",
     "id": "comp9444-new-94",
     "bankId": "comp9444-new",
     "number": 94
@@ -13448,7 +13600,8 @@ export const questions = [
       "imageNotes": "题意：计算 tanh(−2)，保留两位小数。",
       "referenceAnswer": "参考答案 / 解题要点：tanh(−2)≈−0.96。"
     },
-    "transcript": "Compute tanh ( — 2) and give the result to two decimal places.\nAnswer:\n* Activation value =",
+    "transcript": "Compute tanh(−2) and give the result to two decimal places.\n\n* Activation value =",
+    "category": "calculation",
     "id": "comp9444-new-95",
     "bankId": "comp9444-new",
     "number": 95
@@ -13469,7 +13622,8 @@ export const questions = [
       "imageNotes": "题意：以下哪组元素定义一个有限马尔可夫决策过程（MDP）？",
       "referenceAnswer": "参考答案 / 解题要点：状态、动作、状态转移概率、奖励与折扣因子。"
     },
-    "transcript": "Which collection specifies a finite Markov decision process?\nSelect one:\na. States, actions, transition probabilities, rewards and a discount factor\nb. Inputs, labels, a confusion matrix and a validation split\nc. Clusters, centroids, singular values and a reconstruction rank\nd, Tokens, parse trees, a vocabulary and a language-model perplexity",
+    "transcript": "Which collection specifies a finite Markov decision process?\n\nSelect one:\na. States, actions, transition probabilities, rewards and a discount factor\nb. Inputs, labels, a confusion matrix and a validation split\nc. Clusters, centroids, singular values and a reconstruction rank\nd. Tokens, parse trees, a vocabulary and a language-model perplexity",
+    "category": "multiple-choice",
     "id": "comp9444-new-96",
     "bankId": "comp9444-new",
     "number": 96
@@ -13491,6 +13645,7 @@ export const questions = [
       "referenceAnswer": "参考答案 / 解题要点：使网络可以表示非线性决策边界。"
     },
     "transcript": "What do sigmoid, ReLU and tanh activations have in common when used in hidden layers?\nSelect one:\na. They always produce outputs between zero and one.\nb. They are applied only to output units.\nc. They allow a network to represent nonlinear decision boundaries.\nd. They make gradient computation asymptotically faster than a linear layer.",
+    "category": "multiple-choice",
     "id": "comp9444-new-97",
     "bankId": "comp9444-new",
     "number": 97
@@ -13511,7 +13666,8 @@ export const questions = [
       "imageNotes": "题意：DenseNet block 输入 64 channels，3 个层，每层增长率 16，求输出通道数。",
       "referenceAnswer": "参考答案 / 解题要点：64+3×16=112。"
     },
-    "transcript": "A DenseNet block receives 64 input channels and contains three layers, each with growth rate 16. Assuming every layer appends 16 new\nfeature maps, how many channels are present st the output of the block? Give an integer.\nAnewer.\n* Output channels = .",
+    "transcript": "A DenseNet block receives 64 input channels and contains three layers, each with growth rate 16. Assuming every layer appends 16 new feature maps, how many channels are present at the output of the block? Give an integer.",
+    "category": "calculation",
     "id": "comp9444-new-98",
     "bankId": "comp9444-new",
     "number": 98
@@ -13532,7 +13688,8 @@ export const questions = [
       "imageNotes": "题意：朴素贝叶斯文本分类中，结合类先验和词条件概率，比较文档属于指定类的未归一化分数。",
       "referenceAnswer": "参考答案 / 解题要点：对给定词的条件概率连乘，再乘类先验；完整数值与备选项见原题图。"
     },
-    "transcript": "a A Bernoulli Naive Bayes model uses the presence features \"Chinese\", \"Tokyo\" and \"Japan\". The only class-j training document contains\nall three words, and class / has prior ; Without smoothing, what is the non-normalized score for a new document containing all three\nfeatures?\nSelect one: {\na (1x1x1)xt\ni i 3\nb. ( 1x=x =) x3\nCG; eb Vetok ban 3\n( (3) xax ‘) x4\nd. 43 y RB. 1\n(s da 5 |) 5",
+    "transcript": "A Bernoulli Naive Bayes model uses the presence features “Chinese”, “Tokyo” and “Japan”. The only class-j training document contains all three words, and class j has prior 1/4. Without smoothing, what is the non-normalized score for a new document containing all three features?\nSelect one:\na. (1 × 1 × 1) × 1/4\nb. (1 × 1/4 × 1/4) × 3/4\nc. ((3/7)^3 × 1/14 × 1/14) × 3/4\nd. ((2/9)^3 × 2/9 × 2/9) × 1/4",
+    "category": "multiple-choice",
     "id": "comp9444-new-99",
     "bankId": "comp9444-new",
     "number": 99
@@ -13553,7 +13710,8 @@ export const questions = [
       "imageNotes": "题意：训练时最前面的层权重变化很小，问哪一种条件最不可能是直接原因。",
       "referenceAnswer": "参考答案 / 解题要点：网络很宽（width）本身通常不是梯度很小的直接原因。"
     },
-    "transcript": "During training, the weights in the earliest layers change very little. Which condition is least likely to be the direct cause?\nSelect one:\na. The optimizer is near a stationary point.\nb. The network is very wide.\nc._ All network weights were initialized to zero.\nd. The learning rate is extremely small.",
+    "transcript": "During training, the weights in the earliest layers change very little. Which condition is least likely to be the direct cause?\nSelect one:\na. The optimizer is near a stationary point.\nb. The network is very wide.\nc. All network weights were initialized to zero.\nd. The learning rate is extremely small.",
+    "category": "multiple-choice",
     "id": "comp9444-new-100",
     "bankId": "comp9444-new",
     "number": 100
@@ -13574,7 +13732,8 @@ export const questions = [
       "imageNotes": "题意：给定特征矩阵 F=[[1,0,2],[2,1,1]]，G=FFᵀ，求 G₁₂。",
       "referenceAnswer": "参考答案 / 解题要点：1×2+0×1+2×1=4。"
     },
-    "transcript": "In neural style transfer, let the feature matrix be\nr2 ( 108\n2m 1\nThe Gram matrix is G = FF'. Compute G,2. Give an integer.\nAnswer:\n* Gram-matrix entry =",
+    "transcript": "In neural style transfer, let the feature matrix be\nF = [[1, 0, 2], [2, 1, 1]]\nThe Gram matrix is G = FF^T. Compute G_12. Give an integer.",
+    "category": "calculation",
     "id": "comp9444-new-101",
     "bankId": "comp9444-new",
     "number": 101
@@ -13595,7 +13754,8 @@ export const questions = [
       "imageNotes": "题意：区分 Supervised、Unsupervised 与 Reinforcement Learning 的训练信号。",
       "referenceAnswer": "参考答案 / 解题要点：监督学习使用标签目标；无监督学习发现未标注数据结构；强化学习最大化奖励。"
     },
-    "transcript": "Which statement correctly distinguishes supervised, unsupervised and reinforcement learning?\nSelect one:\na. Supervised learning uses labelled targets; unsupervised learning finds structure without supplied targets; reinforcement learning\nlearns from rewards.\nb. Supervised learning finds unlabelled clusters; unsupervised learning requires target labels; reinforcement learning learns only by\nimitation,\nc. Supervised learning learns only from rewards; unsupervised learning predicts supplied labels; reinforcement learning has no\nenvironment.\nd. Supervised learning requires no data; unsupervised learning requires rewards; reinforcement learning requires a labelled target\nfor every action.",
+    "transcript": "Which statement correctly distinguishes supervised, unsupervised and reinforcement learning?\nSelect one:\na. Supervised learning uses labelled targets; unsupervised learning finds structure without supplied targets; reinforcement learning learns from rewards.\nb. Supervised learning finds unlabelled clusters; unsupervised learning requires target labels; reinforcement learning learns only by imitation.\nc. Supervised learning learns only from rewards; unsupervised learning predicts supplied labels; reinforcement learning has no environment.\nd. Supervised learning requires no data; unsupervised learning requires rewards; reinforcement learning requires a labelled target for every action.",
+    "category": "multiple-choice",
     "id": "comp9444-new-102",
     "bankId": "comp9444-new",
     "number": 102
@@ -13616,7 +13776,8 @@ export const questions = [
       "imageNotes": "题意：一个前向计算图具有两个连续变量和已知 upstream gradient，求输入端梯度。",
       "referenceAnswer": "参考答案 / 解题要点：将局部导数与上游梯度连乘；数值以原题为准。"
     },
-    "transcript": "Ina computation graph, z = xy. A forward pass gives x = 3, y = 4 and the upstream gradient a = 5. Compute a to two decimal places.\nAnswer:\n* Gradient =",
+    "transcript": "In a computation graph, z = xy. A forward pass gives x = 3, y = 4 and the upstream gradient ∂L/∂z = 5. Compute ∂L/∂x to two decimal places.",
+    "category": "calculation",
     "id": "comp9444-new-103",
     "bankId": "comp9444-new",
     "number": 103
@@ -13637,7 +13798,8 @@ export const questions = [
       "imageNotes": "题意：从当前状态确定性转移到下一状态，立即奖励 10，γ=0.8，下一状态价值 7.5，求当前最优价值。",
       "referenceAnswer": "参考答案 / 解题要点：10+0.8×7.5=16.00。"
     },
-    "transcript": "At state S,, the optimal action moves deterministically to S, with immediate reward 10. The discount factor is y = 0.8 and V\" (sz ) = 7.5.\nCompute V\" (s; ) to two decimal places.\nAnswer:\n* Optimal state value =",
+    "transcript": "At state S_1, the optimal action moves deterministically to S_2 with immediate reward 10. The discount factor is γ = 0.8 and V*(S_2) = 7.5. Compute V*(S_1) to two decimal places.",
+    "category": "calculation",
     "id": "comp9444-new-104",
     "bankId": "comp9444-new",
     "number": 104
@@ -13658,7 +13820,8 @@ export const questions = [
       "imageNotes": "题意：不带 attention 的 encoder-decoder 中，固定长度编码状态需要概括全序列，attention 直接解决什么限制？",
       "referenceAnswer": "参考答案 / 解题要点：解码器可按需访问不同 encoder hidden states，而非只依赖固定长度向量。"
     },
-    "transcript": "What limitation of a sequence-to-sequence encoder-decoder without attention is directly addressed by attention?\nSelect one:\na. A fixed-size encoder state must carry all source information; attention lets the decoder consult relevant encoder states.\nb. The decoder cannot use nonlinear activations; attention replaces every activation with a linear map.\nc. The encoder cannot process variable-length input; attention pads every sequence to.a fixed length.\nd. The model cannot be trained by gradient descent; attention supplies a closed-form solution.",
+    "transcript": "What limitation of a sequence-to-sequence encoder-decoder without attention is directly addressed by attention?\nSelect one:\na. A fixed-size encoder state must carry all source information; attention lets the decoder consult relevant encoder states.\nb. The decoder cannot use nonlinear activations; attention replaces every activation with a linear map.\nc. The encoder cannot process variable-length input; attention pads every sequence to a fixed length.\nd. The model cannot be trained by gradient descent; attention supplies a closed-form solution.",
+    "category": "multiple-choice",
     "id": "comp9444-new-105",
     "bankId": "comp9444-new",
     "number": 105
@@ -13679,7 +13842,8 @@ export const questions = [
       "imageNotes": "题意：给定 return、baseline、score-function gradient 与学习率，求一次标量更新。",
       "referenceAnswer": "参考答案 / 解题要点：若 G=6、b=2、梯度=0.25、η=0.1，则增量为 0.10。"
     },
-    "transcript": "For one REINFORCE sample, the retum is G = 6, the baseline is b = 2, the score-function gradient is Vglogze(a|s) = 0.25, and the\nlearning rate is 1 = 0.1. Compute the scalar parameter increment 7(G — b) Vlogr, (a | s) to two decimal placee.\nAnswer:\n* Parameter increment = LL a",
+    "transcript": "For one REINFORCE sample, the return is G = 6, the baseline is b = 2, the score-function gradient is ∇_θ log π_θ(a | s) = 0.25, and the learning rate is η = 0.1. Compute the scalar parameter increment η(G − b)∇_θ log π_θ(a | s) to two decimal places.",
+    "category": "calculation",
     "id": "comp9444-new-106",
     "bankId": "comp9444-new",
     "number": 106
@@ -13700,7 +13864,8 @@ export const questions = [
       "imageNotes": "题意：输入 patch 各像素灰度值为 5，使用题图给定 3×3 kernel，求单位置 cross-correlation 输出。",
       "referenceAnswer": "参考答案 / 解题要点：核元素和为 0，因此该 constant patch 的输出为 0.00。"
     },
-    "transcript": "A single-channel image patch has constant intensity 5. It is convolved at one valid location with the kernel\n-1 O\nK=|{ -1 -—4 -1\n-1 O\nUsing cross-correlation as in a standard CNN layer, compute the scalar output at that location. Give your answer to two decimal places.\nAnswer:\n* Convolution output =",
+    "transcript": "A single-channel image patch has constant intensity 5. It is convolved at one valid location with the kernel\nK = [[0, −1, 0], [−1, −4, −1], [0, −1, 0]]\nUsing cross-correlation as in a standard CNN layer, compute the scalar output at that location. Give your answer to two decimal places.",
+    "category": "calculation",
     "id": "comp9444-new-107",
     "bankId": "comp9444-new",
     "number": 107
@@ -13722,6 +13887,7 @@ export const questions = [
       "referenceAnswer": "参考答案 / 解题要点：对抗项鼓励目标域逼真；循环一致性约束往返映射保留原始内容。"
     },
     "transcript": "Which pair correctly describes the roles of CycleGAN's adversarial and cycle-consistency terms?\nSelect one:\na. Adversarial terms encourage target-domain realism; cycle consistency discourages mappings that discard source content.\nb. Adversarial terms preserve each input pixel exactly; cycle consistency chooses the target-domain class label.\nc. Adversarial terms make both generators linear; cycle consistency removes both discriminators.\nd. Adversarial terms enforce paired supervision; cycle consistency requires a label for every generated image.",
+    "category": "multiple-choice",
     "id": "comp9444-new-108",
     "bankId": "comp9444-new",
     "number": 108
@@ -13742,7 +13908,8 @@ export const questions = [
       "imageNotes": "题意：使用 q*(s,a)=r(s,a)+γV*(s′) 计算 action value。",
       "referenceAnswer": "参考答案 / 解题要点：题图给定 r=2、γ=0.8、V*(s′)=3，则 Q*=4.40。"
     },
-    "transcript": "For a deterministic transition, Q\"(s.a) = r+yv\"(s'). ifr = 2, y = 0.8 and v*(s') = 5, compute Q\" (s,a) to two decimal places.\nAnswer:\n* Action value = | I",
+    "transcript": "For a deterministic transition, Q^π(s, a) = r + γV^π(s′). If r = 2, γ = 0.8 and V^π(s′) = 5, compute Q^π(s, a) to two decimal places.",
+    "category": "calculation",
     "id": "comp9444-new-109",
     "bankId": "comp9444-new",
     "number": 109
@@ -13763,7 +13930,8 @@ export const questions = [
       "imageNotes": "题意：均值 0、标准差 2 的 Gaussian，求 x=2 处的概率密度。",
       "referenceAnswer": "参考答案 / 解题要点：约 0.12。"
     },
-    "transcript": "A Gaussian random variable has mean yz = 0 and standard deviation o = 2. Compute its probability density at x = 2.\nGive your answer to two decimal places.\nAnswer.\n* Probablity density = ya",
+    "transcript": "A Gaussian random variable has mean μ = 0 and standard deviation σ = 2. Compute its probability density at x = 2. Give your answer to two decimal places.",
+    "category": "calculation",
     "id": "comp9444-new-110",
     "bankId": "comp9444-new",
     "number": 110
@@ -13784,7 +13952,8 @@ export const questions = [
       "imageNotes": "题意：已知 P(W)=0.2，P(B|W)=0.1，P(B|¬W)=0.01，计算 P(W|B)。",
       "referenceAnswer": "参考答案 / 解题要点：0.02/(0.02+0.008)≈0.714。"
     },
-    "transcript": "In a Bayesian network, P(W). = 0.2,P(B|W) =0.1 and P(B| AW) =0.01. Whatis P(W |B)?\nSelect one:\na. (0.020\nb. 0.833\nc. ,0.714\nd. 0.042",
+    "transcript": "In a Bayesian network, P(W) = 0.2, P(B | W) = 0.1 and P(B | ¬W) = 0.01. What is P(W | B)?\nSelect one:\na. 0.020\nb. 0.833\nc. 0.714\nd. 0.042",
+    "category": "multiple-choice",
     "id": "comp9444-new-111",
     "bankId": "comp9444-new",
     "number": 111
@@ -13805,7 +13974,8 @@ export const questions = [
       "imageNotes": "题意：句子包含 6 个单词，context radius=2，边界窗口截断；计算有序 center-context pairs 总数。",
       "referenceAnswer": "参考答案 / 解题要点：2+3+4+4+3+2=18。"
     },
-    "transcript": "Askip-gram model uses a context-window radius of 2 on a sentence containing 6 words. Counting ordered centre—\ncontext training pairs and truncating the window at sentence boundaries, how many pairs are generated? Give an\ninteger,\nAnswer: Pa\n* Training-pair count = |",
+    "transcript": "A skip-gram model uses a context-window radius of 2 on a sentence containing 6 words. Counting ordered centre–context training pairs and truncating the window at sentence boundaries, how many pairs are generated? Give an integer.",
+    "category": "calculation",
     "id": "comp9444-new-112",
     "bankId": "comp9444-new",
     "number": 112
@@ -13826,7 +13996,8 @@ export const questions = [
       "imageNotes": "题意：对权重、梯度和学习率执行一次随机梯度下降。",
       "referenceAnswer": "参考答案 / 解题要点：w_new=w−η∇w L；根据题图数值代入。"
     },
-    "transcript": "ms Stochastic gradient descent uses w — w — ng. If w = 2.40, g = — 0.60 and 7 = 0.25, compute the updated value of w to\ntwo decimal places.\nAnswer.\naut _\n* Updated weight = |",
+    "transcript": "Stochastic gradient descent uses w ← w − ηg. If w = 2.40, g = −0.60 and η = 0.25, compute the updated value of w to two decimal places.",
+    "category": "calculation",
     "id": "comp9444-new-113",
     "bankId": "comp9444-new",
     "number": 113
@@ -13847,7 +14018,8 @@ export const questions = [
       "imageNotes": "题意：3 个连续 3×3 卷积、stride=1、无膨胀，求输出相对于输入的 receptive-field width。",
       "referenceAnswer": "参考答案 / 解题要点：1+3×(3−1)=7。"
     },
-    "transcript": "ACNN applies three consecutive 3 x 3 convolutions, each with stride 1 and no dilation. What is the receptive-field width\nof one unit in the third layer with respect to the input? Give an integer.\nAnswer:\n* Receptive-field width =.",
+    "transcript": "A CNN applies three consecutive 3 × 3 convolutions, each with stride 1 and no dilation. What is the receptive-field width of one unit in the third layer with respect to the input? Give an integer.",
+    "category": "calculation",
     "id": "comp9444-new-114",
     "bankId": "comp9444-new",
     "number": 114
@@ -13868,7 +14040,8 @@ export const questions = [
       "imageNotes": "题意：在 word2vec 中，negative sampling 用什么替代全词汇表预测？",
       "referenceAnswer": "参考答案 / 解题要点：判别观察到的 word-context pair 与少量采样的负样本 pair。"
     },
-    "transcript": "3 In word2vec training, what does negative sampling replace the full vocabulary prediction with?\nSelect one:\nt a. Abinary distinction between an observed word-context pair and a small set of sampled noise pairs\nb... Adeterministic lookup of the most frequent word with no gradient computation\nc. _Acomplete hierarchical clustering of every sentence before each parameter update\nd. Aregression target equal to the raw position of each word in the vocabulary",
+    "transcript": "In word2vec training, what does negative sampling replace the full vocabulary prediction with?\nSelect one:\na. A binary distinction between an observed word-context pair and a small set of sampled noise pairs\nb. A deterministic lookup of the most frequent word with no gradient computation\nc. A complete hierarchical clustering of every sentence before each parameter update\nd. A regression target equal to the raw position of each word in the vocabulary",
+    "category": "multiple-choice",
     "id": "comp9444-new-115",
     "bankId": "comp9444-new",
     "number": 115
@@ -13889,7 +14062,8 @@ export const questions = [
       "imageNotes": "题意：Backpropagation 需要哪些计算阶段？",
       "referenceAnswer": "参考答案 / 解题要点：Forward pass 计算激活/损失；backward pass 计算梯度；两者都需要。"
     },
-    "transcript": "Which statement about backpropagation is correct?\nSelect one:\na. A forward pass and a backward pass are both parts of the procedure.\nb. | Only the backward pass is needed because activations do not affect gradients.\nc. Only the forward pass is needed when a loss function is differentiable.\nd. Neither pass is needed if the network contains a bias term.",
+    "transcript": "Which statement about backpropagation is correct?\nSelect one:\na. A forward pass and a backward pass are both parts of the procedure.\nb. Only the backward pass is needed because activations do not affect gradients.\nc. Only the forward pass is needed when a loss function is differentiable.\nd. Neither pass is needed if the network contains a bias term.",
+    "category": "multiple-choice",
     "id": "comp9444-new-116",
     "bankId": "comp9444-new",
     "number": 116
@@ -13911,6 +14085,7 @@ export const questions = [
       "referenceAnswer": "参考答案 / 解题要点：使用 update gate 和 reset gate；没有单独的 LSTM 式 cell state。"
     },
     "transcript": "Which statement about a standard gated recurrent unit (GRU) is correct?\nSelect one:\na. It uses update and reset gates and does not maintain a separate LSTM-style cell state.\nb. It has input, forget and output gates plus a separate cell state identical to an LSTM.\nc. It contains no recurrent connection and processes every timestep independently.\nd. It can use only binary hidden states because its gates are threshold units.",
+    "category": "multiple-choice",
     "id": "comp9444-new-117",
     "bankId": "comp9444-new",
     "number": 117
@@ -13931,7 +14106,8 @@ export const questions = [
       "imageNotes": "题意：对正类标签和 logit z=2，求自然对数 logistic loss。",
       "referenceAnswer": "参考答案 / 解题要点：log(1+exp(−2))≈0.13。"
     },
-    "transcript": "For a positive binary label and logit s = 2, theJogistic loss is log (1 + e~* ) . Compute the loss using the natural logarithm.\nGive your answer to two decimal places..\nAnswer:\n* Logistic loss =",
+    "transcript": "For a positive binary label and logit s = 2, the logistic loss is log(1 + e^(−s)). Compute the loss using the natural logarithm. Give your answer to two decimal places.",
+    "category": "calculation",
     "id": "comp9444-new-118",
     "bankId": "comp9444-new",
     "number": 118
@@ -13952,7 +14128,8 @@ export const questions = [
       "imageNotes": "题意：h=2x+1，y=3h−4，求等效 y=ax+b，并求给定输入下的输出。",
       "referenceAnswer": "参考答案 / 解题要点：a=6，b=−1；若 x=2，则 y=11。"
     },
-    "transcript": "Two affine layers are h = 2x + 1 and y = 3h — 4. Fold them into y = ax + b, and then evaluate the result at x = 2. Give\ninteger values for a, b and y.\nYour answers:\n‘a=\n*h= a\nty=",
+    "transcript": "Two affine layers are h = 2x + 1 and y = 3h − 4. Fold them into y = ax + b, and then evaluate the result at x = 2. Give integer values for a, b and y.",
+    "category": "calculation",
     "id": "comp9444-new-119",
     "bankId": "comp9444-new",
     "number": 119
@@ -13973,7 +14150,8 @@ export const questions = [
       "imageNotes": "题意：架构及激活函数完全相同，训练学习率不同的两个模型，表达能力是否有区别？",
       "referenceAnswer": "参考答案 / 解题要点：Hypothesis class 相同；学习率影响优化过程，不会直接改变可表示函数类。"
     },
-    "transcript": "Models A and B have the same architecture and activation functions, but B is trained with a smaller learning rate. Before\nconsidering the parameters reached by training, which statement about their representational complexity is correct?\nSelect one:\na. Bis more expressive because smaller updates create additional hidden units.\nb. Ais more expressive because a larger learning rate adds nonlinear decision regions.\nc. Bis less expressive because the optimizer restricts the number of possible output classes.\nd. They have the same hypothesis class; the learning rate changes optimization, not the functions the architecture\ncan represent.",
+    "transcript": "Models A and B have the same architecture and activation functions, but B is trained with a smaller learning rate. Before considering the parameters reached by training, which statement about their representational complexity is correct?\nSelect one:\na. B is more expressive because smaller updates create additional hidden units.\nb. A is more expressive because a larger learning rate adds nonlinear decision regions.\nc. B is less expressive because the optimizer restricts the number of possible output classes.\nd. They have the same hypothesis class; the learning rate changes optimization, not the functions the architecture can represent.",
+    "category": "multiple-choice",
     "id": "comp9444-new-120",
     "bankId": "comp9444-new",
     "number": 120
@@ -13994,7 +14172,8 @@ export const questions = [
       "imageNotes": "题意：没有自然终止状态、长期奖励重要的 RL 任务中，最适合的绩效指标是什么？",
       "referenceAnswer": "参考答案 / 解题要点：Average reward per time step。"
     },
-    "transcript": "Which performance criterion is most appropriate for a continuing reinforcement-ieaming task in which there is no natural\nterminal state and long-run reward rate matters?\nSelect one:\na. Average reward per time step\nb. Training-set classification accuracy a\nc. One-step reconstruction esror\nd. The number of distinct visited states only",
+    "transcript": "Which performance criterion is most appropriate for a continuing reinforcement-learning task in which there is no natural terminal state and long-run reward rate matters?\nSelect one:\na. Average reward per time step\nb. Training-set classification accuracy\nc. One-step reconstruction error\nd. The number of distinct visited states only",
+    "category": "multiple-choice",
     "id": "comp9444-new-121",
     "bankId": "comp9444-new",
     "number": 121
@@ -14015,7 +14194,8 @@ export const questions = [
       "imageNotes": "题意：给定一步 reward 与下一个状态的动作价值，比较 SARSA 更新目标和 Q-learning 更新目标。",
       "referenceAnswer": "参考答案 / 解题要点：SARSA 用 r+γQ(s′,a′)；Q-learning 用 r+γmaxₐQ(s′,a)。"
     },
-    "transcript": "After a transition, the immediate reward is r = 2 and the discount factor is y = 0.9. At the next state, the action selected\nby the behaviour policy has value 4, while the maximum available action value is 6. Compute the one-step SARSA target\nand the one-step Q-learning target. Give both answers to two decimal places.\nYour answers:\n* SARSA target =\n* Q-learning target =",
+    "transcript": "After a transition, the immediate reward is r = 2 and the discount factor is γ = 0.9. At the next state, the action selected by the behaviour policy has value 4, while the maximum available action value is 6. Compute the one-step SARSA target and the one-step Q-learning target. Give both answers to two decimal places.",
+    "category": "calculation",
     "id": "comp9444-new-122",
     "bankId": "comp9444-new",
     "number": 122
@@ -14036,7 +14216,8 @@ export const questions = [
       "imageNotes": "题意：对于猫狗分类通常可用、但对于手写数字分类可能改变标签的增强方式是哪一种？",
       "referenceAnswer": "参考答案 / 解题要点：Horizontal flip；某些数字翻转后不再保留原标签。"
     },
-    "transcript": "Which data-augmentation operation is generally suitable for classifying cats versus dogs but potentially harmful for\nclassifying handwritten digits?\nSelect one:\na. Ahorizontal flip\nb. Asmalil translation\nc. Aslight change in brightness\nd. Asmail random crop that preserves the object",
+    "transcript": "Which data-augmentation operation is generally suitable for classifying cats versus dogs but potentially harmful for classifying handwritten digits?\nSelect one:\na. A horizontal flip\nb. A small translation\nc. A slight change in brightness\nd. A small random crop that preserves the object",
+    "category": "multiple-choice",
     "id": "comp9444-new-123",
     "bankId": "comp9444-new",
     "number": 123
@@ -14054,10 +14235,11 @@ export const questions = [
     "answers": [],
     "referenceAnswer": "Align the kernel according to the convolution/cross-correlation convention in the original question, multiply overlapping entries and sum them.",
     "translation": {
-      "imageNotes": "题意：对一维序列与给定 kernel 做无填充 convolution，求指定位置的输出。",
+      "imageNotes": "题意：按题图约定做一维全卷积，卷积核为 (2, −1)，输入为 (4, −1, 2)。求输出的第三个分量，保留两位小数。",
       "referenceAnswer": "参考答案 / 解题要点：先按题图指定的 convolution 约定对齐，逐项相乘求和；原始数据见截图。"
     },
-    "transcript": "Use full one-dimensional convolution in the convention\ny = (2x, 2x2 — xy, 2x3 — xz, — x3)\nwhich correapifhe to kernei (2, — 1). Forx = (4, — 1,2), compute the third component of y. Give your answer to two\ndecimal places.\nAnswer:\n* Third output component = 7 |",
+    "transcript": "Use full one-dimensional convolution in the convention\ny = (2x_1, 2x_2 − x_1, 2x_3 − x_2, −x_3)\nwhich corresponds to kernel (2, −1). For x = (4, −1, 2), compute the third component of y. Give your answer to two decimal places.",
+    "category": "calculation",
     "id": "comp9444-new-124",
     "bankId": "comp9444-new",
     "number": 124
@@ -14078,7 +14260,8 @@ export const questions = [
       "imageNotes": "题意：卷积与循环自回归序列模型对训练并行性和状态依赖有何区别？",
       "referenceAnswer": "参考答案 / 解题要点：CNN 可在位置维并行卷积；典型 RNN 依赖逐时刻的递归隐藏状态。"
     },
-    "transcript": "Which trade-off correctly compares convolutional and recurrent autoregressive sequence models?\nSelect one:\na... Aconvolutional model can parallelize training across positions, while an RNN naturally carries a state over an\narbitrarily long generated prefix.\nb. Aconvolutional model has unlimited context with one layer, while an RNN can process all timesteps in parallel\nduring generation.\nc. Aconvolutional model requires teacher forcing, while an RNN cannot be trained with teacher forcing.\nd. Aconvolutional model is always probabilistic, while an RNN can represent only deterministic sequences.",
+    "transcript": "Which trade-off correctly compares convolutional and recurrent autoregressive sequence models?\nSelect one:\na. A convolutional model can parallelize training across positions, while an RNN naturally carries a state over an arbitrarily long generated prefix.\nb. A convolutional model has unlimited context with one layer, while an RNN can process all timesteps in parallel during generation.\nc. A convolutional model requires teacher forcing, while an RNN cannot be trained with teacher forcing.\nd. A convolutional model is always probabilistic, while an RNN can represent only deterministic sequences.",
+    "category": "multiple-choice",
     "id": "comp9444-new-125",
     "bankId": "comp9444-new",
     "number": 125
@@ -14099,7 +14282,8 @@ export const questions = [
       "imageNotes": "题意：策略在状态 1 选择指定动作概率 0.70，在状态 2 选择指定动作概率 0.40，转移确定，求两步轨迹概率。",
       "referenceAnswer": "参考答案 / 解题要点：0.70×0.40=0.28。"
     },
-    "transcript": "A two-step policy rollout selects a, in s; with probability 0.70 and then selects az in sz with probability 0.40. Assuming the\ntransition between the states is deterministic, compute the probability of this action sequence. Give your answer to two\ndecimal places.\nAnswer:\n* Rollout probability =",
+    "transcript": "A two-step policy rollout selects a_1 in s_1 with probability 0.70 and then selects a_2 in s_2 with probability 0.40. Assuming the transition between the states is deterministic, compute the probability of this action sequence. Give your answer to two decimal places.",
+    "category": "calculation",
     "id": "comp9444-new-126",
     "bankId": "comp9444-new",
     "number": 126
@@ -14120,7 +14304,8 @@ export const questions = [
       "imageNotes": "题意：下列神经网络相关陈述中哪项是 False？包含 Transformer/CV、分布式表示、深层表征和 Gradient Clipping。",
       "referenceAnswer": "参考答案 / 解题要点：“Gradient clipping can prevent the vanishing gradients problem” 不正确；主要用于抑制梯度爆炸。"
     },
-    "transcript": "6 Which one of the following statements is False?\nSelect one alternative:\n‘ Transformer models can be used for computer vision applications\nDistributed representations generally require fewer dimensions than local (one-hot) representations\nUpper level layers (closer to the output) tend to learn more abstract representations (shapes, forms, objects)\n~ compared to lower level layers\n\") Gradient clipping can prevent the vanishing gradients problem",
+    "transcript": "Which one of the following statements is False?\nSelect one alternative:\n- Transformer models can be used for computer vision applications\n- Distributed representations generally require fewer dimensions than local (one-hot) representations\n- Upper level layers (closer to the output) tend to learn more abstract representations (shapes, forms, objects) compared to lower level layers\n- Gradient clipping can prevent the vanishing gradients problem",
+    "category": "multiple-choice",
     "id": "comp9444-new-127",
     "bankId": "comp9444-new",
     "number": 127
@@ -14141,7 +14326,9 @@ export const questions = [
       "imageNotes": "题意：计算图 y=ab，a=3x+σ(x)，b=x²−e^(−x)+3，求 dy/dx。",
       "referenceAnswer": "参考答案 / 解题要点：dy/dx=b[3+σ(x)(1−σ(x))]+a[2x+e^(−x)]。"
     },
-    "transcript": "7 Consider the following computational graph, where o({z) = 1/(1 + ce *) is the sigmoid function. What is the\nderivative of y with respect to z ?\nQy-e\nnm p b=27-e7+3\nSelect one alternative:\n) 6(3 + o(z)(1 - o(z))) + a(2z +. *)\nC 3+4o(x)(1 —o(z)) + 2x+e 7",
+    "transcript": "Consider the following computational graph, where σ(z) = 1/(1 + e^(−z)) is the sigmoid function. What is the derivative of y with respect to x?\n\nGraph labels: y = ab, a = 3x + σ(x), b = x² − e^(−x) + 3.\n\nSelect one alternative:\n- 0\n- b(3 + σ(x)(1 − σ(x))) + a(2x + e^(−x))\n- 3 + σ(x)(1 − σ(x)) + 2x + e^(−x)\n- a(3 + σ(x)(1 − σ(x))) + b(2x + e^(−x))",
+    "category": "multiple-choice",
+    "transcriptNote": "The fourth option was verified against the continuation on page 25 of the 25T2 final PDF.",
     "id": "comp9444-new-128",
     "bankId": "comp9444-new",
     "number": 128
@@ -14162,7 +14349,8 @@ export const questions = [
       "imageNotes": "题意：四个布尔函数中，哪一个不能由单层感知机学到？",
       "referenceAnswer": "参考答案 / 解题要点：XOR 型布尔函数不能由单层线性阈值单元表示；原选项见截图。"
     },
-    "transcript": "8 Let A, V, and @ denote respectively the AND, OR and XOR Boolean logical operators, and — denote Boolean\nnegation. Assume Boolean values are represented as 0 (FALSE) and 1 (TRUE). Which of these logical functions\ncannot be learned by a single layer Perceptron with inputs A and B ?\nSelect one alternative:\nO(ASBB)AA\nOAVB\n9 AAAB\n9 (AA-=B) Vv (-AA B)",
+    "transcript": "Let ∧, ∨, and ⊕ denote respectively the AND, OR and XOR Boolean logical operators, and ¬ denote Boolean negation. Assume Boolean values are represented as 0 (FALSE) and 1 (TRUE). Which of these logical functions cannot be learned by a single layer Perceptron with inputs A and B?\nSelect one alternative:\n- (A ⊕ B) ∧ A\n- A ∨ B\n- ¬A ∧ B\n- (A ∧ ¬B) ∨ (¬A ∧ B)",
+    "category": "multiple-choice",
     "id": "comp9444-new-129",
     "bankId": "comp9444-new",
     "number": 129
@@ -14183,7 +14371,8 @@ export const questions = [
       "imageNotes": "题意：2 inputs、1 output、K 个隐藏层（每层 D units），统计所有 weights 和 biases。",
       "referenceAnswer": "参考答案 / 解题要点：3D+(K−1)D(D+1)+(D+1) = 4D+1+(K−1)D(D+1)。"
     },
-    "transcript": "9 Consider a deep neural network with two inputs, one output and K hidden layers, each containing D hidden\nunits. What is the total number of parameters in this network (including weights and biases)?\nSelect one alternative:\nO3D+1+KD(D+1)\n3D+1+(K —1)D(D+1)\n4D+1+(K —1)D(D +1)\nO4D+1+ KD(D +1)",
+    "transcript": "Consider a deep neural network with two inputs, one output and K hidden layers, each containing D hidden units. What is the total number of parameters in this network (including weights and biases)?\nSelect one alternative:\n- 3D + 1 + KD(D + 1)\n- 3D + 1 + (K − 1)D(D + 1)\n- 4D + 1 + (K − 1)D(D + 1)\n- 4D + 1 + KD(D + 1)",
+    "category": "multiple-choice",
     "id": "comp9444-new-130",
     "bankId": "comp9444-new",
     "number": 130
@@ -14204,7 +14393,8 @@ export const questions = [
       "imageNotes": "题意：简要解释 Data Augmentation，并说明一个神经网络应用示例。",
       "referenceAnswer": "参考答案 / 解题要点：用标签保持的数据变换扩充训练数据，如分类中随机 crop/轻微旋转/颜色扰动，以改善泛化。"
     },
-    "transcript": "11 Briefly explain the concept of Data Augmentation, and how it has been used in a neural network application of\nyour own choosing.\nFill in your answer here",
+    "transcript": "Briefly explain the concept of Data Augmentation, and how it has been used in a neural network application of your own choosing.",
+    "category": "short-answer",
     "id": "comp9444-new-131",
     "bankId": "comp9444-new",
     "number": 131
@@ -14225,7 +14415,8 @@ export const questions = [
       "imageNotes": "题意：用文字简要比较权重初始化与批量归一化。",
       "referenceAnswer": "参考答案 / 解题要点：初始化设置训练起点及信号尺度；BatchNorm 在训练过程中使用批统计量归一化激活并学习缩放/平移。"
     },
-    "transcript": "12 Briefly explain in words the difference between Weight Initialization and Batch Normalization (you do not need\nto write any equations).\nFill in your answer here",
+    "transcript": "Briefly explain in words the difference between Weight Initialization and Batch Normalization (you do not need to write any equations).",
+    "category": "short-answer",
     "id": "comp9444-new-132",
     "bankId": "comp9444-new",
     "number": 132
@@ -14246,7 +14437,8 @@ export const questions = [
       "imageNotes": "题意：用简答题形式比较强化学习中的 Value Function Learning 与 Policy Learning。",
       "referenceAnswer": "参考答案 / 解题要点：价值学习拟合 V(s) 或 Q(s,a) 后据此选动作；策略学习直接优化 π(a|s) 的参数。"
     },
-    "transcript": "13 In the context of Reinforcement Learning, briefly explain the difference between Value Function Learning and\nPolicy Learning.\nFill in your answer here",
+    "transcript": "In the context of Reinforcement Learning, briefly explain the difference between Value Function Learning and Policy Learning.",
+    "category": "short-answer",
     "id": "comp9444-new-133",
     "bankId": "comp9444-new",
     "number": 133
@@ -14271,7 +14463,9 @@ export const questions = [
       "imageNotes": "题意：按原题 a/b/c 三个样本与初始权重，填写净输入、Add/Subtract/None 和前三次更新后的权重。",
       "referenceAnswer": "参考答案 / 解题要点：使用 w ← w+η(t−ŷ)(1,x₁,x₂) 逐样本更新；原卷未提供标准答案。"
     },
-    "transcript": "[Original screenshot 1]\n= EES |\n14 Consider a perceptron whose output is given by h(wa + wir; + wer) where x, x2 are inputs and h() is the Heaviside\n(step) function.\nTraining Item ©; <<» Class\na. 1 : | —\nb. —1 0 =\nc. | 2)-t| +\nDemonstrate the first three steps of the Perceptron Learning Algorithm on the above data, using a learning rate of 1.0 and\ninitial weight values of\nwo = —0.5\nw= 0\nw2= 1\nFor each step, you need to:\n¢ Enter the value of 8 = wo + wy 2) + wore\ne« Choose the appropriate Action (right column)\n¢ Enter the new values of wo, uw 1, wa on the next line (left columns)\nStep wy | wy | We Item x1 22 Class s | Action\n1 —0.5 0 1 ajsjiji|— Enter: Choose:\n| a <|>\n2 Enter: Enter: Enter: b. -1 0 — (Enter: :\n| Select alterna\n3 Enter: Enter: Enter: le | 2|—1| + Enter: Choose:\n[Original screenshot 2]\niemonstrate the first three steps of the Perceptron Learning Algorithm on the above data, using a learning rate of 1.0 and initial\nigight values of\nwo = —0.5\nwy= O\nw2e= 1\nor each step, you need to:\n¢ Enter the value of s = wa + wir) + wore\n* Choose the appropriate Action (right column)\n« Enter the new values of wo, wy, we on the next line (left columns)\n1 0.5 0 1 a. |1/)1| — Enter: | Choose:\nSelect alternative v |\n2 Enter: | Enter: Enter: | b. |—1| 0 | — (Enter: | Choose:\nSelect alternative v |\n3. Enter: | Enter: Enter: | ce. | 2 }—1| + (Enter: Choose:\n| Select alternative ~ |\n4 Enter: Enter: Enter: | |\n‘eset Maximum marks: 3",
+    "transcript": "Consider a perceptron whose output is given by h(w_0 + w_1x_1 + w_2x_2) where x_1, x_2 are inputs and h() is the Heaviside (step) function.\n\n| Training Item | x_1 | x_2 | Class |\n| --- | --- | --- | --- |\n| a. | 1 | 1 | − |\n| b. | −1 | 0 | − |\n| c. | 2 | −1 | + |\n\nDemonstrate the first three steps of the Perceptron Learning Algorithm on the above data, using a learning rate of 1.0 and initial weight values of\nw_0 = −0.5\nw_1 = 0\nw_2 = 1\n\nFor each step, you need to:\n- Enter the value of s = w_0 + w_1x_1 + w_2x_2\n- Choose the appropriate Action (right column)\n- Enter the new values of w_0, w_1, w_2 on the next line (left columns)\n\n| Step | w_0 | w_1 | w_2 | Item | x_1 | x_2 | Class | s | Action |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| 1 | −0.5 | 0 | 1 | a. | 1 | 1 | − | | |\n| 2 | | | | b. | −1 | 0 | − | | |\n| 3 | | | | c. | 2 | −1 | + | | |\n| 4 | | | | | | | | | |",
+    "category": "calculation",
+    "transcriptNote": "The source screenshots show the Action dropdowns in their closed state.",
     "id": "comp9444-new-134",
     "bankId": "comp9444-new",
     "number": 134
@@ -14296,7 +14490,9 @@ export const questions = [
       "imageNotes": "题意：根据网络已知连接权重和给定布尔公式，求 b0,b1,b2,b3。",
       "referenceAnswer": "参考答案 / 解题要点：逐个隐藏单元实现子句，再设置输出偏置实现合取；原卷未附答案。"
     },
-    "transcript": "[Original screenshot 1]\no_o SSS SL ne =\n15 Consider the following multi-layer perceptron, using the threshold activation function, and assume that TRUE is represented\nby 1; FALSE by 0; OR by V; AND by A.\n+1 +1 +1\nb, b, b,\n+1 -1 +1 +I —| +1 +1 +1\nFor which values of the biases bo, 6;, b2 and bs would this network compute the following logical function?\n(KV aL) A (LVMV-R) A (RVSVT)\n[Original screenshot 2]\n*« 09 = | Select alternative \"|\na eames Select alternative |\nby -2.9 |\naay -1.5 |\nbs = |+0.5 |\n+2.5",
+    "transcript": "Consider the following multi-layer perceptron, using the threshold activation function, and assume that TRUE is represented by 1; FALSE by 0; OR by ∨; AND by ∧.\n\n[See the network diagram in the screenshot.]\n\nFor which values of the biases b_0, b_1, b_2 and b_3 would this network compute the following logical function?\n(K ∨ ¬L) ∧ (L ∨ M ∨ ¬R) ∧ (R ∨ S ∨ T)\n\nDropdown alternatives shown for b_0: −2.5, −1.5, −0.5, +0.5, +1.5, +2.5.",
+    "category": "multiple-choice",
+    "transcriptNote": "Only the b_0 dropdown is expanded in the supplied screenshots.",
     "id": "comp9444-new-135",
     "bankId": "comp9444-new",
     "number": 135
@@ -14317,7 +14513,8 @@ export const questions = [
       "imageNotes": "题意：32×32 RGB 输入，CONV3-8、LeakyReLU、POOL2、BatchNorm、CONV3-16、LeakyReLU、POOL2、FLATTEN、FC-10，逐层统计独立参数。",
       "referenceAnswer": "参考答案 / 解题要点：若 BatchNorm 位于8通道处：224、0、0、16、1168、0、0、0、10250。"
     },
-    "transcript": "21 Consider a Convolutional Neural Network (CNN) architecture defined by the layers in the left column below. The input is a 32\nx 32 color image (i.e., three channels R, G, B). Find the number of independent parameters (including bias) for each layer of\nthe network and enter them in the table below. (Note: some of them may be zero). Assume padding of 1 where appropriate.\nNotations:\ne CONV:-N denotes a convolutional layer with N filters, with height and width equal to zx.\n¢ Pool-n denotes an n x n max-pooling layer with stride n and zero padding.\n« FLATTEN flattens its inputs, identical to torch.nn.flatten()\ne FC-N denotes a fully-connected layer with N neurons.\nCONV3-8: |\nLeaky ReLU:\nPOOL-2:\nBatchNorm: |\nCONV3-16:\nLeaky ReLU:\nFLATTEN:\nFC-10:",
+    "transcript": "Consider a Convolutional Neural Network (CNN) architecture defined by the layers in the left column below. The input is a 32 x 32 color image (i.e., three channels R, G, B). Find the number of independent parameters (including bias) for each layer of the network and enter them in the table below. (Note: some of them may be zero). Assume padding of 1 where appropriate.\n\nNotations:\n- CONVx-N denotes a convolutional layer with N filters, with height and width equal to x.\n- Pool-n denotes an n × n max-pooling layer with stride n and zero padding.\n- FLATTEN flattens its inputs, identical to torch.nn.flatten()\n- FC-N denotes a fully-connected layer with N neurons.\n\nCONV3-8:\nLeaky ReLU:\nPOOL-2:\nBatchNorm:\nCONV3-16:\nLeaky ReLU:\nPOOL-2:\nFLATTEN:\nFC-10:",
+    "category": "calculation",
     "id": "comp9444-new-136",
     "bankId": "comp9444-new",
     "number": 136
@@ -14342,7 +14539,8 @@ export const questions = [
       "imageNotes": "题意：按照题图给定的权重和 bias，计算两个输出、MSE 及一次学习率 0.1 的权重更新。",
       "referenceAnswer": "参考答案 / 解题要点：对前向传播、损失和 chain rule 分别求值；原卷未提供标准答案。"
     },
-    "transcript": "[Original screenshot 1]\n22 Consider the following neural network with a fully connected hidden layer and ReLU activations, including two input units\n(i1,%2) and four hidden values (hy, ha) and (h3, h4). The output units are indicated as (0), 02) and their targets are\nindicated as (t,, to) . The weights and biases of the hidden and output layer are called w and 6 with specific sub-descriptors\n(indices).\nb, by\nL l\n\" /\ni) Wy) nt hy p ReLU —+(h }—wa —+ of)\nOa wre waa ee a\nwar vw\n(i2 S$— Xe ReLU —+(hy ¥— we2 —Xor)\n— \" r\nI t\nby by\nThe current values are given in the following table:\nVariable ig (wir wi2 |W Weg Wei) Wye | war wae bi bo by | by ty te\nValue ~1.01.0 —0.50.5 —1.00.5 —1.0 —0.51.0 0.5—0.5 —1.6 0.51.00.5\nCompute the output (0), 09) with the input (z;, i2) and network parameters as specified above.\nom |\n[Original screenshot 2]\nCompute the output (0; , 02) with the input (7;, #2) and network parameters as specified above.\noOl1= |\n09> |\nCompute the mean squared error (MSE) of the output (01, 02) calculated above and the target (t1, t2), given by:\n51 ¥Y (oi — ts)?\n« MSE=\nUpdate the weight wu; using gradient descent with learning rate 0.1 as well as the loss computed in the previous step\n(where w;', denotes the updated weight)\nwi, = |",
+    "transcript": "Consider the following neural network with a fully connected hidden layer and ReLU activations, including two input units (i_1, i_2) and four hidden values (h_1, h_2) and (h_3, h_4). The output units are indicated as (o_1, o_2) and their targets are indicated as (t_1, t_2). The weights and biases of the hidden and output layer are called w and b with specific sub-descriptors (indices).\n\n[See the network diagram in the screenshot.]\n\nThe current values are given in the following table:\n| Variable | i_1 | i_2 | w_11 | w_12 | w_21 | w_22 | w_31 | w_32 | w_41 | w_42 | b_1 | b_2 | b_3 | b_4 | t_1 | t_2 |\n| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |\n| Value | 2.0 | −1.0 | 1.0 | −0.5 | 0.5 | −1.0 | 0.5 | −1.0 | −0.5 | 1.0 | 0.5 | −0.5 | −1.0 | 0.5 | 1.0 | 0.5 |\n\nCompute the output (o_1, o_2) with the input (i_1, i_2) and network parameters as specified above.\n\nCompute the mean squared error (MSE) of the output (o_1, o_2) calculated above and the target (t_1, t_2), given by:\n(1/2) Σ_i (o_i − t_i)²\n\nUpdate the weight w_11 using gradient descent with learning rate 0.1 as well as the loss computed in the previous step (where w_11^+ denotes the updated weight)",
+    "category": "calculation",
     "id": "comp9444-new-137",
     "bankId": "comp9444-new",
     "number": 137
@@ -14363,7 +14561,9 @@ export const questions = [
       "imageNotes": "题意：使用 22T3 题图给定的样本、初始权重和学习率，计算单步感知机更新。",
       "referenceAnswer": "参考答案 / 解题要点：原资料自带答案：(0.5, −3.0, 0.0)。"
     },
-    "transcript": "Question 13 Consider a Perceptron whose output is given by h(wo+w1x1+W2x2), where x, x2 are inputs and h() is the Heaviside (step) function.\npel ael 7 Assume this Perceptron is being trained on the data in the following table, and that the current values of the weights are wo= -0.5, w4= -1\nand w2= -2.\n2.00 Training Example|x7 |x2|Class|\nF Flag | fa) 2) 2| Pos |\ncuestion Peal ane\n|) +} Neg |\nIf the Perceptron Learning Rule is applied to the current weights, using training item (a) and a learning rate of n=1.0, the new values\nfor wo, Wi and w?2 at the end of this training step will be:\n* wo: i\nWw: :\n* wa: >",
+    "transcript": "Consider a Perceptron whose output is given by h(w_0+w_1x_1+w_2x_2), where x_1, x_2 are inputs and h() is the Heaviside (step) function.\n\nAssume this Perceptron is being trained on the data in the following table, and that the current values of the weights are w_0 = −0.5, w_1 = −1 and w_2 = −2.\n\n| Training Example | x_1 | x_2 | Class |\n| --- | --- | --- | --- |\n| (a) | −2 | 2 | Pos |\n| (b) | 2 | 1 | Neg |\n| (c) | −1 | −1 | Neg |\n\nIf the Perceptron Learning Rule is applied to the current weights, using training item (a) and a learning rate of η=1.0, the new values for w_0, w_1 and w_2 at the end of this training step will be:",
+    "category": "calculation",
+    "transcriptNote": "The source screenshot does not show the choices inside the closed menus.",
     "id": "comp9444-new-138",
     "bankId": "comp9444-new",
     "number": 138
@@ -14384,7 +14584,8 @@ export const questions = [
       "imageNotes": "题意：求题图中两个五维概率分布的 entropy 与 KL divergence。",
       "referenceAnswer": "参考答案 / 解题要点：原资料自带答案：H=1.88，KL=0.52。"
     },
-    "transcript": "Question 16 Consider these two probability distributions on the same space 0 = {A, B, C, D, E}\nweno p=(Ve.%e, Ye, Ya, V2\nY yn yn. Ye 1\nq=(%, A6, 76, 7, >\n3.00 Compute (correct to at least two decimal places):\n¥ Flag\nquestion * The Entropy H(p): [\n* The KL-Divergence Dxt (p II q): [",
+    "transcript": "Consider these two probability distributions on the same space Ω = {A, B, C, D, E}\n\np = ⟨1/16, 1/16, 1/8, 1/4, 1/2⟩\nq = ⟨1/4, 1/16, 1/16, 1/2, 1/8⟩\n\nCompute (correct to at least two decimal places):\n- The Entropy H(p)\n- The KL-Divergence D_KL(p ∥ q)",
+    "category": "calculation",
     "id": "comp9444-new-139",
     "bankId": "comp9444-new",
     "number": 139
@@ -14409,7 +14610,8 @@ export const questions = [
       "imageNotes": "题意：在四个具有不同隐藏层/输出层阈值权重的网络中选择能够计算 XOR 的模型。",
       "referenceAnswer": "参考答案 / 解题要点：原资料标注答案：C。"
     },
-    "transcript": "[Original screenshot 1]\nQuestion 17 If O=FALSE and 1=TRUE, which of these networks (with threshold activations at both the hidden and output layer) correctly computes the\nNot yet XOR function of two inputs?\n2.00 Oa\n& Flag\nquestion 40.5\nome\nNw A lim\nOmb:\n0.5\n+1 -1\n+1 +1 /-\nOfc:\n0.5\n1 +1\n+0.5 ip :» < Ta 5\n(ie\n[Original screenshot 2]\nNLS NZ\nd.\n+1.5\n1 -1\nwos / > < \\ 05\nOT TO",
+    "transcript": "If 0=FALSE and 1=TRUE, which of these networks (with threshold activations at both the hidden and output layer) correctly computes the XOR function of two inputs?\nSelect one:\na. [Network diagram in the first screenshot]\nb. [Network diagram in the first screenshot]\nc. [Network diagram in the first screenshot]\nd. [Network diagram in the second screenshot]",
+    "category": "multiple-choice",
     "id": "comp9444-new-140",
     "bankId": "comp9444-new",
     "number": 140
@@ -14430,7 +14632,8 @@ export const questions = [
       "imageNotes": "题意：输入三分类 logits 与目标类别，分别求三项 ∂log p(target)/∂zⱼ。",
       "referenceAnswer": "参考答案 / 解题要点：原资料自带答案：(0.90, −0.30, −0.60)。"
     },
-    "transcript": "time lel 2-U9-.59\nQuestion 18 Consider a neural network trained using softmax for a classification task with three classes 1, 2, 3. Suppose a particular input is presented,\nNot yet producing outputs\n24= 1.3, 22= 2.4, Z3= 3.1\nAssuming the correct class for this input is Class 1, and that Prob(1) is the softmax probability of the network choosing Class 1, compute the\n3.00\nF Flag following, to two decimal places:\nquestion * d{log Prob(1))/dz1= [|\n* d(log Prob(1))/dz2=\n* d(log Prob(1))/dz3= []",
+    "transcript": "Consider a neural network trained using softmax for a classification task with three classes 1, 2, 3. Suppose a particular input is presented, producing outputs\n\nz_1 = 1.3, z_2 = 2.4, z_3 = 3.1\n\nAssuming the correct class for this input is Class 1, and that Prob(1) is the softmax probability of the network choosing Class 1, compute the following, to two decimal places:\n- d(log Prob(1))/dz_1\n- d(log Prob(1))/dz_2\n- d(log Prob(1))/dz_3",
+    "category": "calculation",
     "id": "comp9444-new-141",
     "bankId": "comp9444-new",
     "number": 141
@@ -14451,7 +14654,8 @@ export const questions = [
       "imageNotes": "题意：65×77 RGB 输入、题图给定卷积核与 stride，求 weights/neuron、neurons、connections、independent parameters。",
       "referenceAnswer": "参考答案 / 解题要点：原资料自带答案：(19, 21888, 415872, 342)。"
     },
-    "transcript": "Question 19 Consider a convolutional neural network which takes as input a 65-by-77 color image (i.e. with three channels R, G, B). The first\nNot yet convolutional layer has 18 filters that are 3-by-3, with stride 2 and no zero-padding.\nCompute the number of:\n3.60 * weights per neuron in this layer (including bias): [|\nF Flag\nquestion * neurons in this layer: [\n* connections into the neurons in this layer: [\n* independent parameters in this layer:",
+    "transcript": "Consider a convolutional neural network which takes as input a 65-by-77 color image (i.e. with three channels R, G, B). The first convolutional layer has 18 filters that are 3-by-3, with stride 2 and no zero-padding.\n\nCompute the number of:\n- weights per neuron in this layer (including bias)\n- neurons in this layer\n- connections into the neurons in this layer\n- independent parameters in this layer",
+    "category": "calculation",
     "id": "comp9444-new-142",
     "bankId": "comp9444-new",
     "number": 142
@@ -14472,7 +14676,8 @@ export const questions = [
       "imageNotes": "题意：对题图给定权重矩阵和三个 bipolar vectors，判断 stable / not stable。",
       "referenceAnswer": "参考答案 / 解题要点：原资料标注：Not Stable、Not Stable、Not Stable。"
     },
-    "transcript": "Time lett 2:09:15\nQuestion 20 Consider a Hopfield Network with the following weight matrix W:\ncae 00-100]\n1000 0-1|\n3.00 1-10 0 +10]\nF Flag 10 0410 +1|\nquestion 10-10 +10]\nFor each of the following vectors, state whether it is Stable or Not Stable for this network:\n* (-14141 +1 +1]: >\n* [4141-1-1-1]: = |\n* [+141 -141 +1]: > |",
+    "transcript": "Consider a Hopfield Network with the following weight matrix W:\n\nW = [[0, 0, −1, 0, 0],\n     [0, 0, 0, 0, −1],\n     [−1, 0, 0, +1, 0],\n     [0, 0, +1, 0, +1],\n     [0, −1, 0, +1, 0]]\n\nFor each of the following vectors, state whether it is Stable or Not Stable for this network:\n- [−1 +1 +1 +1 +1]\n- [+1 +1 −1 −1 −1]\n- [+1 +1 −1 +1 +1]",
+    "category": "calculation",
     "id": "comp9444-new-143",
     "bankId": "comp9444-new",
     "number": 143
@@ -14493,7 +14698,8 @@ export const questions = [
       "imageNotes": "题意：给定两状态转移/奖励图与 γ，计算最优策略和四个 Q* 值、最优 γ 区间。",
       "referenceAnswer": "参考答案 / 解题要点：按 Bellman optimality equations 求解；原资料无完整可核对答案。"
     },
-    "transcript": "Question 21 Consider an environment with two states S = {S;, S2} and two actions A = {ay, a2}, where the (deterministic) transitions 6 and reward R for\nNot yet each state and action are as follows:\n6.00 a, fr % a,\nFlag\nquestion +3 af\n! NU\" ra\nAssuming a discount factor of y = 0.6, determine:\nw(Si=| |\n*w(S)=) 2 |\nAgain assuming Ww 0.6, compute these values (correct to two decimal places):\n\"(Sia |\n* Q\"(S1,a2)\n* Q\"(S2,a1)\n* Q\"(S2,a2)\nIf y is allowed to vary between 0 and 1, for which range of values of y is this policy optimal (correct to two decimal places)?\n* Minimum value of y: |\n* Maximum value of y:",
+    "transcript": "Consider an environment with two states S = {S_1, S_2} and two actions A = {a_1, a_2}, where the (deterministic) transitions δ and reward R for each state and action are as follows:\n\n[See the transition diagram in the screenshot.]\n- S_1 with a_1 → S_1, reward +3\n- S_1 with a_2 → S_2, reward +5\n- S_2 with a_1 → S_1, reward −4\n- S_2 with a_2 → S_2, reward +1\n\nAssuming a discount factor of γ = 0.6, determine:\n- π*(S_1)\n- π*(S_2)\n\nAgain assuming γ = 0.6, compute these values (correct to two decimal places):\n- Q*(S_1, a_1)\n- Q*(S_1, a_2)\n- Q*(S_2, a_1)\n- Q*(S_2, a_2)\n\nIf γ is allowed to vary between 0 and 1, for which range of values of γ is this policy optimal (correct to two decimal places)?\n- Minimum value of γ\n- Maximum value of γ",
+    "category": "calculation",
     "id": "comp9444-new-144",
     "bankId": "comp9444-new",
     "number": 144
@@ -14518,7 +14724,9 @@ export const questions = [
       "imageNotes": "题意：对具有 6 个输入、2 个 tanh hidden units、4 个 sigmoid outputs 的网络，选择 2D hidden space 的正确划分图。",
       "referenceAnswer": "参考答案 / 解题要点：原资料标注答案：D。"
     },
-    "transcript": "[Original screenshot 1]\nHIME 1€1l 2-U4-4U\nQuestion 22 Consider a fully connected feedforward neural network with 6 inputs, 2 hidden units and 4 outputs, using tanh activation at the hidden units\nNot yet and sigmoid at the outputs. Suppose this network is trained on the following data, and that the training is successful.\n2.00 oe er\n= 1. [100000] 0001\nquestion | 2. |010000| 0011\n| 3. |oo1000) 0100\n| 4. 000100) 1000\n5. looooto| tort\n| 6. |000001} 1100\nWhich of these diagrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a line dividing the\nhidden unit space into regions for which the value of that output is greater/less than one half ?\nSelect one:\n[Original screenshot 2]\nEre\nace",
+    "transcript": "Consider a fully connected feedforward neural network with 6 inputs, 2 hidden units and 4 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is trained on the following data, and that the training is successful.\n\n| Item | Inputs | Outputs |\n| --- | --- | --- |\n| | 123456 | 1234 |\n| 1. | 100000 | 0001 |\n| 2. | 010000 | 0011 |\n| 3. | 001000 | 0100 |\n| 4. | 000100 | 1000 |\n| 5. | 000010 | 1011 |\n| 6. | 000001 | 1100 |\n\nWhich of these diagrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a line dividing the hidden unit space into regions for which the value of that output is greater/less than one half?\nSelect one:\na. [Diagram in the first screenshot]\nb. [Diagram in the second screenshot]\nc. [Diagram in the second screenshot]\nd. [Diagram in the second screenshot]",
+    "category": "multiple-choice",
+    "transcriptNote": "The source screenshot includes a prior answer or annotation.",
     "id": "comp9444-new-145",
     "bankId": "comp9444-new",
     "number": 145

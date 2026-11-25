@@ -61,6 +61,26 @@ const sources = [
     description: '附英文原题截图、可复制的题干、参考答案和可切换的中文翻译。',
     ungraded: true,
     supportsMarks: true,
+    sections: [
+      {
+        category: 'multiple-choice',
+        title: 'COMP9444 选择题',
+        englishTitle: 'COMP9444 Multiple-Choice Questions',
+        description: '按原题选项作答，包含带选项的计算题。'
+      },
+      {
+        category: 'calculation',
+        title: 'COMP9444 计算题',
+        englishTitle: 'COMP9444 Calculation Questions',
+        description: '练习数值计算、公式推导和逐步求解。'
+      },
+      {
+        category: 'short-answer',
+        title: 'COMP9444 简答题',
+        englishTitle: 'COMP9444 Short-Answer Questions',
+        description: '练习概念解释、方法比较和图示题。'
+      }
+    ],
     path: path.join(root, 'COMP9444_original_question_bank'),
     fileMatcher: file => file === 'questions.json',
     parser: JSON.parse
@@ -443,7 +463,7 @@ const questions = []
 for (const source of sources) {
   const { filePath, content } = readSource(source)
   const parsed = withIds(source.id, source.parser(content, path.dirname(filePath)))
-  banks.push({
+  const bank = {
     id: source.id,
     title: source.title,
     ...(source.englishTitle && { englishTitle: source.englishTitle }),
@@ -451,7 +471,23 @@ for (const source of sources) {
     ...(source.supportsMarks && { supportsMarks: true }),
     description: source.description,
     total: parsed.length
-  })
+  }
+  banks.push(bank)
+  if (source.sections) {
+    const categories = new Set(source.sections.map(section => section.category))
+    for (const question of parsed) {
+      if (!categories.has(question.category)) throw new Error(`Missing or invalid category for ${question.id}`)
+    }
+    for (const section of source.sections) {
+      banks.push({
+        ...bank,
+        ...section,
+        id: `${bank.id}-${section.category}`,
+        parentBankId: bank.id,
+        total: parsed.filter(question => question.category === section.category).length
+      })
+    }
+  }
   questions.push(...parsed)
 }
 
