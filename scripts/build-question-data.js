@@ -66,7 +66,9 @@ const sources = [
         category: 'multiple-choice',
         title: 'COMP9444 选择题',
         englishTitle: 'COMP9444 Multiple-Choice Questions',
-        description: '按原题选项作答，包含带选项的计算题。'
+        description: '直接选择文字或图形选项，作答后查看答案和解析。',
+        ungraded: false,
+        interactiveChoices: true
       },
       {
         category: 'calculation',

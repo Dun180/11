@@ -4,7 +4,9 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import AnalysisBox from '../components/AnalysisBox.jsx'
 import MarkdownContent from '../components/MarkdownContent.jsx'
 import OptionList from '../components/OptionList.jsx'
+import QuestionCard from '../components/QuestionCard.jsx'
 import QuestionLanguageToggle from '../components/QuestionLanguageToggle.jsx'
+import { makeChoiceRecord, selectGroupedOption } from '../data/choiceAnswers.js'
 import { getBank, getQuestionForDisplay, getQuestionsForBank } from '../data/selectors.js'
 import { loadAnswerRecords, saveAnswerRecords } from '../data/storage.js'
 
@@ -20,29 +22,20 @@ export default function ReviewWrongPage() {
 
   if (!bank) return <Navigate to="/" replace />
 
+  const incorrectCount = bankQuestions.filter(question => records[question.id]?.correct === false).length
   const wrongQuestions = bankQuestions
-    .filter(question => records[question.id]?.correct === false)
+    .filter(question => records[question.id]?.correct === false || (bank.interactiveChoices && retryRecords[question.id]))
     .map(question => getQuestionForDisplay(question, showChinese))
 
-  function retryQuestion(question) {
-    const rawSelected = practiceSelections[question.id]
-    const selections = Array.isArray(rawSelected)
-      ? rawSelected
-      : rawSelected === undefined ? [] : [rawSelected]
-    if (selections.length === 0) {
-      alert(english ? 'Select an answer first.' : '请先选择一个答案')
+  function retryQuestion(question, selected = practiceSelections[question.id]) {
+    const record = makeChoiceRecord(question, selected)
+    if (!record) {
+      alert(question.optionGroups ? 'Choose one value for every bias.' : english ? 'Select an answer first.' : '请先选择一个答案')
       return
     }
-    const correctAnswers = question.answers || []
-    const isCorrect = correctAnswers.length === 0 ? null : selections.length === correctAnswers.length
-      && selections.every(option => correctAnswers.includes(option))
     const nextRecords = {
       ...records,
-      [question.id]: {
-        selected: correctAnswers.length > 1 ? selections : selections[0],
-        answers: correctAnswers,
-        correct: isCorrect
-      }
+      [question.id]: record
     }
     setRecords(nextRecords)
     setRetryRecords(prev => ({
@@ -61,7 +54,7 @@ export default function ReviewWrongPage() {
       <header className="result-header">
         <p className="eyebrow">{bank.englishTitle || bank.title}</p>
         <h1>{english ? 'Review incorrect answers' : '错题复习'}</h1>
-        <p className="muted">{english ? `Incorrect answers: ${wrongQuestions.length}` : `共 ${wrongQuestions.length} 道错题`}</p>
+        <p className="muted">{english ? `Incorrect answers: ${incorrectCount}` : `共 ${incorrectCount} 道错题`}</p>
         {english && wrongQuestions.length > 0 && (
           <QuestionLanguageToggle showChinese={showChinese} onToggle={() => setShowChinese(value => !value)} />
         )}
@@ -74,7 +67,31 @@ export default function ReviewWrongPage() {
         </section>
       ) : (
         <div className="review-list">
-          {wrongQuestions.map(question => (
+          {wrongQuestions.map(question => bank.interactiveChoices ? (
+            <QuestionCard
+              key={question.id}
+              question={question}
+              english={english}
+              instantChoice
+              selectedOption={retryRecords[question.id]?.selected ?? practiceSelections[question.id] ?? null}
+              record={retryRecords[question.id]}
+              onSelect={index => {
+                if (question.optionGroups) {
+                  setPracticeSelections(prev => ({
+                    ...prev,
+                    [question.id]: selectGroupedOption(question, prev[question.id], index)
+                  }))
+                } else {
+                  retryQuestion(question, index)
+                }
+              }}
+              onSubmit={() => retryQuestion(question)}
+              onRetry={() => {
+                setRetryRecords(prev => ({ ...prev, [question.id]: null }))
+                setPracticeSelections(prev => ({ ...prev, [question.id]: null }))
+              }}
+            />
+          ) : (
             <article className="review-card" key={question.id}>
               <div className="question-heading">
                 <span>{english ? 'Question' : '错题'} {question.number}</span>

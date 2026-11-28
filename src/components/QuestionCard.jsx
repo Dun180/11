@@ -11,11 +11,13 @@ export default function QuestionCard({
   ungraded = false,
   marked = false,
   onToggleMark,
+  instantChoice = false,
   onSelect,
-  onSubmit
+  onSubmit,
+  onRetry
 }) {
   const isReferenceOnly = Boolean(question.referenceAnswer)
-  const isMultipleChoice = (question.answers || [question.answer]).length > 1
+  const isMultipleChoice = !question.optionGroups && (question.answers || [question.answer]).length > 1
   const submitLabel = isReferenceOnly
     ? (english ? 'Show reference answer' : '查看参考答案')
     : (english ? 'Submit answer' : '提交答案')
@@ -58,22 +60,34 @@ export default function QuestionCard({
           {english ? 'Select all correct answers.' : '本题有多个正确答案，请选择所有符合的选项。'}
         </p>
       )}
+      {question.optionGroups && <p className="multi-choice-note">Choose one value for each bias.</p>}
       {question.options.length > 0 && (
         <OptionList
           options={question.options}
+          optionGroups={question.optionGroups}
+          optionImages={question.optionImages}
           selectedOption={selectedOption}
           answer={question.answers || [question.answer]}
           record={record}
           onSelect={onSelect}
         />
       )}
-      <div className="question-actions">
+      {(!instantChoice || question.optionGroups) && <div className="question-actions">
         <button type="button" className="primary-button" onClick={onSubmit} disabled={Boolean(record)}>
           {submitLabel}
         </button>
         {record && !isReferenceOnly && <span className="submitted-note">{english ? 'Answer submitted' : '已提交，答案已锁定'}</span>}
-      </div>
+      </div>}
       <AnalysisBox question={question} record={record} english={english} />
+      {onRetry && record?.correct === false && (
+        <div className="question-actions">
+          <button type="button" className="secondary-button" onClick={onRetry}>Try again</button>
+        </div>
+      )}
+      {question.sourceImages && <details className="original-question">
+        <summary>Original screenshots</summary>
+        <MarkdownContent images={question.sourceImages} />
+      </details>}
     </article>
   )
 }

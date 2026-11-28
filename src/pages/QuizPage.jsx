@@ -4,6 +4,7 @@ import { Link, Navigate, useParams } from 'react-router-dom'
 import QuestionCard from '../components/QuestionCard.jsx'
 import QuestionLanguageToggle from '../components/QuestionLanguageToggle.jsx'
 import StatsBox from '../components/StatsBox.jsx'
+import { makeChoiceRecord, selectGroupedOption } from '../data/choiceAnswers.js'
 import { getBank, getQuestionForDisplay, getQuestionsForBank } from '../data/selectors.js'
 import { getStats, loadAnswerRecords, loadMarkedQuestionIds, saveAnswerRecords, setQuestionMarked } from '../data/storage.js'
 
@@ -97,6 +98,14 @@ function QuizSession({ bankId, randomize, markedOnly }) {
 
   function handleSelectOption(optionIndex) {
     if (record) return
+    if (currentQuestion.optionGroups) {
+      setSelectedOption(previous => selectGroupedOption(currentQuestion, previous, optionIndex))
+      return
+    }
+    if (bank.interactiveChoices) {
+      saveChoice(optionIndex)
+      return
+    }
     const isMultiAnswer = (currentQuestion.answers || [currentQuestion.answer]).length > 1
     if (!isMultiAnswer) {
       setSelectedOption(optionIndex)
@@ -109,6 +118,15 @@ function QuizSession({ bankId, randomize, markedOnly }) {
         ? selections.filter(item => item !== optionIndex)
         : [...selections, optionIndex].sort((a, b) => a - b)
     })
+  }
+
+  function saveChoice(selection) {
+    const choice = makeChoiceRecord(currentQuestion, selection)
+    if (!choice) {
+      alert(currentQuestion.optionGroups ? 'Choose one value for every bias.' : english ? 'Select an answer first.' : '请先选择一个答案')
+      return
+    }
+    setAnswerRecords(prev => prev[currentQuestion.id] ? prev : { ...prev, [currentQuestion.id]: choice })
   }
 
   function handleSubmitAnswer() {
@@ -125,25 +143,7 @@ function QuizSession({ bankId, randomize, markedOnly }) {
       return
     }
 
-    const selections = Array.isArray(selectedOption)
-      ? selectedOption
-      : selectedOption === null ? [] : [selectedOption]
-    if (selections.length === 0) {
-      alert(english ? 'Select an answer first.' : '请先选择一个答案')
-      return
-    }
-    const correctAnswers = currentQuestion.answers || []
-    const isCorrect = correctAnswers.length === 0 ? null : selections.length === correctAnswers.length
-      && selections.every(option => correctAnswers.includes(option))
-
-    setAnswerRecords(prev => ({
-      ...prev,
-      [currentQuestion.id]: {
-        selected: correctAnswers.length > 1 ? selections : selections[0],
-        answers: correctAnswers,
-        correct: isCorrect
-      }
-    }))
+    saveChoice(selectedOption)
   }
 
   function goToQuestion(nextIndex) {
@@ -186,6 +186,7 @@ function QuizSession({ bankId, randomize, markedOnly }) {
           english={english}
           ungraded={bank.ungraded}
           marked={isMarked}
+          instantChoice={bank.interactiveChoices}
           onToggleMark={bank.supportsMarks ? handleToggleMark : undefined}
           selectedOption={selectedOption}
           record={displayedRecord}

@@ -277,6 +277,58 @@ button:disabled {
   color: #566984;
 }
 
+.option-list.has-diagrams {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+}
+
+.option-diagram {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: min(100%, 280px);
+  margin-top: 6px;
+  background: white;
+}
+
+.option-diagram img {
+  position: absolute;
+  max-width: none;
+  display: block;
+}
+
+.grouped-options {
+  display: grid;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.grouped-options fieldset {
+  min-width: 0;
+  border: 1px solid #dce4ee;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.group-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
+  gap: 6px;
+}
+
+.group-options .option-button {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+}
+
+.original-question {
+  margin-top: 16px;
+}
+
+.original-question summary {
+  cursor: pointer;
+}
+
 .question-meta-row {
   display: flex;
   flex-wrap: wrap;

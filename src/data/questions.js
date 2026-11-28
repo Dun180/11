@@ -49,11 +49,12 @@ export const questionBanks = [
     "id": "comp9444-new-multiple-choice",
     "title": "COMP9444 选择题",
     "englishTitle": "COMP9444 Multiple-Choice Questions",
-    "ungraded": true,
+    "ungraded": false,
     "supportsMarks": true,
-    "description": "按原题选项作答，包含带选项的计算题。",
+    "description": "直接选择文字或图形选项，作答后查看答案和解析。",
     "total": 58,
     "category": "multiple-choice",
+    "interactiveChoices": true,
     "parentBankId": "comp9444-new"
   },
   {
@@ -11397,6 +11398,25 @@ export const questions = [
     },
     "transcript": "Which of these statements about Dropout is FALSE:\nSelect one:\na. Dropout simulates an ensemble of network architectures\nb. Dropout helps to prevent overfitting\nc. Dropout encourages redundancy\nd. Dropout encourages the weight values to be small",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Dropout simulates an ensemble of network architectures",
+        "Dropout helps to prevent overfitting",
+        "Dropout encourages redundancy",
+        "Dropout encourages the weight values to be small"
+      ],
+      "answers": [
+        3
+      ],
+      "chineseOptions": [
+        "Dropout 模拟由多种网络结构组成的集成模型。",
+        "Dropout 有助于防止过拟合。",
+        "Dropout 鼓励网络形成冗余表征。",
+        "Dropout 鼓励权重数值变小。"
+      ],
+      "explanation": "d. Dropout encourages smaller weight magnitudes.\n\nDropout randomly disables units during training, acting like an ensemble of shared-weight subnetworks and reducing co-adaptation. It does not explicitly penalize weight magnitude; L1/L2 regularization or weight decay does that.",
+      "transcript": "Which of these statements about Dropout is FALSE:"
+    },
     "id": "comp9444-new-1",
     "bankId": "comp9444-new",
     "number": 1
@@ -11420,6 +11440,25 @@ export const questions = [
     },
     "transcript": "The Context Layer in a Simple Recurrent Network:\nSelect one:\na. is computed from the current input and the previous hidden layer\nb. is comprised of the inputs in a sliding window around the current timestep\nc. is a copy of the hidden layer from the previous timestep\nd. is computed from the current input and the previous output",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "is computed from the current input and the previous hidden layer",
+        "is comprised of the inputs in a sliding window around the current timestep",
+        "is a copy of the hidden layer from the previous timestep",
+        "is computed from the current input and the previous output"
+      ],
+      "answers": [
+        2
+      ],
+      "chineseOptions": [
+        "由当前输入和上一时间步的隐藏层共同计算得到。",
+        "由当前时间步附近滑动窗口中的输入组成。",
+        "是上一时间步隐藏层状态的副本。",
+        "由当前输入和上一时间步的输出共同计算得到。"
+      ],
+      "explanation": "c. A copy of the hidden-layer activations from the previous time step.\n\nThe context layer stores h(t−1). The current hidden state uses the present input and the previous hidden state: h(t) = f(Wx·x(t) + Wh·h(t−1) + b).",
+      "transcript": "The Context Layer in a Simple Recurrent Network:"
+    },
     "id": "comp9444-new-2",
     "bankId": "comp9444-new",
     "number": 2
@@ -11443,6 +11482,25 @@ export const questions = [
     },
     "transcript": "Which statement about word2vec is FALSE?\nSelect one:\na. Representations for the same word at the input and output layers are different\nb. It aims to maximise the log probability of a word, based on the surrounding words\nc. The tanh activation function is used at the hidden nodes\nd. Performance improves if frequent words are sampled less often",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Representations for the same word at the input and output layers are different",
+        "It aims to maximise the log probability of a word, based on the surrounding words",
+        "The tanh activation function is used at the hidden nodes",
+        "Performance improves if frequent words are sampled less often"
+      ],
+      "answers": [
+        2
+      ],
+      "chineseOptions": [
+        "同一个词在输入层和输出层可以具有不同的表示。",
+        "它的目标是根据周围词最大化某个词的对数概率。",
+        "隐藏节点使用 tanh 激活函数。",
+        "降低高频词的采样频率可以改善性能。"
+      ],
+      "explanation": "c. The hidden units use a tanh activation function.\n\nClassic CBOW/Skip-gram uses a linear hidden projection rather than a tanh nonlinear layer. Input and output embeddings may differ, and downsampling common words can be helpful.",
+      "transcript": "Which statement about word2vec is FALSE?"
+    },
     "id": "comp9444-new-3",
     "bankId": "comp9444-new",
     "number": 3
@@ -11466,6 +11524,25 @@ export const questions = [
     },
     "transcript": "Which of these is NOT a method for dealing with the problem of vanishing or exploding gradients?\nSelect one:\na. Batch Normalization\nb. Rectified Linear Unit\nc. Weight Initialization\nd. Conjugate Gradients",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Batch Normalization",
+        "Rectified Linear Unit",
+        "Weight Initialization",
+        "Conjugate Gradients"
+      ],
+      "answers": [
+        3
+      ],
+      "chineseOptions": [
+        "Batch Normalization（批量归一化）。",
+        "Rectified Linear Unit（ReLU，修正线性单元）。",
+        "Weight Initialization（权重初始化）。",
+        "Conjugate Gradients（共轭梯度法）。"
+      ],
+      "explanation": "d. Conjugate Gradients.\n\nReLU, suitable weight initialization and normalization can improve gradient propagation or training stability. Conjugate Gradients is a general optimization method.",
+      "transcript": "Which of these is NOT a method for dealing with the problem of vanishing or exploding gradients?"
+    },
     "id": "comp9444-new-4",
     "bankId": "comp9444-new",
     "number": 4
@@ -11581,6 +11658,73 @@ export const questions = [
     },
     "transcript": "If 0=FALSE and 1=TRUE, which of these networks (with threshold activations at both the hidden and output layer) correctly computes the XOR function of two inputs?\nSelect one:\na. [Network diagram in the screenshot]\nb. [Network diagram in the screenshot]\nc. [Network diagram in the screenshot]\nd. [Network diagram in the screenshot]",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Diagram A",
+        "Diagram B",
+        "Diagram C",
+        "Diagram D"
+      ],
+      "optionImages": [
+        {
+          "src": "/COMP9444_original_question_bank/images/image9.png",
+          "size": [
+            800,
+            713
+          ],
+          "crop": [
+            37,
+            51,
+            159,
+            160
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image9.png",
+          "size": [
+            800,
+            713
+          ],
+          "crop": [
+            37,
+            214,
+            159,
+            160
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image9.png",
+          "size": [
+            800,
+            713
+          ],
+          "crop": [
+            37,
+            378,
+            159,
+            159
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image9.png",
+          "size": [
+            800,
+            713
+          ],
+          "crop": [
+            37,
+            541,
+            160,
+            159
+          ]
+        }
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "a. The first network in the original figure.\n\nCheck all four input pairs: XOR should output 0,1,1,0 for (0,0),(0,1),(1,0),(1,1), respectively. Read the exact weights from the diagram.",
+      "transcript": "If 0=FALSE and 1=TRUE, which of these networks (with threshold activations at both the hidden and output layer) correctly computes the XOR function of two inputs?"
+    },
     "id": "comp9444-new-9",
     "bankId": "comp9444-new",
     "number": 9
@@ -11656,6 +11800,25 @@ export const questions = [
     },
     "transcript": "What type of Autoencoder explicitly forces the hidden features not to change much when the inputs are slightly altered?\nSelect one:\na. Variational Autoencoder\nb. Sparse Autoencoder\nc. Denoising Autoencoder\nd. Contractive Autoencoder",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Variational Autoencoder",
+        "Sparse Autoencoder",
+        "Denoising Autoencoder",
+        "Contractive Autoencoder"
+      ],
+      "answers": [
+        3
+      ],
+      "chineseOptions": [
+        "Variational Autoencoder（变分自编码器）。",
+        "Sparse Autoencoder（稀疏自编码器）。",
+        "Denoising Autoencoder（去噪自编码器）。",
+        "Contractive Autoencoder（收缩自编码器）。"
+      ],
+      "explanation": "d. Contractive Autoencoder.\n\nA contractive autoencoder adds a penalty on the Jacobian of the encoder representation with respect to its input.",
+      "transcript": "What type of Autoencoder explicitly forces the hidden features not to change much when the inputs are slightly altered?"
+    },
     "id": "comp9444-new-12",
     "bankId": "comp9444-new",
     "number": 12
@@ -11725,6 +11888,25 @@ export const questions = [
     },
     "transcript": "The best way to deal with the problem of temporal correlations in Deep Q-Learning is:\nSelect one:\na. Cross Entropy Minimization\nb. Increased Momentum\nc. Experience Replay\nd. Back Propagation Through Time",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Cross Entropy Minimization",
+        "Increased Momentum",
+        "Experience Replay",
+        "Back Propagation Through Time"
+      ],
+      "answers": [
+        2
+      ],
+      "chineseOptions": [
+        "Cross Entropy Minimization（交叉熵最小化）。",
+        "Increased Momentum（增大动量）。",
+        "Experience Replay（经验回放）。",
+        "Back Propagation Through Time（随时间反向传播）。"
+      ],
+      "explanation": "c. Experience Replay.\n\nReplay buffers store transitions and sample minibatches out of sequence, breaking short-range correlations during optimization.",
+      "transcript": "The best way to deal with the problem of temporal correlations in Deep Q-Learning is:"
+    },
     "id": "comp9444-new-15",
     "bankId": "comp9444-new",
     "number": 15
@@ -11748,6 +11930,25 @@ export const questions = [
     },
     "transcript": "Considering a Singular Value Decomposition X = U S V^T, what are the special properties of matrices U, S and V ?\nSelect one:\na. U is orthogonal, V is upper triangular and S is symmetric.\nb. U, V are upper triangular, and S is diagonal.\nc. U, V are symmetric and S is orthogonal.\nd. U, V are unitary and S is diagonal.",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "U is orthogonal, V is upper triangular and S is symmetric.",
+        "U, V are upper triangular, and S is diagonal.",
+        "U, V are symmetric and S is orthogonal.",
+        "U, V are unitary and S is diagonal."
+      ],
+      "answers": [
+        3
+      ],
+      "chineseOptions": [
+        "U 是正交矩阵，V 是上三角矩阵，S 是对称矩阵。",
+        "U、V 是上三角矩阵，S 是对角矩阵。",
+        "U、V 是对称矩阵，S 是正交矩阵。",
+        "U、V 是酉矩阵，S 是对角矩阵。"
+      ],
+      "explanation": "d. U and V are unitary/orthogonal, and S is diagonal.\n\nThe singular-vector matrices are orthonormal (unitary in the complex case), and S contains the nonnegative singular values on its diagonal.",
+      "transcript": "Considering a Singular Value Decomposition X = U S V^T, what are the special properties of matrices U, S and V ?"
+    },
     "id": "comp9444-new-16",
     "bankId": "comp9444-new",
     "number": 16
@@ -11771,6 +11972,25 @@ export const questions = [
     },
     "transcript": "Two common methods for unsupervised pre-training of neural networks are:\nSelect one:\na. Deep Boltzmann Machine and Bayesian Inference\nb. Weight Initialization and Autoencoder\nc. Bayesian Inference and Weight Initialization\nd. Autoencoder and Deep Boltzmann Machine",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Deep Boltzmann Machine and Bayesian Inference",
+        "Weight Initialization and Autoencoder",
+        "Bayesian Inference and Weight Initialization",
+        "Autoencoder and Deep Boltzmann Machine"
+      ],
+      "answers": [
+        3
+      ],
+      "chineseOptions": [
+        "Deep Boltzmann Machine（深度玻尔兹曼机）和 Bayesian Inference（贝叶斯推断）。",
+        "Weight Initialization（权重初始化）和 Autoencoder（自编码器）。",
+        "Bayesian Inference（贝叶斯推断）和 Weight Initialization（权重初始化）。",
+        "Autoencoder（自编码器）和 Deep Boltzmann Machine（深度玻尔兹曼机）。"
+      ],
+      "explanation": "d. Autoencoder and Deep Boltzmann Machine.\n\nBoth can learn representations from unlabeled data before supervised fine-tuning.",
+      "transcript": "Two common methods for unsupervised pre-training of neural networks are:"
+    },
     "id": "comp9444-new-17",
     "bankId": "comp9444-new",
     "number": 17
@@ -11794,6 +12014,25 @@ export const questions = [
     },
     "transcript": "When training on linearly separable data using the Perceptron Learning Rule, what will happen if both the learning rate and the initial weights are scaled up by a large factor?\nSelect one:\na. The data will be learned successfully, but in a larger number of epochs\nb. The data will be learned successfully, in a smaller number of epochs\nc. The data will be learned successfully, in about the same number of epochs\nd. Learning may become unstable and fail to converge",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "The data will be learned successfully, but in a larger number of epochs",
+        "The data will be learned successfully, in a smaller number of epochs",
+        "The data will be learned successfully, in about the same number of epochs",
+        "Learning may become unstable and fail to converge"
+      ],
+      "answers": [
+        2
+      ],
+      "chineseOptions": [
+        "数据仍会被成功学会，但需要更多 epoch。",
+        "数据仍会被成功学会，而且需要更少 epoch。",
+        "数据仍会被成功学会，所需 epoch 数大致不变。",
+        "学习可能变得不稳定并且无法收敛。"
+      ],
+      "explanation": "c. Learning still succeeds in approximately the same number of epochs.\n\nThe parameter trajectory is scaled; threshold decisions and update sequence remain the same under joint positive scaling.",
+      "transcript": "When training on linearly separable data using the Perceptron Learning Rule, what will happen if both the learning rate and the initial weights are scaled up by a large factor?"
+    },
     "id": "comp9444-new-18",
     "bankId": "comp9444-new",
     "number": 18
@@ -11817,6 +12056,25 @@ export const questions = [
     },
     "transcript": "Reinforcement Learning is when an agent is:\nSelect one:\na. presented multiple times (over time) with the same examples of inputs and their target outputs\nb. only presented with the inputs and not target outputs, so it aims to find structure in these inputs\nc. not presented with target outputs, but instead given a reward signal that it aims to maximize\nd. presented once with examples of inputs and their target outputs",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "presented multiple times (over time) with the same examples of inputs and their target outputs",
+        "only presented with the inputs and not target outputs, so it aims to find structure in these inputs",
+        "not presented with target outputs, but instead given a reward signal that it aims to maximize",
+        "presented once with examples of inputs and their target outputs"
+      ],
+      "answers": [
+        2
+      ],
+      "chineseOptions": [
+        "随时间多次看到相同的输入样本及其目标输出。",
+        "只得到输入而没有目标输出，目的是发现输入中的结构。",
+        "不提供目标输出，而是提供一个智能体试图最大化的奖励信号。",
+        "只看一次输入样本及其目标输出。"
+      ],
+      "explanation": "c. The agent receives reward signals, rather than desired target outputs, and seeks to maximize cumulative reward.\n\nThe supervision is evaluative and often delayed, not a per-example correct target label.",
+      "transcript": "Reinforcement Learning is when an agent is:"
+    },
     "id": "comp9444-new-19",
     "bankId": "comp9444-new",
     "number": 19
@@ -11840,6 +12098,25 @@ export const questions = [
     },
     "transcript": "When using Batch Normalization, in the Testing phase, the Mean and Variance of the activations at each node are typically:\nSelect one:\na. pre computed from the training set\nb. estimated using running averages\nc. either of the above\nd. none of the above",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "pre computed from the training set",
+        "estimated using running averages",
+        "either of the above",
+        "none of the above"
+      ],
+      "answers": [
+        1
+      ],
+      "chineseOptions": [
+        "预先从训练集计算得到。",
+        "使用训练过程中估计并维护的 running averages（运行平均值）。",
+        "上述两种方式均可。",
+        "以上都不是。"
+      ],
+      "explanation": "b. From running averages collected during training.\n\nBatchNorm uses accumulated training statistics at test time instead of the test minibatch statistics.",
+      "transcript": "When using Batch Normalization, in the Testing phase, the Mean and Variance of the activations at each node are typically:"
+    },
     "id": "comp9444-new-20",
     "bankId": "comp9444-new",
     "number": 20
@@ -11863,6 +12140,25 @@ export const questions = [
     },
     "transcript": "When comparing a Hopfield Network with a Boltzmann Machine, which statement is FALSE?\nSelect one:\na. The range of activations is {-1,1} for one model and {0,1} for the other\nb. One model is used for retrieval, the other for generation\nc. The formula for the energy function is different for the two models\nd. The updates are deterministic for one model, and stochastic for the other",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "The range of activations is {-1,1} for one model and {0,1} for the other",
+        "One model is used for retrieval, the other for generation",
+        "The formula for the energy function is different for the two models",
+        "The updates are deterministic for one model, and stochastic for the other"
+      ],
+      "answers": [
+        2
+      ],
+      "chineseOptions": [
+        "一个模型的激活取值范围为 {-1,1}，另一个为 {0,1}。",
+        "一个模型用于检索，另一个用于生成。",
+        "两种模型的能量函数公式不同。",
+        "一个模型采用确定性更新，另一个采用随机更新。"
+      ],
+      "explanation": "c. Their energy functions necessarily have different forms.\n\nBoth are energy-based models with related pairwise energy functions. Their typical uses, stochasticity and state conventions differ.",
+      "transcript": "When comparing a Hopfield Network with a Boltzmann Machine, which statement is FALSE?"
+    },
     "id": "comp9444-new-21",
     "bankId": "comp9444-new",
     "number": 21
@@ -11887,6 +12183,25 @@ export const questions = [
     "transcript": "Which of these architectures would have the best chance of learning long range dependencies?\nSelect one:\na. Long Short Term Memory\nb. Simple Recurrent Network\nc. Feedforward network with sliding window\nd. Elman Network",
     "category": "multiple-choice",
     "transcriptNote": "The source screenshot includes a prior answer or annotation.",
+    "choicePractice": {
+      "options": [
+        "Long Short Term Memory",
+        "Simple Recurrent Network",
+        "Feedforward network with sliding window",
+        "Elman Network"
+      ],
+      "answers": [
+        0
+      ],
+      "chineseOptions": [
+        "Long Short-Term Memory（LSTM，长短期记忆网络）。",
+        "Simple Recurrent Network（简单循环网络）。",
+        "Feedforward network with sliding window（带滑动窗口的前馈网络）。",
+        "Elman Network（Elman 网络）。"
+      ],
+      "explanation": "LSTM (Long Short-Term Memory).\n\nThe LSTM cell state and gates help preserve information and gradients across long spans.",
+      "transcript": "Which of these architectures would have the best chance of learning long range dependencies?"
+    },
     "id": "comp9444-new-22",
     "bankId": "comp9444-new",
     "number": 22
@@ -12039,6 +12354,73 @@ export const questions = [
     "transcript": "Consider a fully connected feedforward neural network with 6 inputs, 2 hidden units and 3 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is trained on the following data, and that the training is successful.\n\nItem | Inputs | Outputs\n     | 123456 | 123\n1.   | 100000 | 000\n2.   | 010000 | 001\n3.   | 001000 | 010\n4.   | 000100 | 100\n5.   | 000010 | 101\n6.   | 000001 | 110\n\nWhich of these diagrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a (correctly labeled) line dividing the hidden unit space into regions for which the value of that output is greater/less than one half ?\nSelect one:\na. [Diagram in the screenshot]\nb. [Diagram in the screenshot]\nc. [Diagram in the screenshot]\nd. [Diagram in the screenshot]",
     "category": "multiple-choice",
     "transcriptNote": "The source screenshot includes a prior answer or annotation.",
+    "choicePractice": {
+      "options": [
+        "Diagram A",
+        "Diagram B",
+        "Diagram C",
+        "Diagram D"
+      ],
+      "optionImages": [
+        {
+          "src": "/COMP9444_original_question_bank/images/image30.png",
+          "size": [
+            444,
+            697
+          ],
+          "crop": [
+            69,
+            33,
+            324,
+            324
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image30.png",
+          "size": [
+            444,
+            697
+          ],
+          "crop": [
+            69,
+            369,
+            324,
+            324
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image31.png",
+          "size": [
+            433,
+            804
+          ],
+          "crop": [
+            59,
+            12,
+            324,
+            324
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image31.png",
+          "size": [
+            433,
+            804
+          ],
+          "crop": [
+            59,
+            472,
+            324,
+            325
+          ]
+        }
+      ],
+      "answers": [
+        2
+      ],
+      "explanation": "c. The third configuration in the original figure.\n\nEach sigmoid output is an affine separator in hidden-unit space; its 0.5 threshold corresponds to a straight line. Compare the required 0/1 partitions with the output table.",
+      "transcript": "Consider a fully connected feedforward neural network with 6 inputs, 2 hidden units and 3 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is trained on the following data, and that the training is successful.\n\nItem | Inputs | Outputs\n     | 123456 | 123\n1.   | 100000 | 000\n2.   | 010000 | 001\n3.   | 001000 | 010\n4.   | 000100 | 100\n5.   | 000010 | 101\n6.   | 000001 | 110\n\nWhich of these diagrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a (correctly labeled) line dividing the hidden unit space into regions for which the value of that output is greater/less than one half ?"
+    },
     "id": "comp9444-new-28",
     "bankId": "comp9444-new",
     "number": 28
@@ -12135,6 +12517,25 @@ export const questions = [
     "transcript": "For the Generative Adversarial Networks discussed in this course, the game between the Generator and Discriminator:\na. Is never zero-sum\nb. Can be either zero-sum or not, but the non-zero-sum version produces better images\nc. Is always zero-sum\nd. Can be either zero-sum or not, but the zero-sum version produces better images",
     "category": "multiple-choice",
     "transcriptNote": "The source screenshot includes a prior answer or annotation.",
+    "choicePractice": {
+      "options": [
+        "Is never zero-sum",
+        "Can be either zero-sum or not, but the non-zero-sum version produces better images",
+        "Is always zero-sum",
+        "Can be either zero-sum or not, but the zero-sum version produces better images"
+      ],
+      "answers": [
+        1
+      ],
+      "chineseOptions": [
+        "永远不是零和博弈。",
+        "可以写成零和或非零和，但非零和版本会生成更好的图像。",
+        "永远是零和博弈。",
+        "可以写成零和或非零和，但零和版本会生成更好的图像。"
+      ],
+      "explanation": "It may be formulated as zero-sum or non-zero-sum; the non-saturating (non-zero-sum) generator objective often produces better images.\n\nThe minimax objective defines a zero-sum game, while the widely used non-saturating generator loss changes that game.",
+      "transcript": "For the Generative Adversarial Networks discussed in this course, the game between the Generator and Discriminator:"
+    },
     "id": "comp9444-new-32",
     "bankId": "comp9444-new",
     "number": 32
@@ -12158,6 +12559,25 @@ export const questions = [
     },
     "transcript": "The principle ‘The most likely hypothesis is the simplest one consistent with the data.’ is called:\na. Perceptron Learning\nb. Bayes’ Rule\nc. Maximum Likelihood\nd. Ockham’s Razor",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Perceptron Learning",
+        "Bayes’ Rule",
+        "Maximum Likelihood",
+        "Ockham’s Razor"
+      ],
+      "answers": [
+        3
+      ],
+      "chineseOptions": [
+        "Perceptron Learning（感知机学习）。",
+        "Bayes' Rule（贝叶斯法则）。",
+        "Maximum Likelihood（最大似然）。",
+        "Ockham's Razor（奥卡姆剃刀）。"
+      ],
+      "explanation": "d. Ockham's Razor.\n\nAmong explanations fitting the observations, prefer the simpler one, all else equal.",
+      "transcript": "The principle ‘The most likely hypothesis is the simplest one consistent with the data.’ is called:"
+    },
     "id": "comp9444-new-33",
     "bankId": "comp9444-new",
     "number": 33
@@ -12181,6 +12601,73 @@ export const questions = [
     },
     "transcript": "If 0=FALSE and 1=TRUE, which of these networks (with threshold activations at both the hidden and output layer) correctly computes the XOR function of two inputs?\nSelect one:\na. [Network diagram in the screenshot]\nb. [Network diagram in the screenshot]\nc. [Network diagram in the screenshot]\nd. [Network diagram in the screenshot]",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Diagram A",
+        "Diagram B",
+        "Diagram C",
+        "Diagram D"
+      ],
+      "optionImages": [
+        {
+          "src": "/COMP9444_original_question_bank/images/image37.png",
+          "size": [
+            736,
+            820
+          ],
+          "crop": [
+            43,
+            43,
+            183,
+            186
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image37.png",
+          "size": [
+            736,
+            820
+          ],
+          "crop": [
+            43,
+            233,
+            183,
+            187
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image37.png",
+          "size": [
+            736,
+            820
+          ],
+          "crop": [
+            43,
+            425,
+            183,
+            186
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image37.png",
+          "size": [
+            736,
+            820
+          ],
+          "crop": [
+            43,
+            628,
+            184,
+            187
+          ]
+        }
+      ],
+      "answers": [
+        2
+      ],
+      "explanation": "c. The third network in this figure.\n\nEvaluate the full truth table using the weights and biases printed in this particular figure; option letters differ between variants.",
+      "transcript": "If 0=FALSE and 1=TRUE, which of these networks (with threshold activations at both the hidden and output layer) correctly computes the XOR function of two inputs?"
+    },
     "id": "comp9444-new-34",
     "bankId": "comp9444-new",
     "number": 34
@@ -12326,6 +12813,73 @@ export const questions = [
     "transcript": "Consider a fully connected feedforward neural network with 6 inputs, 2 hidden units and 4 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is trained on the following data, and that the training is successful.\n\nItem | Inputs | Outputs\n     | 123456 | 1234\n1.   | 100000 | 0001\n2.   | 010000 | 0011\n3.   | 001000 | 0101\n4.   | 000100 | 1000\n5.   | 000010 | 1011\n6.   | 000001 | 1100\n\nWhich of these diagrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a line dividing the hidden unit space into regions for which the value of that output is greater/less than one half ?\nSelect one:\na. [Diagram in the first screenshot]\nb. [Diagram in the first screenshot]\nc. [Diagram in the second screenshot]\nd. [Diagram in the second screenshot]",
     "category": "multiple-choice",
     "transcriptNote": "The source image cuts off the bottom edge of diagram b.",
+    "choicePractice": {
+      "options": [
+        "Diagram A",
+        "Diagram B",
+        "Diagram C",
+        "Diagram D"
+      ],
+      "optionImages": [
+        {
+          "src": "/COMP9444_original_question_bank/images/image43.png",
+          "size": [
+            978,
+            801
+          ],
+          "crop": [
+            59,
+            269,
+            242,
+            241
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image43.png",
+          "size": [
+            978,
+            801
+          ],
+          "crop": [
+            59,
+            562,
+            242,
+            239
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image44.png",
+          "size": [
+            348,
+            547
+          ],
+          "crop": [
+            57,
+            14,
+            244,
+            244
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image44.png",
+          "size": [
+            348,
+            547
+          ],
+          "crop": [
+            58,
+            284,
+            244,
+            244
+          ]
+        }
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "a. The first plot.\n\nEach of the four output units divides hidden space by one linear threshold at sigmoid probability 0.5.",
+      "transcript": "Consider a fully connected feedforward neural network with 6 inputs, 2 hidden units and 4 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is trained on the following data, and that the training is successful.\n\nItem | Inputs | Outputs\n     | 123456 | 1234\n1.   | 100000 | 0001\n2.   | 010000 | 0011\n3.   | 001000 | 0101\n4.   | 000100 | 1000\n5.   | 000010 | 1011\n6.   | 000001 | 1100\n\nWhich of these diagrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a line dividing the hidden unit space into regions for which the value of that output is greater/less than one half ?"
+    },
     "id": "comp9444-new-40",
     "bankId": "comp9444-new",
     "number": 40
@@ -12395,6 +12949,25 @@ export const questions = [
     },
     "transcript": "The Actor-Critic algorithm combines:\nSelect one:\na. two different Q-Learners (one for action selection, the other for value estimation)\nb. Q-Learning and Policy Gradients\nc. adversarially trained Generator and Discriminator networks\nd. Q-Learning and TD-Learning",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "two different Q-Learners (one for action selection, the other for value estimation)",
+        "Q-Learning and Policy Gradients",
+        "adversarially trained Generator and Discriminator networks",
+        "Q-Learning and TD-Learning"
+      ],
+      "answers": [
+        1
+      ],
+      "chineseOptions": [
+        "两个不同的 Q-Learner（一个用于选择动作，另一个用于估计价值）。",
+        "Q-Learning 与 Policy Gradients（策略梯度）。",
+        "通过对抗训练的生成器网络与判别器网络。",
+        "Q-Learning 与 TD-Learning（时序差分学习）。"
+      ],
+      "explanation": "b. Value/Q estimation by a critic and policy-gradient updates by an actor.\n\nThe critic estimates a value signal; the actor uses this signal to improve the policy.",
+      "transcript": "The Actor-Critic algorithm combines:"
+    },
     "id": "comp9444-new-43",
     "bankId": "comp9444-new",
     "number": 43
@@ -12418,6 +12991,26 @@ export const questions = [
     },
     "transcript": "Which architecture would have the best chance of learning an Embedded Reber Grammar?\nSelect one:\na. Gated Recurrent Unit\nb. NetTalk system\nc. Jordan Network\nd. Elman Network",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Gated Recurrent Unit",
+        "NetTalk system",
+        "Jordan Network",
+        "Elman Network"
+      ],
+      "answers": [
+        0
+      ],
+      "includeStemImage": true,
+      "chineseOptions": [
+        "Gated Recurrent Unit（GRU，门控循环单元）。",
+        "NetTalk system（NetTalk 系统）。",
+        "Jordan Network（Jordan 网络）。",
+        "Elman Network（Elman 网络）。"
+      ],
+      "explanation": "a. Gated Recurrent Unit (GRU).\n\nA gated recurrent model can retain the sequential dependencies needed for this grammar.",
+      "transcript": "Which architecture would have the best chance of learning an Embedded Reber Grammar?"
+    },
     "id": "comp9444-new-44",
     "bankId": "comp9444-new",
     "number": 44
@@ -12838,6 +13431,49 @@ export const questions = [
     },
     "transcript": "Consider the following multi-layer perceptron, using the threshold activation function, and assume that TRUE is represented by 1; FALSE by 0.\n\n[See the original image for the network diagram.]\n\nFor which values of the biases b₀, b₁, b₂, b₃ would this network compute the following logical function ?\n\n(¬A ∨ ¬B) ∧ (B ∨ ¬C ∨ D) ∧ (D ∨ ¬E)\n\n• b₀ = (−2.5, −1.5, −0.5, +0.5, +1.5, +2.5)\n• b₁ = (−2.5, −1.5, −0.5, +0.5, +1.5, +2.5)\n• b₂ = (−2.5, −1.5, −0.5, +0.5, +1.5, +2.5)\n• b₃ = (−2.5, −1.5, −0.5, +0.5, +1.5, +2.5)",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "−2.5",
+        "−1.5",
+        "−0.5",
+        "+0.5",
+        "+1.5",
+        "+2.5",
+        "−2.5",
+        "−1.5",
+        "−0.5",
+        "+0.5",
+        "+1.5",
+        "+2.5",
+        "−2.5",
+        "−1.5",
+        "−0.5",
+        "+0.5",
+        "+1.5",
+        "+2.5",
+        "−2.5",
+        "−1.5",
+        "−0.5",
+        "+0.5",
+        "+1.5",
+        "+2.5"
+      ],
+      "optionGroups": [
+        "b₀",
+        "b₁",
+        "b₂",
+        "b₃"
+      ],
+      "answers": [
+        0,
+        10,
+        15,
+        21
+      ],
+      "includeStemImage": true,
+      "explanation": "Set each hidden threshold to fire for its OR clause; combine the three hidden activations with AND.",
+      "transcript": "Consider the following multi-layer perceptron, using the threshold activation function, and assume that TRUE is represented by 1; FALSE by 0.\n\n[See the original image for the network diagram.]\n\nFor which values of the biases b₀, b₁, b₂, b₃ would this network compute the following logical function ?\n\n(¬A ∨ ¬B) ∧ (B ∨ ¬C ∨ D) ∧ (D ∨ ¬E)"
+    },
     "id": "comp9444-new-62",
     "bankId": "comp9444-new",
     "number": 62
@@ -13047,6 +13683,73 @@ export const questions = [
     },
     "transcript": "If 0=FALSE and 1=TRUE, which of these networks (with threshold activations at both the hidden and output layer) correctly computes the XOR function of two inputs ?\nSelect one alternative:\n\n[See the original image for the four network diagrams.]",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Diagram A",
+        "Diagram B",
+        "Diagram C",
+        "Diagram D"
+      ],
+      "optionImages": [
+        {
+          "src": "/COMP9444_original_question_bank/images/image76.png",
+          "size": [
+            672,
+            706
+          ],
+          "crop": [
+            46,
+            79,
+            256,
+            259
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image76.png",
+          "size": [
+            672,
+            706
+          ],
+          "crop": [
+            349,
+            79,
+            255,
+            259
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image76.png",
+          "size": [
+            672,
+            706
+          ],
+          "crop": [
+            46,
+            421,
+            256,
+            262
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image76.png",
+          "size": [
+            672,
+            706
+          ],
+          "crop": [
+            350,
+            421,
+            254,
+            262
+          ]
+        }
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "a. The upper-left network in this specific figure.\n\nCheck all four Boolean input combinations using the diagram; option positions differ between exams.",
+      "transcript": "If 0=FALSE and 1=TRUE, which of these networks (with threshold activations at both the hidden and output layer) correctly computes the XOR function of two inputs ?"
+    },
     "id": "comp9444-new-71",
     "bankId": "comp9444-new",
     "number": 71
@@ -13070,6 +13773,73 @@ export const questions = [
     },
     "transcript": "Consider a fully connected feedforward neural network with 6 inputs, 2 hidden units and 4 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is trained on the following data, and that the training is successful.\n\nItem | Inputs (1 2 3 4 5 6) | Outputs (1 2 3 4)\n1. | 1 0 0 0 0 0 | 0 0 0 1\n2. | 0 1 0 0 0 0 | 0 0 1 1\n3. | 0 0 1 0 0 0 | 0 1 0 0\n4. | 0 0 0 1 0 0 | 1 0 1 0\n5. | 0 0 0 0 1 0 | 1 0 1 1\n6. | 0 0 0 0 0 1 | 1 1 1 0\n\nWhich of these diagrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a line dividing the hidden unit space into regions for which the value of that output is greater/less than one half ?\nSelect one alternative:\n\n[See the original image for the four diagrams.]",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Diagram A",
+        "Diagram B",
+        "Diagram C",
+        "Diagram D"
+      ],
+      "optionImages": [
+        {
+          "src": "/COMP9444_original_question_bank/images/image77.png",
+          "size": [
+            576,
+            734
+          ],
+          "crop": [
+            42,
+            308,
+            174,
+            174
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image77.png",
+          "size": [
+            576,
+            734
+          ],
+          "crop": [
+            261,
+            308,
+            174,
+            174
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image77.png",
+          "size": [
+            576,
+            734
+          ],
+          "crop": [
+            42,
+            557,
+            174,
+            174
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image77.png",
+          "size": [
+            576,
+            734
+          ],
+          "crop": [
+            261,
+            557,
+            174,
+            174
+          ]
+        }
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "a. The upper-left diagram in this specific figure.\n\nEvery output is a linear function of the hidden activations followed by sigmoid, so p=0.5 is a straight line.",
+      "transcript": "Consider a fully connected feedforward neural network with 6 inputs, 2 hidden units and 4 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is trained on the following data, and that the training is successful.\n\nItem | Inputs (1 2 3 4 5 6) | Outputs (1 2 3 4)\n1. | 1 0 0 0 0 0 | 0 0 0 1\n2. | 0 1 0 0 0 0 | 0 0 1 1\n3. | 0 0 1 0 0 0 | 0 1 0 0\n4. | 0 0 0 1 0 0 | 1 0 1 0\n5. | 0 0 0 0 1 0 | 1 0 1 1\n6. | 0 0 0 0 0 1 | 1 1 1 0\n\nWhich of these diagrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a line dividing the hidden unit space into regions for which the value of that output is greater/less than one half ?"
+    },
     "id": "comp9444-new-72",
     "bankId": "comp9444-new",
     "number": 72
@@ -13093,6 +13863,25 @@ export const questions = [
     },
     "transcript": "Consider a deep neural network with a two inputs, one output, and K hidden layers, each containing D hidden units. What is the total number of parameters in this network (including weights and biases)?\n\nSelect one:\na. 4D + 1 + (K − 1)D(D + 1)\nb. 3D + 1 + (K − 1)D(D + 1)\nc. 3D + 1 + KD(D + 1)\nd. 4D + 1 + KD(D + 1)",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "4D + 1 + (K − 1)D(D + 1)",
+        "3D + 1 + (K − 1)D(D + 1)",
+        "3D + 1 + KD(D + 1)",
+        "4D + 1 + KD(D + 1)"
+      ],
+      "answers": [
+        0
+      ],
+      "chineseOptions": [
+        "4D+1+(K-1)D(D+1)。",
+        "3D+1+(K-1)D(D+1)。",
+        "3D+1+KD(D+1)。",
+        "4D+1+KD(D+1)。"
+      ],
+      "explanation": "a. 4D+1+(K−1)D(D+1).\n\nThe first hidden layer has 3D parameters, internal layers contribute (K−1)D(D+1), and the output layer adds D+1.",
+      "transcript": "Consider a deep neural network with a two inputs, one output, and K hidden layers, each containing D hidden units. What is the total number of parameters in this network (including weights and biases)?"
+    },
     "id": "comp9444-new-73",
     "bankId": "comp9444-new",
     "number": 73
@@ -13191,6 +13980,74 @@ export const questions = [
     "transcript": "Which of these diagrams is a correct depiction of a Long Short Term Memory (LSTM) unit?\n\nSelect one:\n\n[See the two original images for diagrams a–d.]",
     "category": "multiple-choice",
     "transcriptNote": "The source screenshot includes a prior answer or annotation.",
+    "choicePractice": {
+      "options": [
+        "Diagram A",
+        "Diagram B",
+        "Diagram C",
+        "Diagram D"
+      ],
+      "optionImages": [
+        {
+          "src": "/COMP9444_original_question_bank/images/image82.png",
+          "size": [
+            554,
+            422
+          ],
+          "crop": [
+            60,
+            76,
+            241,
+            167
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image82.png",
+          "size": [
+            554,
+            422
+          ],
+          "crop": [
+            60,
+            252,
+            241,
+            168
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image83.png",
+          "size": [
+            636,
+            715
+          ],
+          "crop": [
+            117,
+            17,
+            482,
+            333
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image83.png",
+          "size": [
+            636,
+            715
+          ],
+          "crop": [
+            117,
+            373,
+            482,
+            333
+          ]
+        }
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "A is the confirmed course answer. In the standard LSTM equation the output gate multiplies tanh(cₜ), although the diagram shows a plus sign at that junction.",
+      "chineseExplanation": "课程答案为 A。标准 LSTM 的输出门会与 tanh(cₜ) 相乘，原图在该处画的是加号。",
+      "transcript": "Which of these diagrams is a correct depiction of a Long Short Term Memory (LSTM) unit?"
+    },
     "id": "comp9444-new-77",
     "bankId": "comp9444-new",
     "number": 77
@@ -13215,6 +14072,25 @@ export const questions = [
     "transcript": "You have a pet dog whose mood is heavily dependent on the current and past few days' weather. You've collected data for the past 365 days on the weather, which you represent as a sequence as x^<1>, ......, x^<365>. You have also collected data on your dog's mood, which you represent as y^<1>, ......, y^<365>. You'd like to build a model to map from x to y. Should you use a Unidirectional RNN or Bidirectional RNN for this problem?\n\na. Unidirectional RNN, because the value of y^<1> depends only on x^<1>, ......, x^<t>., but not on x^<t+1>, ......, x^<365>.\nb. Unidirectional RNN, because the value of y^<1> depends only on x^<t>. and no other days' weather.\nc. Bidirectional RNN, because this allows the prediction of mood on day t to take into account more information.\nd. Bidirectional RNN, because this allows backpropagation to compute more accurate gradients.",
     "category": "multiple-choice",
     "transcriptNote": "The first two choices both print y with superscript <1>.",
+    "choicePractice": {
+      "options": [
+        "Unidirectional RNN, because the value of y^<1> depends only on x^<1>, ......, x^<t>., but not on x^<t+1>, ......, x^<365>.",
+        "Unidirectional RNN, because the value of y^<1> depends only on x^<t>. and no other days' weather.",
+        "Bidirectional RNN, because this allows the prediction of mood on day t to take into account more information.",
+        "Bidirectional RNN, because this allows backpropagation to compute more accurate gradients."
+      ],
+      "answers": [
+        0
+      ],
+      "chineseOptions": [
+        "使用单向 RNN，因为 y^(t) 只依赖 x^(1),…,x^(t)，不依赖 x^(t+1),…,x^(365)。",
+        "使用单向 RNN，因为 y^(t) 只依赖 x^(t)，不依赖其他日期的天气。",
+        "使用双向 RNN，因为它能让第 t 天心情的预测考虑更多信息。",
+        "使用双向 RNN，因为它能让反向传播计算更准确的梯度。"
+      ],
+      "explanation": "a. Unidirectional RNN.\n\nA bidirectional network uses future weather to predict current mood, which is unavailable in an online/causal setting.",
+      "transcript": "You have a pet dog whose mood is heavily dependent on the current and past few days' weather. You've collected data for the past 365 days on the weather, which you represent as a sequence as x^<1>, ......, x^<365>. You have also collected data on your dog's mood, which you represent as y^<1>, ......, y^<365>. You'd like to build a model to map from x to y. Should you use a Unidirectional RNN or Bidirectional RNN for this problem?"
+    },
     "id": "comp9444-new-78",
     "bankId": "comp9444-new",
     "number": 78
@@ -13262,6 +14138,25 @@ export const questions = [
     },
     "transcript": "In the Transformer architecture, which of the following correctly calculates Attention, based on the Query (Q), Key (K) and Value (V) ?\n\nSelect one:\na. Attention(Q, K, V) = softmax(QV^T/√dₖ)K\nb. Attention(Q, K, V) = min(KV^T/√dₖ)Q\nc. Attention(Q, K, V) = softmax(QK^T/√dₖ)V\nd. Attention(Q, K, V) = softmax(KV^T/√dₖ)Q",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Attention(Q, K, V) = softmax(QV^T/√dₖ)K",
+        "Attention(Q, K, V) = min(KV^T/√dₖ)Q",
+        "Attention(Q, K, V) = softmax(QK^T/√dₖ)V",
+        "Attention(Q, K, V) = softmax(KV^T/√dₖ)Q"
+      ],
+      "answers": [
+        2
+      ],
+      "chineseOptions": [
+        "Attention(Q,K,V)=softmax(QV^T/√d_k)K。",
+        "Attention(Q,K,V)=min(KV^T/√d_k)Q。",
+        "Attention(Q,K,V)=softmax(QK^T/√d_k)V。",
+        "Attention(Q,K,V)=softmax(KV^T/√d_k)Q。"
+      ],
+      "explanation": "c. Attention(Q,K,V)=softmax(QKᵀ/√d_k)V.\n\nThe softmax of query-key similarities supplies weights for a weighted sum of values.",
+      "transcript": "In the Transformer architecture, which of the following correctly calculates Attention, based on the Query (Q), Key (K) and Value (V) ?"
+    },
     "id": "comp9444-new-80",
     "bankId": "comp9444-new",
     "number": 80
@@ -13286,6 +14181,25 @@ export const questions = [
     "transcript": "What is the primary advantage of dense word vectors learned by Word2Vec or GloVe, compared to spares one-hot word vectors?\n\nSelect one:\na. Simpler implementation\nb. Captures semantic relationships\nc. Higher dimensionality than one-hot encodings\nd. None of the above",
     "category": "multiple-choice",
     "transcriptNote": "The screenshot prints “spares one-hot”.",
+    "choicePractice": {
+      "options": [
+        "Simpler implementation",
+        "Captures semantic relationships",
+        "Higher dimensionality than one-hot encodings",
+        "None of the above"
+      ],
+      "answers": [
+        1
+      ],
+      "chineseOptions": [
+        "实现更简单。",
+        "能捕捉语义关系。",
+        "维度比 one-hot 编码更高。",
+        "以上都不是。"
+      ],
+      "explanation": "b. They capture semantic relationships.\n\nSemantically related words can have nearby vectors; one-hot encodings do not express such similarity.",
+      "transcript": "What is the primary advantage of dense word vectors learned by Word2Vec or GloVe, compared to spares one-hot word vectors?"
+    },
     "id": "comp9444-new-81",
     "bankId": "comp9444-new",
     "number": 81
@@ -13309,6 +14223,25 @@ export const questions = [
     },
     "transcript": "You are given a classification problem with 50,000 training examples. After you have trained a neural network, you observe that the model is giving 98% accuracy on the training set and 57% accuracy on the test set. Which of the following methods will likely reduce this gap?\n\nSelect one:\na. Keep training the network for additional epochs\nb. Increase the batch size\nc. Introduce Dropout\nd. Add more layers to the network",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Keep training the network for additional epochs",
+        "Increase the batch size",
+        "Introduce Dropout",
+        "Add more layers to the network"
+      ],
+      "answers": [
+        2
+      ],
+      "chineseOptions": [
+        "继续训练更多 epoch。",
+        "增大 batch size。",
+        "引入 Dropout。",
+        "向网络添加更多层。"
+      ],
+      "explanation": "c. Introduce Dropout.\n\nThe large generalization gap indicates overfitting; Dropout is a regularizer.",
+      "transcript": "You are given a classification problem with 50,000 training examples. After you have trained a neural network, you observe that the model is giving 98% accuracy on the training set and 57% accuracy on the test set. Which of the following methods will likely reduce this gap?"
+    },
     "id": "comp9444-new-82",
     "bankId": "comp9444-new",
     "number": 82
@@ -13332,6 +14265,25 @@ export const questions = [
     },
     "transcript": "Your task is to benchmark runtime for the following layers typically forming building blocks of a Convolutional Neural Network (CNN). Which of the following would you expect to be the fastest (in terms of the floating point operations)?\n\na. Average Pooling\nb. Batch Normalization\nc. Conv layer\nd. Max Pooling",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Average Pooling",
+        "Batch Normalization",
+        "Conv layer",
+        "Max Pooling"
+      ],
+      "answers": [
+        3
+      ],
+      "chineseOptions": [
+        "Average Pooling（平均池化）。",
+        "Batch Normalization（批量归一化）。",
+        "Convolutional layer（卷积层）。",
+        "Max Pooling（最大池化）。"
+      ],
+      "explanation": "d. Max Pooling.\n\nMax Pooling mainly performs comparisons, rather than multiply-add operations, whereas convolution is comparatively costly.",
+      "transcript": "Your task is to benchmark runtime for the following layers typically forming building blocks of a Convolutional Neural Network (CNN). Which of the following would you expect to be the fastest (in terms of the floating point operations)?"
+    },
     "id": "comp9444-new-83",
     "bankId": "comp9444-new",
     "number": 83
@@ -13355,6 +14307,25 @@ export const questions = [
     },
     "transcript": "How does the BERT model expect a pair of sentences to be presented?\n\na. [CLS] Tokens_of_sentence_1 [SEP] Tokens_of_sentence_2 [SEP]\nb. Tokens_of_sentence_1 [SEP] Tokens_of_sentence_2\nc. [CLS] Tokens_of_sentence_1 [SEP] Tokens_of_sentence_2\nd. [CLS] Tokens_of_sentence_1 Tokens_of_sentence_2",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "[CLS] Tokens_of_sentence_1 [SEP] Tokens_of_sentence_2 [SEP]",
+        "Tokens_of_sentence_1 [SEP] Tokens_of_sentence_2",
+        "[CLS] Tokens_of_sentence_1 [SEP] Tokens_of_sentence_2",
+        "[CLS] Tokens_of_sentence_1 Tokens_of_sentence_2"
+      ],
+      "answers": [
+        0
+      ],
+      "chineseOptions": [
+        "[CLS] 句子1的词元 [SEP] 句子2的词元 [SEP]。",
+        "句子1的词元 [SEP] 句子2的词元。",
+        "[CLS] 句子1的词元 [SEP] 句子2的词元。",
+        "[CLS] 句子1的词元 句子2的词元。"
+      ],
+      "explanation": "a. [CLS] sentence_1 [SEP] sentence_2 [SEP].\n\nThe first [SEP] separates the two segments; the final [SEP] terminates the second segment.",
+      "transcript": "How does the BERT model expect a pair of sentences to be presented?"
+    },
     "id": "comp9444-new-84",
     "bankId": "comp9444-new",
     "number": 84
@@ -13424,6 +14395,25 @@ export const questions = [
     },
     "transcript": "What are the gates in the Long Short-Term Memory (LSTM) Network?\nSelect one alternative:\n\n• input, reset, and update\n• forget, input, and output\n• forget, input, and update\n• input, output, and reset",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "input, reset, and update",
+        "forget, input, and output",
+        "forget, input, and update",
+        "input, output, and reset"
+      ],
+      "answers": [
+        1
+      ],
+      "chineseOptions": [
+        "input、reset、update（输入门、重置门、更新门）。",
+        "forget、input、output（遗忘门、输入门、输出门）。",
+        "forget、input、update（遗忘门、输入门、更新门）。",
+        "input、output、reset（输入门、输出门、重置门）。"
+      ],
+      "explanation": "b. Forget gate, input gate and output gate.\n\nUpdate/reset gates are characteristic of a GRU, not the standard LSTM gate list.",
+      "transcript": "What are the gates in the Long Short-Term Memory (LSTM) Network?"
+    },
     "id": "comp9444-new-87",
     "bankId": "comp9444-new",
     "number": 87
@@ -13447,6 +14437,25 @@ export const questions = [
     },
     "transcript": "In ChatGPT, what does GPT stand for?\nSelect one alternative:\n\n• Generalised Programming Tool\n• Generative Pre-trained Transformer\n• Grouped Pattern Translator\n• Global Processing Technique",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Generalised Programming Tool",
+        "Generative Pre-trained Transformer",
+        "Grouped Pattern Translator",
+        "Global Processing Technique"
+      ],
+      "answers": [
+        1
+      ],
+      "chineseOptions": [
+        "Generalised Programming Tool（通用编程工具）。",
+        "Generative Pre-trained Transformer（生成式预训练 Transformer）。",
+        "Grouped Pattern Translator（分组模式翻译器）。",
+        "Global Processing Technique（全局处理技术）。"
+      ],
+      "explanation": "b. Generative Pre-trained Transformer.\n\nThis expands the standard abbreviation GPT.",
+      "transcript": "In ChatGPT, what does GPT stand for?"
+    },
     "id": "comp9444-new-88",
     "bankId": "comp9444-new",
     "number": 88
@@ -13514,6 +14523,19 @@ export const questions = [
     },
     "transcript": "A convolutional layer receives a 65 × 77 RGB image and uses 18 filters of size 5 × 5. Including one bias per filter, how many trainable parameters belong to each filter?\n\nSelect one:\na. 25\nb. 75\nc. 76\nd. 1,368",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "25",
+        "75",
+        "76",
+        "1,368"
+      ],
+      "answers": [
+        2
+      ],
+      "explanation": "5·5·3 weights plus one bias = 76.",
+      "transcript": "A convolutional layer receives a 65 × 77 RGB image and uses 18 filters of size 5 × 5. Including one bias per filter, how many trainable parameters belong to each filter?"
+    },
     "id": "comp9444-new-91",
     "bankId": "comp9444-new",
     "number": 91
@@ -13536,6 +14558,19 @@ export const questions = [
     },
     "transcript": "A two-layer sigmoid network misclassifies an example. Which learning procedure can assign a separate loss-gradient contribution to weights in both layers?\n\nSelect one:\na. Backpropagation, because it applies the chain rule through differentiable intermediate activations\nb. The perceptron rule, because its threshold update differentiates every hidden activation\nc. The perceptron rule, because a classification error supplies an exact gradient for any multilayer network\nd. Neither procedure, because an error signal cannot be propagated beyond the output layer",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Backpropagation, because it applies the chain rule through differentiable intermediate activations",
+        "The perceptron rule, because its threshold update differentiates every hidden activation",
+        "The perceptron rule, because a classification error supplies an exact gradient for any multilayer network",
+        "Neither procedure, because an error signal cannot be propagated beyond the output layer"
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "The chain rule propagates derivatives through differentiable intermediate activations.",
+      "transcript": "A two-layer sigmoid network misclassifies an example. Which learning procedure can assign a separate loss-gradient contribution to weights in both layers?"
+    },
     "id": "comp9444-new-92",
     "bankId": "comp9444-new",
     "number": 92
@@ -13624,6 +14659,19 @@ export const questions = [
     },
     "transcript": "Which collection specifies a finite Markov decision process?\n\nSelect one:\na. States, actions, transition probabilities, rewards and a discount factor\nb. Inputs, labels, a confusion matrix and a validation split\nc. Clusters, centroids, singular values and a reconstruction rank\nd. Tokens, parse trees, a vocabulary and a language-model perplexity",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "States, actions, transition probabilities, rewards and a discount factor",
+        "Inputs, labels, a confusion matrix and a validation split",
+        "Clusters, centroids, singular values and a reconstruction rank",
+        "Tokens, parse trees, a vocabulary and a language-model perplexity"
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "These components define the controlled stochastic dynamics and return objective.",
+      "transcript": "Which collection specifies a finite Markov decision process?"
+    },
     "id": "comp9444-new-96",
     "bankId": "comp9444-new",
     "number": 96
@@ -13646,6 +14694,19 @@ export const questions = [
     },
     "transcript": "What do sigmoid, ReLU and tanh activations have in common when used in hidden layers?\nSelect one:\na. They always produce outputs between zero and one.\nb. They are applied only to output units.\nc. They allow a network to represent nonlinear decision boundaries.\nd. They make gradient computation asymptotically faster than a linear layer.",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "They always produce outputs between zero and one.",
+        "They are applied only to output units.",
+        "They allow a network to represent nonlinear decision boundaries.",
+        "They make gradient computation asymptotically faster than a linear layer."
+      ],
+      "answers": [
+        2
+      ],
+      "explanation": "Nonlinear activation functions prevent a stack of layers from collapsing to one affine transformation.",
+      "transcript": "What do sigmoid, ReLU and tanh activations have in common when used in hidden layers?"
+    },
     "id": "comp9444-new-97",
     "bankId": "comp9444-new",
     "number": 97
@@ -13690,6 +14751,20 @@ export const questions = [
     },
     "transcript": "A Bernoulli Naive Bayes model uses the presence features “Chinese”, “Tokyo” and “Japan”. The only class-j training document contains all three words, and class j has prior 1/4. Without smoothing, what is the non-normalized score for a new document containing all three features?\nSelect one:\na. (1 × 1 × 1) × 1/4\nb. (1 × 1/4 × 1/4) × 3/4\nc. ((3/7)^3 × 1/14 × 1/14) × 3/4\nd. ((2/9)^3 × 2/9 × 2/9) × 1/4",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "(1 × 1 × 1) × 1/4",
+        "(1 × 1/4 × 1/4) × 3/4",
+        "((3/7)^3 × 1/14 × 1/14) × 3/4",
+        "((2/9)^3 × 2/9 × 2/9) × 1/4"
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "The sole class-j training document contains all three words, so each unsmoothed conditional probability is 1. Multiplying by the prior gives 1 × 1 × 1 × 1/4 = 1/4.",
+      "chineseExplanation": "类 j 的唯一训练文档包含全部三个词，无平滑时三个条件概率均为 1。乘上先验 1/4，所得分数为 1/4。",
+      "transcript": "A Bernoulli Naive Bayes model uses the presence features “Chinese”, “Tokyo” and “Japan”. The only class-j training document contains all three words, and class j has prior 1/4. Without smoothing, what is the non-normalized score for a new document containing all three features?"
+    },
     "id": "comp9444-new-99",
     "bankId": "comp9444-new",
     "number": 99
@@ -13712,6 +14787,19 @@ export const questions = [
     },
     "transcript": "During training, the weights in the earliest layers change very little. Which condition is least likely to be the direct cause?\nSelect one:\na. The optimizer is near a stationary point.\nb. The network is very wide.\nc. All network weights were initialized to zero.\nd. The learning rate is extremely small.",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "The optimizer is near a stationary point.",
+        "The network is very wide.",
+        "All network weights were initialized to zero.",
+        "The learning rate is extremely small."
+      ],
+      "answers": [
+        1
+      ],
+      "explanation": "Small updates can arise from weak/vanishing gradients or related optimization effects, but width alone does not necessarily cause this.",
+      "transcript": "During training, the weights in the earliest layers change very little. Which condition is least likely to be the direct cause?"
+    },
     "id": "comp9444-new-100",
     "bankId": "comp9444-new",
     "number": 100
@@ -13756,6 +14844,19 @@ export const questions = [
     },
     "transcript": "Which statement correctly distinguishes supervised, unsupervised and reinforcement learning?\nSelect one:\na. Supervised learning uses labelled targets; unsupervised learning finds structure without supplied targets; reinforcement learning learns from rewards.\nb. Supervised learning finds unlabelled clusters; unsupervised learning requires target labels; reinforcement learning learns only by imitation.\nc. Supervised learning learns only from rewards; unsupervised learning predicts supplied labels; reinforcement learning has no environment.\nd. Supervised learning requires no data; unsupervised learning requires rewards; reinforcement learning requires a labelled target for every action.",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Supervised learning uses labelled targets; unsupervised learning finds structure without supplied targets; reinforcement learning learns from rewards.",
+        "Supervised learning finds unlabelled clusters; unsupervised learning requires target labels; reinforcement learning learns only by imitation.",
+        "Supervised learning learns only from rewards; unsupervised learning predicts supplied labels; reinforcement learning has no environment.",
+        "Supervised learning requires no data; unsupervised learning requires rewards; reinforcement learning requires a labelled target for every action."
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "Supervised training minimizes target error, unsupervised training models structure, and RL maximizes accumulated return.",
+      "transcript": "Which statement correctly distinguishes supervised, unsupervised and reinforcement learning?"
+    },
     "id": "comp9444-new-102",
     "bankId": "comp9444-new",
     "number": 102
@@ -13822,6 +14923,19 @@ export const questions = [
     },
     "transcript": "What limitation of a sequence-to-sequence encoder-decoder without attention is directly addressed by attention?\nSelect one:\na. A fixed-size encoder state must carry all source information; attention lets the decoder consult relevant encoder states.\nb. The decoder cannot use nonlinear activations; attention replaces every activation with a linear map.\nc. The encoder cannot process variable-length input; attention pads every sequence to a fixed length.\nd. The model cannot be trained by gradient descent; attention supplies a closed-form solution.",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "A fixed-size encoder state must carry all source information; attention lets the decoder consult relevant encoder states.",
+        "The decoder cannot use nonlinear activations; attention replaces every activation with a linear map.",
+        "The encoder cannot process variable-length input; attention pads every sequence to a fixed length.",
+        "The model cannot be trained by gradient descent; attention supplies a closed-form solution."
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "Attention computes content-dependent weights over source positions during decoding.",
+      "transcript": "What limitation of a sequence-to-sequence encoder-decoder without attention is directly addressed by attention?"
+    },
     "id": "comp9444-new-105",
     "bankId": "comp9444-new",
     "number": 105
@@ -13888,6 +15002,19 @@ export const questions = [
     },
     "transcript": "Which pair correctly describes the roles of CycleGAN's adversarial and cycle-consistency terms?\nSelect one:\na. Adversarial terms encourage target-domain realism; cycle consistency discourages mappings that discard source content.\nb. Adversarial terms preserve each input pixel exactly; cycle consistency chooses the target-domain class label.\nc. Adversarial terms make both generators linear; cycle consistency removes both discriminators.\nd. Adversarial terms enforce paired supervision; cycle consistency requires a label for every generated image.",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Adversarial terms encourage target-domain realism; cycle consistency discourages mappings that discard source content.",
+        "Adversarial terms preserve each input pixel exactly; cycle consistency chooses the target-domain class label.",
+        "Adversarial terms make both generators linear; cycle consistency removes both discriminators.",
+        "Adversarial terms enforce paired supervision; cycle consistency requires a label for every generated image."
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "These losses jointly constrain domain realism and reconstruction after translation back.",
+      "transcript": "Which pair correctly describes the roles of CycleGAN's adversarial and cycle-consistency terms?"
+    },
     "id": "comp9444-new-108",
     "bankId": "comp9444-new",
     "number": 108
@@ -13954,6 +15081,19 @@ export const questions = [
     },
     "transcript": "In a Bayesian network, P(W) = 0.2, P(B | W) = 0.1 and P(B | ¬W) = 0.01. What is P(W | B)?\nSelect one:\na. 0.020\nb. 0.833\nc. 0.714\nd. 0.042",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "0.020",
+        "0.833",
+        "0.714",
+        "0.042"
+      ],
+      "answers": [
+        2
+      ],
+      "explanation": "P(W|B)=0.2·0.1/(0.2·0.1+0.8·0.01)=0.02/0.028.",
+      "transcript": "In a Bayesian network, P(W) = 0.2, P(B | W) = 0.1 and P(B | ¬W) = 0.01. What is P(W | B)?"
+    },
     "id": "comp9444-new-111",
     "bankId": "comp9444-new",
     "number": 111
@@ -14042,6 +15182,19 @@ export const questions = [
     },
     "transcript": "In word2vec training, what does negative sampling replace the full vocabulary prediction with?\nSelect one:\na. A binary distinction between an observed word-context pair and a small set of sampled noise pairs\nb. A deterministic lookup of the most frequent word with no gradient computation\nc. A complete hierarchical clustering of every sentence before each parameter update\nd. A regression target equal to the raw position of each word in the vocabulary",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "A binary distinction between an observed word-context pair and a small set of sampled noise pairs",
+        "A deterministic lookup of the most frequent word with no gradient computation",
+        "A complete hierarchical clustering of every sentence before each parameter update",
+        "A regression target equal to the raw position of each word in the vocabulary"
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "Only the positive pair and sampled negatives need to contribute to each update.",
+      "transcript": "In word2vec training, what does negative sampling replace the full vocabulary prediction with?"
+    },
     "id": "comp9444-new-115",
     "bankId": "comp9444-new",
     "number": 115
@@ -14064,6 +15217,19 @@ export const questions = [
     },
     "transcript": "Which statement about backpropagation is correct?\nSelect one:\na. A forward pass and a backward pass are both parts of the procedure.\nb. Only the backward pass is needed because activations do not affect gradients.\nc. Only the forward pass is needed when a loss function is differentiable.\nd. Neither pass is needed if the network contains a bias term.",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "A forward pass and a backward pass are both parts of the procedure.",
+        "Only the backward pass is needed because activations do not affect gradients.",
+        "Only the forward pass is needed when a loss function is differentiable.",
+        "Neither pass is needed if the network contains a bias term."
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "The forward pass computes activations and loss; the backward pass propagates derivatives.",
+      "transcript": "Which statement about backpropagation is correct?"
+    },
     "id": "comp9444-new-116",
     "bankId": "comp9444-new",
     "number": 116
@@ -14086,6 +15252,19 @@ export const questions = [
     },
     "transcript": "Which statement about a standard gated recurrent unit (GRU) is correct?\nSelect one:\na. It uses update and reset gates and does not maintain a separate LSTM-style cell state.\nb. It has input, forget and output gates plus a separate cell state identical to an LSTM.\nc. It contains no recurrent connection and processes every timestep independently.\nd. It can use only binary hidden states because its gates are threshold units.",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "It uses update and reset gates and does not maintain a separate LSTM-style cell state.",
+        "It has input, forget and output gates plus a separate cell state identical to an LSTM.",
+        "It contains no recurrent connection and processes every timestep independently.",
+        "It can use only binary hidden states because its gates are threshold units."
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "A GRU controls its single hidden state through these gates.",
+      "transcript": "Which statement about a standard gated recurrent unit (GRU) is correct?"
+    },
     "id": "comp9444-new-117",
     "bankId": "comp9444-new",
     "number": 117
@@ -14152,6 +15331,19 @@ export const questions = [
     },
     "transcript": "Models A and B have the same architecture and activation functions, but B is trained with a smaller learning rate. Before considering the parameters reached by training, which statement about their representational complexity is correct?\nSelect one:\na. B is more expressive because smaller updates create additional hidden units.\nb. A is more expressive because a larger learning rate adds nonlinear decision regions.\nc. B is less expressive because the optimizer restricts the number of possible output classes.\nd. They have the same hypothesis class; the learning rate changes optimization, not the functions the architecture can represent.",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "B is more expressive because smaller updates create additional hidden units.",
+        "A is more expressive because a larger learning rate adds nonlinear decision regions.",
+        "B is less expressive because the optimizer restricts the number of possible output classes.",
+        "They have the same hypothesis class; the learning rate changes optimization, not the functions the architecture can represent."
+      ],
+      "answers": [
+        3
+      ],
+      "explanation": "Learning rate changes optimization dynamics, not the class of functions expressible by the architecture.",
+      "transcript": "Models A and B have the same architecture and activation functions, but B is trained with a smaller learning rate. Before considering the parameters reached by training, which statement about their representational complexity is correct?"
+    },
     "id": "comp9444-new-120",
     "bankId": "comp9444-new",
     "number": 120
@@ -14174,6 +15366,19 @@ export const questions = [
     },
     "transcript": "Which performance criterion is most appropriate for a continuing reinforcement-learning task in which there is no natural terminal state and long-run reward rate matters?\nSelect one:\na. Average reward per time step\nb. Training-set classification accuracy\nc. One-step reconstruction error\nd. The number of distinct visited states only",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Average reward per time step",
+        "Training-set classification accuracy",
+        "One-step reconstruction error",
+        "The number of distinct visited states only"
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "It measures continuing performance without assuming finite episodes.",
+      "transcript": "Which performance criterion is most appropriate for a continuing reinforcement-learning task in which there is no natural terminal state and long-run reward rate matters?"
+    },
     "id": "comp9444-new-121",
     "bankId": "comp9444-new",
     "number": 121
@@ -14218,6 +15423,19 @@ export const questions = [
     },
     "transcript": "Which data-augmentation operation is generally suitable for classifying cats versus dogs but potentially harmful for classifying handwritten digits?\nSelect one:\na. A horizontal flip\nb. A small translation\nc. A slight change in brightness\nd. A small random crop that preserves the object",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "A horizontal flip",
+        "A small translation",
+        "A slight change in brightness",
+        "A small random crop that preserves the object"
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "A reflection may preserve an animal class but not the identity of some digit images.",
+      "transcript": "Which data-augmentation operation is generally suitable for classifying cats versus dogs but potentially harmful for classifying handwritten digits?"
+    },
     "id": "comp9444-new-123",
     "bankId": "comp9444-new",
     "number": 123
@@ -14262,6 +15480,19 @@ export const questions = [
     },
     "transcript": "Which trade-off correctly compares convolutional and recurrent autoregressive sequence models?\nSelect one:\na. A convolutional model can parallelize training across positions, while an RNN naturally carries a state over an arbitrarily long generated prefix.\nb. A convolutional model has unlimited context with one layer, while an RNN can process all timesteps in parallel during generation.\nc. A convolutional model requires teacher forcing, while an RNN cannot be trained with teacher forcing.\nd. A convolutional model is always probabilistic, while an RNN can represent only deterministic sequences.",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "A convolutional model can parallelize training across positions, while an RNN naturally carries a state over an arbitrarily long generated prefix.",
+        "A convolutional model has unlimited context with one layer, while an RNN can process all timesteps in parallel during generation.",
+        "A convolutional model requires teacher forcing, while an RNN cannot be trained with teacher forcing.",
+        "A convolutional model is always probabilistic, while an RNN can represent only deterministic sequences."
+      ],
+      "answers": [
+        0
+      ],
+      "explanation": "Temporal recurrence restricts time-axis parallelization compared with convolution.",
+      "transcript": "Which trade-off correctly compares convolutional and recurrent autoregressive sequence models?"
+    },
     "id": "comp9444-new-125",
     "bankId": "comp9444-new",
     "number": 125
@@ -14306,6 +15537,19 @@ export const questions = [
     },
     "transcript": "Which one of the following statements is False?\nSelect one alternative:\n- Transformer models can be used for computer vision applications\n- Distributed representations generally require fewer dimensions than local (one-hot) representations\n- Upper level layers (closer to the output) tend to learn more abstract representations (shapes, forms, objects) compared to lower level layers\n- Gradient clipping can prevent the vanishing gradients problem",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Transformer models can be used for computer vision applications",
+        "Distributed representations generally require fewer dimensions than local (one-hot) representations",
+        "Upper level layers (closer to the output) tend to learn more abstract representations (shapes, forms, objects) compared to lower level layers",
+        "Gradient clipping can prevent the vanishing gradients problem"
+      ],
+      "answers": [
+        3
+      ],
+      "explanation": "Gradient clipping primarily limits excessively large gradients, so it addresses explosion rather than the underlying cause of vanishing gradients.",
+      "transcript": "Which one of the following statements is False?"
+    },
     "id": "comp9444-new-127",
     "bankId": "comp9444-new",
     "number": 127
@@ -14329,6 +15573,19 @@ export const questions = [
     "transcript": "Consider the following computational graph, where σ(z) = 1/(1 + e^(−z)) is the sigmoid function. What is the derivative of y with respect to x?\n\nGraph labels: y = ab, a = 3x + σ(x), b = x² − e^(−x) + 3.\n\nSelect one alternative:\n- 0\n- b(3 + σ(x)(1 − σ(x))) + a(2x + e^(−x))\n- 3 + σ(x)(1 − σ(x)) + 2x + e^(−x)\n- a(3 + σ(x)(1 − σ(x))) + b(2x + e^(−x))",
     "category": "multiple-choice",
     "transcriptNote": "The fourth option was verified against the continuation on page 25 of the 25T2 final PDF.",
+    "choicePractice": {
+      "options": [
+        "0",
+        "b(3 + σ(x)(1 − σ(x))) + a(2x + e^(−x))",
+        "3 + σ(x)(1 − σ(x)) + 2x + e^(−x)",
+        "a(3 + σ(x)(1 − σ(x))) + b(2x + e^(−x))"
+      ],
+      "answers": [
+        1
+      ],
+      "explanation": "Apply the product rule to ab and the chain rule to sigmoid and the exponential.",
+      "transcript": "Consider the following computational graph, where σ(z) = 1/(1 + e^(−z)) is the sigmoid function. What is the derivative of y with respect to x?\n\nGraph labels: y = ab, a = 3x + σ(x), b = x² − e^(−x) + 3."
+    },
     "id": "comp9444-new-128",
     "bankId": "comp9444-new",
     "number": 128
@@ -14351,6 +15608,19 @@ export const questions = [
     },
     "transcript": "Let ∧, ∨, and ⊕ denote respectively the AND, OR and XOR Boolean logical operators, and ¬ denote Boolean negation. Assume Boolean values are represented as 0 (FALSE) and 1 (TRUE). Which of these logical functions cannot be learned by a single layer Perceptron with inputs A and B?\nSelect one alternative:\n- (A ⊕ B) ∧ A\n- A ∨ B\n- ¬A ∧ B\n- (A ∧ ¬B) ∨ (¬A ∧ B)",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "(A ⊕ B) ∧ A",
+        "A ∨ B",
+        "¬A ∧ B",
+        "(A ∧ ¬B) ∨ (¬A ∧ B)"
+      ],
+      "answers": [
+        3
+      ],
+      "explanation": "XOR is not linearly separable in its two-dimensional Boolean input space.",
+      "transcript": "Let ∧, ∨, and ⊕ denote respectively the AND, OR and XOR Boolean logical operators, and ¬ denote Boolean negation. Assume Boolean values are represented as 0 (FALSE) and 1 (TRUE). Which of these logical functions cannot be learned by a single layer Perceptron with inputs A and B?"
+    },
     "id": "comp9444-new-129",
     "bankId": "comp9444-new",
     "number": 129
@@ -14373,6 +15643,19 @@ export const questions = [
     },
     "transcript": "Consider a deep neural network with two inputs, one output and K hidden layers, each containing D hidden units. What is the total number of parameters in this network (including weights and biases)?\nSelect one alternative:\n- 3D + 1 + KD(D + 1)\n- 3D + 1 + (K − 1)D(D + 1)\n- 4D + 1 + (K − 1)D(D + 1)\n- 4D + 1 + KD(D + 1)",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "3D + 1 + KD(D + 1)",
+        "3D + 1 + (K − 1)D(D + 1)",
+        "4D + 1 + (K − 1)D(D + 1)",
+        "4D + 1 + KD(D + 1)"
+      ],
+      "answers": [
+        2
+      ],
+      "explanation": "First hidden layer: 3D; inter-hidden connections: (K−1)D(D+1); output: D+1.",
+      "transcript": "Consider a deep neural network with two inputs, one output and K hidden layers, each containing D hidden units. What is the total number of parameters in this network (including weights and biases)?"
+    },
     "id": "comp9444-new-130",
     "bankId": "comp9444-new",
     "number": 130
@@ -14493,6 +15776,51 @@ export const questions = [
     "transcript": "Consider the following multi-layer perceptron, using the threshold activation function, and assume that TRUE is represented by 1; FALSE by 0; OR by ∨; AND by ∧.\n\n[See the network diagram in the screenshot.]\n\nFor which values of the biases b_0, b_1, b_2 and b_3 would this network compute the following logical function?\n(K ∨ ¬L) ∧ (L ∨ M ∨ ¬R) ∧ (R ∨ S ∨ T)\n\nDropdown alternatives shown for b_0: −2.5, −1.5, −0.5, +0.5, +1.5, +2.5.",
     "category": "multiple-choice",
     "transcriptNote": "Only the b_0 dropdown is expanded in the supplied screenshots.",
+    "choicePractice": {
+      "options": [
+        "−2.5",
+        "−1.5",
+        "−0.5",
+        "+0.5",
+        "+1.5",
+        "+2.5",
+        "−2.5",
+        "−1.5",
+        "−0.5",
+        "+0.5",
+        "+1.5",
+        "+2.5",
+        "−2.5",
+        "−1.5",
+        "−0.5",
+        "+0.5",
+        "+1.5",
+        "+2.5",
+        "−2.5",
+        "−1.5",
+        "−0.5",
+        "+0.5",
+        "+1.5",
+        "+2.5"
+      ],
+      "optionGroups": [
+        "b₀",
+        "b₁",
+        "b₂",
+        "b₃"
+      ],
+      "answers": [
+        0,
+        9,
+        15,
+        20
+      ],
+      "includeStemImage": true,
+      "transcriptNote": "The screenshot shows only the b₀ menu. All four menus use those six values in this practice version.",
+      "explanation": "b₀ = −2.5, b₁ = +0.5, b₂ = +0.5, b₃ = −0.5. The three hidden thresholds compute the three clauses. The output fires only when all three hidden units fire.",
+      "chineseExplanation": "b₀ = −2.5，b₁ = +0.5，b₂ = +0.5，b₃ = −0.5。三个隐藏单元分别计算对应的子句，输出单元在三个隐藏单元都激活时才输出 1。",
+      "transcript": "Consider the following multi-layer perceptron, using the threshold activation function, and assume that TRUE is represented by 1; FALSE by 0; OR by ∨; AND by ∧.\n\n[See the network diagram in the screenshot.]\n\nFor which values of the biases b_0, b_1, b_2 and b_3 would this network compute the following logical function?\n(K ∨ ¬L) ∧ (L ∨ M ∨ ¬R) ∧ (R ∨ S ∨ T)"
+    },
     "id": "comp9444-new-135",
     "bankId": "comp9444-new",
     "number": 135
@@ -14612,6 +15940,73 @@ export const questions = [
     },
     "transcript": "If 0=FALSE and 1=TRUE, which of these networks (with threshold activations at both the hidden and output layer) correctly computes the XOR function of two inputs?\nSelect one:\na. [Network diagram in the first screenshot]\nb. [Network diagram in the first screenshot]\nc. [Network diagram in the first screenshot]\nd. [Network diagram in the second screenshot]",
     "category": "multiple-choice",
+    "choicePractice": {
+      "options": [
+        "Diagram A",
+        "Diagram B",
+        "Diagram C",
+        "Diagram D"
+      ],
+      "optionImages": [
+        {
+          "src": "/COMP9444_original_question_bank/images/image149.png",
+          "size": [
+            1239,
+            1227
+          ],
+          "crop": [
+            303,
+            136,
+            269,
+            277
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image149.png",
+          "size": [
+            1239,
+            1227
+          ],
+          "crop": [
+            229,
+            469,
+            334,
+            341
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image149.png",
+          "size": [
+            1239,
+            1227
+          ],
+          "crop": [
+            229,
+            819,
+            334,
+            343
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image150.png",
+          "size": [
+            1239,
+            679
+          ],
+          "crop": [
+            302,
+            57,
+            535,
+            546
+          ]
+        }
+      ],
+      "answers": [
+        2
+      ],
+      "explanation": "Use the weights printed beside the edges to test all four Boolean input combinations.",
+      "transcript": "If 0=FALSE and 1=TRUE, which of these networks (with threshold activations at both the hidden and output layer) correctly computes the XOR function of two inputs?"
+    },
     "id": "comp9444-new-140",
     "bankId": "comp9444-new",
     "number": 140
@@ -14727,6 +16122,73 @@ export const questions = [
     "transcript": "Consider a fully connected feedforward neural network with 6 inputs, 2 hidden units and 4 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is trained on the following data, and that the training is successful.\n\n| Item | Inputs | Outputs |\n| --- | --- | --- |\n| | 123456 | 1234 |\n| 1. | 100000 | 0001 |\n| 2. | 010000 | 0011 |\n| 3. | 001000 | 0100 |\n| 4. | 000100 | 1000 |\n| 5. | 000010 | 1011 |\n| 6. | 000001 | 1100 |\n\nWhich of these diagrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a line dividing the hidden unit space into regions for which the value of that output is greater/less than one half?\nSelect one:\na. [Diagram in the first screenshot]\nb. [Diagram in the second screenshot]\nc. [Diagram in the second screenshot]\nd. [Diagram in the second screenshot]",
     "category": "multiple-choice",
     "transcriptNote": "The source screenshot includes a prior answer or annotation.",
+    "choicePractice": {
+      "options": [
+        "Diagram A",
+        "Diagram B",
+        "Diagram C",
+        "Diagram D"
+      ],
+      "optionImages": [
+        {
+          "src": "/COMP9444_original_question_bank/images/image155.png",
+          "size": [
+            1239,
+            1074
+          ],
+          "crop": [
+            224,
+            507,
+            520,
+            521
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image156.png",
+          "size": [
+            1159,
+            1700
+          ],
+          "crop": [
+            238,
+            47,
+            467,
+            467
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image156.png",
+          "size": [
+            1159,
+            1700
+          ],
+          "crop": [
+            225,
+            570,
+            473,
+            474
+          ]
+        },
+        {
+          "src": "/COMP9444_original_question_bank/images/image156.png",
+          "size": [
+            1159,
+            1700
+          ],
+          "crop": [
+            233,
+            1087,
+            559,
+            560
+          ]
+        }
+      ],
+      "answers": [
+        3
+      ],
+      "explanation": "Each sigmoid output yields a straight-line 0.5 decision boundary; compare labels and partitions against the original output table.",
+      "transcript": "Consider a fully connected feedforward neural network with 6 inputs, 2 hidden units and 4 outputs, using tanh activation at the hidden units and sigmoid at the outputs. Suppose this network is trained on the following data, and that the training is successful.\n\n| Item | Inputs | Outputs |\n| --- | --- | --- |\n| | 123456 | 1234 |\n| 1. | 100000 | 0001 |\n| 2. | 010000 | 0011 |\n| 3. | 001000 | 0100 |\n| 4. | 000100 | 1000 |\n| 5. | 000010 | 1011 |\n| 6. | 000001 | 1100 |\n\nWhich of these diagrams correctly shows a point in hidden unit space corresponding to each input, and, for each output, a line dividing the hidden unit space into regions for which the value of that output is greater/less than one half?"
+    },
     "id": "comp9444-new-145",
     "bankId": "comp9444-new",
     "number": 145

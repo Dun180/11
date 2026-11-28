@@ -1,4 +1,5 @@
 import MarkdownContent from './MarkdownContent.jsx'
+import { getOptionGroup } from '../data/choiceAnswers.js'
 
 const labels = ['A', 'B', 'C', 'D']
 
@@ -8,7 +9,9 @@ export default function AnalysisBox({ question, record, english = false }) {
   const correctAnswers = record.answers || question.answers || [question.answer]
   const selectedAnswers = Array.isArray(record.selected) ? record.selected : [record.selected]
   const formatAnswers = indexes => indexes
-    .map(index => `${labels[index]}. ${question.options[index]}`)
+    .map(index => question.optionGroups
+      ? `${question.optionGroups[getOptionGroup(question, index)]} = ${question.options[index]}`
+      : `${labels[index]}. ${question.options[index]}`)
     .join(english ? '; ' : '；')
   const hasAnswerKey = correctAnswers.length > 0
   const statusLabels = english ? ['Viewed', 'Correct', 'Incorrect', 'Submitted'] : ['已查看', '回答正确', '回答错误', '已提交']

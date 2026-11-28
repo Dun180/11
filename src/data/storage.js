@@ -1,10 +1,14 @@
+import { getBank } from './selectors.js'
+
 export function recordsKey(bankId) {
   return `answerRecords-bank-${bankId}`
 }
 
 export function loadAnswerRecords(bankId) {
   try {
-    return JSON.parse(localStorage.getItem(recordsKey(bankId)) || '{}')
+    const records = JSON.parse(localStorage.getItem(recordsKey(bankId)) || '{}')
+    if (!getBank(bankId)?.interactiveChoices) return records
+    return Object.fromEntries(Object.entries(records).filter(([, record]) => record?.selected != null))
   } catch {
     return {}
   }
